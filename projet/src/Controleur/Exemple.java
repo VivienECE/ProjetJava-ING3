@@ -28,15 +28,19 @@ public class Exemple {
         //Connexion avec la bd
         Connexion connection = new Connexion("edt", "root", "");
         //Ce prépare a récupéré des infos de la table étudiant
-        DAO<Etudiant> etudiantDao = new EtudiantDAO(connection);
-        DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
-        Seance_enseignants S1 = new Seance_enseignants(1,1);
-        seance_enseignantsDAO.create(S1);
+        DAO<Etudiant> etudiantDao = new EtudiantDAO(connection);  
         //Recupère l'etudiant d'id:1 (Seul méthode impl.)
         Etudiant etudiant = etudiantDao.find(1);
         System.out.println("Elève N°" + etudiant.getID_UTILISATEUR() + "  - " + etudiant.getNUMERO() + " " + etudiant.getID_GROUPE());
         System.out.println("\n********************************\n");
         //L'idée est de passé tt en parametre dans new Fenetre(etudiant, ....)
+        
+        /** CREER UN OBJET DANS LA TABLE
+        DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
+        Seance_enseignants S1 = new Seance_enseignants(2,1);
+        seance_enseignantsDAO.create(S1);
+        *ATTENTION PREMIER PARAMETRE CLE PRIMAIRE, UN DOUBLON FERA PLANTER LE PROG
+         */
         Fenetre f = new Fenetre();
         }
     catch (SQLException e) {

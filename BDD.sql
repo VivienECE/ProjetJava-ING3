@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 28 mai 2020 à 10:49
+-- Généré le :  jeu. 28 mai 2020 à 11:11
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.2.18
 
@@ -184,7 +184,8 @@ INSERT INTO `seance` (`ID`, `SEMAINE`, `DATE`, `HEURE_DEBUT`, `HEURE_FIN`, `ETAT
 DROP TABLE IF EXISTS `seance_enseignants`;
 CREATE TABLE IF NOT EXISTS `seance_enseignants` (
   `ID_SEANCE` int(11) NOT NULL,
-  `ID_ENSEIGNANT` int(11) NOT NULL
+  `ID_ENSEIGNANT` int(11) NOT NULL,
+  PRIMARY KEY (`ID_SEANCE`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
