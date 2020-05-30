@@ -52,7 +52,7 @@ public class ControleurEtudiant {
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
     
-    //Recupère toute les données
+    //Recupère toute les données de l'étudiant ayant le numero d'utilisateur en parametre
     public ControleurEtudiant(int ID_UTILISATEUR)
     {
         Connexion connection;
@@ -98,6 +98,17 @@ public class ControleurEtudiant {
     
     public static void main(String[] s) {
         // creation de la fenetre
-        ControleurEtudiant a = new ControleurEtudiant(1);
+        ControleurEtudiant controleur = new ControleurEtudiant(1);
+        //
     }
+    
+    public Utilisateur getUtilisateur() {return utilisateur; }
+    public Etudiant getEtudiant() {return etudiant; }
+    public Groupe getGroupe() {return groupe; }
+    public Promotion getPromotion() {return promotion; }
+    public ArrayList<Seance> getSeances() {return seance; }
+    public ArrayList<Salle> getSalles() {return salle; }
+    public ArrayList<Cours> getCours() {return cours; }
+    public ArrayList<Type_cours> getType_cours(){return type_cours;}
+    public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
 }
