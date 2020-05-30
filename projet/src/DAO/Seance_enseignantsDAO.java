@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Seance_enseignants;
+import java.util.ArrayList;
 
 /**
  *
@@ -45,4 +46,10 @@ public class Seance_enseignantsDAO extends DAO<Seance_enseignants> {
         { e.printStackTrace(); }
     return seance_enseignants;
   }
+
+    @Override
+    public ArrayList<Seance_enseignants> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

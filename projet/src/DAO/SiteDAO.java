@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Site;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,9 @@ public class SiteDAO extends DAO<Site> {
     }
     return seance_groupes;
   }
+
+    @Override
+    public ArrayList<Site> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

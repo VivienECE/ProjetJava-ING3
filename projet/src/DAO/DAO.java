@@ -11,6 +11,7 @@ package DAO;
  */
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import jdbc2020.Connexion;
 
 public abstract class DAO<T> {
@@ -47,4 +48,6 @@ public abstract class DAO<T> {
   * @return T
   */
   public abstract T find(int id);
+  
+  public abstract ArrayList<T> findAll(int id);
 }

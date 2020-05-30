@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Seance_salles;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,9 @@ public class Seance_sallesDAO extends DAO<Seance_salles> {
     }
     return seance_groupes;
   }
+
+    @Override
+    public ArrayList<Seance_salles> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

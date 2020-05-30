@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Type_cours;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,9 @@ public class Type_coursDAO extends DAO<Type_cours> {
     }
     return seance_groupes;
   }
+
+    @Override
+    public ArrayList<Type_cours> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

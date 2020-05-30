@@ -36,4 +36,36 @@ public class DAOFactory {
   public static DAO getGroupeDAO(){
     return new GroupeDAO(conn);
   }   
+  
+  /**
+  * Retourne un objet Matiere interagissant avec la BDD
+  * @return DAO
+  */
+  public static DAO getPromotionDAO(){
+    return new PromotionDAO(conn);
+  }   
+  
+  /**
+  * Retourne un objet Matiere interagissant avec la BDD
+  * @return DAO
+  */
+  public static DAO getSalleDAO(){
+    return new SalleDAO(conn);
+  }   
+  
+  /**
+  * Retourne un objet Matiere interagissant avec la BDD
+  * @return DAO
+  */
+  public static DAO getSeanceDAO(){
+    return new SeanceDAO(conn);
+  }   
+  
+  /**
+  * Retourne un objet Matiere interagissant avec la BDD
+  * @return DAO
+  */
+  public static DAO getSeance_enseignantsDAO(){
+    return new Seance_enseignantsDAO(conn);
+  }   
 }

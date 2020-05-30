@@ -17,7 +17,7 @@ import Vue.Fenetre;
  *
  * Contrôle l'interrogation de la BDD dans la Fenetre
  *
- * @author segado
+ * @author segado + Openclassroom
  */
 public class Controleur {
 

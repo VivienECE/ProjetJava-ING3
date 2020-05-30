@@ -6,6 +6,7 @@
 package Controleur;
 import java.util.ArrayList;
 import Modele.Cours;
+import Modele.Enseignant;
 import Modele.Etudiant;
 import Modele.Groupe;
 import Modele.Promotion;
@@ -17,10 +18,8 @@ import Modele.Seance_salles;
  *
  * @author Vivien
  */
-public class ControleurEtudiant {
-    private Etudiant etudiant;
-    private Groupe groupe;
-    private Promotion promotion;
+public class ControleurEnseignant {
+    private Enseignant enseigant;
     private ArrayList<Seance> seance;
     private ArrayList<Cours> cours;
     private ArrayList<Seance_groupes> seance_groupes;

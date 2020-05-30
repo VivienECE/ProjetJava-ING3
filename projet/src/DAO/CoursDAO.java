@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Cours;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,9 @@ public class CoursDAO extends DAO<Cours> {
     }
     return cours;
   }
+
+    @Override
+    public ArrayList<Cours> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -63,11 +63,11 @@ public class Connexion {
         
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
-        System.out.println("OK");
+       /* System.out.println("OK");
         ResultSet rStu = stmt.executeQuery("Select * from etudiant");
          while(
                 rStu.next()){System.out.println(rStu.getString("ID_UTILISATEUR")+rStu.getString("NUMERO")+rStu.getString("ID_GROUPE"));}
-                //this.getStudent(rStu.getString("STUDENTID")).setAttendance(this.getAttendance(rStu.getString("STUDENTID")))  ;  
+                //this.getStudent(rStu.getString("STUDENTID")).setAttendance(this.getAttendance(rStu.getString("STUDENTID")))  ;  */
         
     }
 

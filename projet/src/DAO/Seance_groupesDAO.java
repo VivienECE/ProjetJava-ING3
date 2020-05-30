@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Seance_groupes;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +38,21 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
       ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
       if(result.first())
         seance_groupes = new Seance_groupes(id, result.getInt("ID_GROUPE"));         
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return seance_groupes;
+  }
+  
+  public ArrayList<Seance_groupes> findAll(int ID_GROUPE) {
+    ArrayList<Seance_groupes> seance_groupes = new ArrayList<>();      
+      
+    try {
+      ResultSet result = this.connect.executeQuery("SELECT ID_SEANCE FROM seance_groupes WHERE ID_GROUPE  = " + ID_GROUPE);
+      while(result.next())
+        {
+            seance_groupes.add(new Seance_groupes(result.getInt("ID_SEANCE"),ID_GROUPE));
+        }      
     } catch (SQLException e) {
       e.printStackTrace();
     }

@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Groupe;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,10 @@ public class GroupeDAO extends DAO<Groupe> {
     }
     return promotion;
   }
+
+    @Override
+    public ArrayList<Groupe> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

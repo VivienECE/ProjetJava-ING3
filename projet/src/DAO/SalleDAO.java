@@ -7,6 +7,7 @@ package DAO;
 import java.sql.*;
 import jdbc2020.Connexion;
 import Modele.Salle;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,4 +43,10 @@ public class SalleDAO extends DAO<Salle> {
     }
     return salle;
   }
+
+    @Override
+    public ArrayList<Salle> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
