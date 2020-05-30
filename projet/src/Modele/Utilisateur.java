@@ -37,6 +37,22 @@ public class Utilisateur {
     this.ID = ID;
   }
 
+  public String getEMAIL() {
+    return EMAIL;
+  }
+
+  public void setEMAIL(String EMAIL) {
+    this.EMAIL = EMAIL;
+  }
+
+  public String getPASSWD() {
+    return PASSWD;
+  }
+
+  public void setPASSWD(String PASSWD) {
+    this.PASSWD = PASSWD;
+  }
+
   public String getNOM() {
     return NOM;
   }
@@ -44,21 +60,19 @@ public class Utilisateur {
   public void setNOM(String NOM) {
     this.NOM = NOM;
   }
-
-  public int getCAPACITE() {
-    return CAPACITE;
-  }
-
-  public void setCAPACITE(int ID) {
-    this.CAPACITE = ID;
-  }
-
-  public int getID_SITE() {
-    return ID_SITE;
-  }
-
-  public void setID_SITE(int ID) {
-    this.ID_SITE = ID;
-  }
   
+   public String getPRENOM() {
+    return PRENOM;
+  }
+
+  public void setPRENOM(String PRENOM) {
+    this.PRENOM = PRENOM;
+  }
+   public int getDROIT() {
+    return DROIT;
+  }
+
+  public void setDROIT(int DROIT) {
+    this.DROIT = DROIT;
+  }
 }

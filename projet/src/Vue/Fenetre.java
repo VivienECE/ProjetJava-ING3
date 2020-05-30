@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jdbc2020;
+package Vue;
 
 /*
  * 
@@ -16,6 +16,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdbc2020.Connexion;
 
 /**
  *

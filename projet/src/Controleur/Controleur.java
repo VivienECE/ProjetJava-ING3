@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc2020.Connexion;
 import Modele.Etudiant;
-import jdbc2020.Fenetre;
+import Vue.Fenetre;
 
 /**
  *
