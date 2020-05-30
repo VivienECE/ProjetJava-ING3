@@ -5,10 +5,6 @@
  */
 package Modele;
 
-/**
- *
- * @author Vivien
- */
 
 public class Etudiant {
   //ID
