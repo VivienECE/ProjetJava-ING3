@@ -14,20 +14,20 @@ public class Seance_salles {
   //ID
   private int ID_SEANCE = 0;
   //Nom de l'élève
-  private int ID_ENSEIGNANT = 0;
+  private int ID_SALLE = 0;
    
   public Seance_salles(int id, int nom) {
     this.ID_SEANCE = id;
-    this.ID_ENSEIGNANT = nom;
+    this.ID_SALLE = nom;
   }
   public Seance_salles(){};
      
-  public int getID_ENSEIGNANT() {
-    return ID_ENSEIGNANT;
+  public int getID_SALLE() {
+    return ID_SALLE;
   }
 
-  public void setID_ENSEIGNANT(int ID) {
-    this.ID_ENSEIGNANT = ID;
+  public void setID_SALLE(int ID) {
+    this.ID_SALLE = ID;
   }
 
   public int getID_SEANCE() {

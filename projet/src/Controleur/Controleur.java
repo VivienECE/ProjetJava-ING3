@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc2020.Connexion;
 import Modele.Etudiant;
-import Vue.Fenetre;
+import Vue.Menu;
 
 /**
  *
@@ -29,27 +29,36 @@ public class Controleur {
      */
     public static void main(String[] s) {
         // creation de la fenetre
-    try{
-        //Testons des élèves
-        Connexion connection = new Connexion("edt", "root", "");
-        DAO<Etudiant> etudiantDao = new EtudiantDAO(connection);
-        for(int i = 1; i < 5; i++){
-          Etudiant etudiant = etudiantDao.find(i);
-          System.out.println("Elève N°" + etudiant.getID_UTILISATEUR() + "  - " + etudiant.getNUMERO() + " " + etudiant.getID_GROUPE());
+        try{
+            Connexion connection = new Connexion("edt", "root", "");
+            /** 
+            Fenetre login = new Login();
+            droit=login.getDroit();
+            switch(droit)
+            {
+                case 1:
+                ControleurAdmin...
+                break;
+                case 2:
+                ControleurReferent...
+                break;
+                case 3:
+                ControleurEnseignant...
+                break;
+                case 4:
+                ControleurEtudiant...
+                break;
+                default:
+                break;
+            }
+             */
+            }
+        catch (SQLException e) {
+          e.printStackTrace();
+        }   
+        catch (ClassNotFoundException ex) {
+                Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
-        System.out.println("\n********************************\n");
-            Fenetre f = new Fenetre();
-        }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }   
-    catch (ClassNotFoundException ex) {
-            Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    
-    
-    
 }
+

@@ -12,9 +12,9 @@ public class Etudiant {
   //Nom de l'élève
   private String NUMERO = "";
   //Prénom de l'élève
-  private String ID_GROUPE = "";
+  private int ID_GROUPE = 0;
    
-  public Etudiant(int id, String nom, String prenom) {
+  public Etudiant(int id, String nom, int prenom) {
     this.ID_UTILISATEUR = id;
     this.NUMERO = nom;
     this.ID_GROUPE = prenom;
@@ -37,11 +37,11 @@ public class Etudiant {
     this.NUMERO = NUMERO;
   }
 
-  public String getID_GROUPE() {
+  public int getID_GROUPE() {
     return ID_GROUPE;
   }
 
-  public void setID_GROUPE(String ID_GROUPE) {
+  public void setID_GROUPE(int ID_GROUPE) {
     this.ID_GROUPE = ID_GROUPE;
   }   
 }

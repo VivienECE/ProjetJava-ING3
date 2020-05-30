@@ -35,11 +35,11 @@ public class Seance_enseignantsDAO extends DAO<Seance_enseignants> {
     return false;
   }
    
-  public Seance_enseignants find(int id) {
+  public Seance_enseignants find(int id) { //REVERSE RECHERCHE POUR 2 VARIABLES ID_SEANCE OU ID_ENSEIGNANT
     Seance_enseignants seance_enseignants = new Seance_enseignants();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_SEANCE = " + id);
       if(result.first())
         seance_enseignants = new Seance_enseignants(id, result.getInt("ID_SEANCE"));         
     } catch (SQLException e)

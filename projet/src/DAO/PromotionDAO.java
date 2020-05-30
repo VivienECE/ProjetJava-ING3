@@ -35,7 +35,7 @@ public class PromotionDAO extends DAO<Promotion> {
     Promotion promotion = new Promotion();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM cours WHERE ID = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM promotion WHERE ID = " + id);
       if(result.first())
         promotion = new Promotion(id, result.getString("NOM"));         
     } catch (SQLException e) {

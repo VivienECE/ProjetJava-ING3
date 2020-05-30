@@ -15,6 +15,7 @@ public class Cours {
   private int ID = 0;
   //Nom de l'élève
   private String NOM = "";
+
    
   public Cours(int id, String nom) {
     this.ID = id;
@@ -37,4 +38,5 @@ public class Cours {
   public void setNOM(String NOM) {
     this.NOM = NOM;
   }
+  
 }

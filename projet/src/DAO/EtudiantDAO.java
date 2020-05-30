@@ -40,7 +40,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
         etudiant = new Etudiant(
           id,
           result.getString("NUMERO"),
-          result.getString("ID_GROUPE" ));         
+          result.getInt("ID_GROUPE"));         
     } catch (SQLException e) {
       e.printStackTrace();
     }

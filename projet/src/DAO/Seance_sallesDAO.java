@@ -35,7 +35,7 @@ public class Seance_sallesDAO extends DAO<Seance_salles> {
     Seance_salles seance_groupes = new Seance_salles();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_salles WHERE ID_SEANCE = " + id);
       if(result.first())
         seance_groupes = new Seance_salles(id, result.getInt("ID_SALLE"));         
     } catch (SQLException e) {

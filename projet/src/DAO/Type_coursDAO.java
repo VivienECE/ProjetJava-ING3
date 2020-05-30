@@ -35,7 +35,7 @@ public class Type_coursDAO extends DAO<Type_cours> {
     Type_cours seance_groupes = new Type_cours();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM type_cours WHERE ID = " + id);
       if(result.first())
         seance_groupes = new Type_cours(id, result.getString("NOM"));         
     } catch (SQLException e) {

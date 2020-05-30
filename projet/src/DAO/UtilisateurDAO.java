@@ -35,7 +35,7 @@ public class UtilisateurDAO extends DAO<Utilisateur> {
     Utilisateur seance_groupes = new Utilisateur();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM utilisateur WHERE ID = " + id);
       if(result.first())
         seance_groupes = new Utilisateur(id, result.getString("EMAIL"),result.getString("PASSWD"),result.getString("NOM"),result.getString("PRENOM"),result.getInt("DROIT"));         
     } catch (SQLException e) {

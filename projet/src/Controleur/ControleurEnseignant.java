@@ -24,6 +24,11 @@ public class ControleurEnseignant {
     private ArrayList<Cours> cours;
     private ArrayList<Seance_groupes> seance_groupes;
     private ArrayList<Seance_salles> seance_salles;
+    
+    //Recupère toute les données
+    public ControleurEnseignant(int ID_UTILISATEUR)
+    {
         
+    }
     
 }

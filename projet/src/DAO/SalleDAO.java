@@ -35,7 +35,7 @@ public class SalleDAO extends DAO<Salle> {
     Salle salle = new Salle();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM cours WHERE ID = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM salle WHERE ID = " + id);
       if(result.first())
         salle = new Salle(id, result.getString("NOM"),result.getInt("CAPACITE"),result.getInt("ID_SITE"));         
     } catch (SQLException e) {

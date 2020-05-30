@@ -35,7 +35,7 @@ public class GroupeDAO extends DAO<Groupe> {
     Groupe promotion = new Groupe();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM cours WHERE ID = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM groupe WHERE ID = " + id);
       if(result.first())
         promotion = new Groupe(id, result.getString("NOM"), result.getInt("ID_PROMOTION"));         
     } catch (SQLException e) {

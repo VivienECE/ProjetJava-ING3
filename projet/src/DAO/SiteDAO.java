@@ -35,7 +35,7 @@ public class SiteDAO extends DAO<Site> {
     Site seance_groupes = new Site();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM seance_enseignants WHERE ID_PROFESSEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM Site WHERE ID = " + id);
       if(result.first())
         seance_groupes = new Site(id, result.getString("NOM"));         
     } catch (SQLException e) {

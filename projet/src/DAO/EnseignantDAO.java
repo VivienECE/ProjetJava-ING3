@@ -35,7 +35,7 @@ public class EnseignantDAO extends DAO<Enseignant> {
     Enseignant enseignant = new Enseignant();      
       
     try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM cours WHERE ID_UTILISATEUR = " + id);
+      ResultSet result = this.connect.executeQuery("SELECT * FROM enseignant WHERE ID_UTILISATEUR = " + id);
       if(result.first())
         enseignant = new Enseignant(id, result.getString("ID_COURS"));         
     } catch (SQLException e) {
