@@ -31,6 +31,8 @@ import Modele.Seance_salles;
 import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
+import Vue.Edt;
+import Vue.EdtEtudiant;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,10 +98,12 @@ public class ControleurEtudiant {
         }
     }
     
+    //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
-        // creation de la fenetre
-        ControleurEtudiant controleur = new ControleurEtudiant(1);
-        //
+        // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
+        int ID_UTILISATEUR=1;
+        ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
+        EdtEtudiant fenetre = new EdtEtudiant(controleur);
     }
     
     public Utilisateur getUtilisateur() {return utilisateur; }
