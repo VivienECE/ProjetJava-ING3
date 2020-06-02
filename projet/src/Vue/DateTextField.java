@@ -25,6 +25,7 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -315,7 +316,21 @@ public class DateTextField extends JTextField {
             }
             setDate(cal.getTime());
             reflushWeekAndDay();
-        }
+        }   
+    }
+    public static void main(String[] args) {
+        JPanel p = new JPanel();
+        JFrame f = new JFrame();
+        f.setTitle("Ajout d'un cours");
+        f.setSize(600, 600);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        DateTextField d = new DateTextField();
+        DatePanel date = d.datePanel;
+        System.out.print(date.getSelectedMonth());
+        p.add(d);
+        f.add(p);
+        f.setVisible(true);
     }
 }
 

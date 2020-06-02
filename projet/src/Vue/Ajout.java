@@ -1,6 +1,8 @@
 
 package Vue;
 
+import Modele.Seance;
+//import Controleur.ControleurEtudiant;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -46,6 +48,10 @@ public class Ajout extends JFrame{
         this.add(content, BorderLayout.NORTH);
         btn = new JButton("Ajouter");
         btn.setSize(100, 20);
+        btn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {        
+              Seance NvCours = new Seance(nom.getText(), (String)sexe.getSelectedItem(), getAge(), (String)cheveux.getSelectedItem() ,getTaille());
+            }});
         this.add(btn, BorderLayout.SOUTH);
         
     }
@@ -102,7 +108,7 @@ public class Ajout extends JFrame{
         panel4.add(td10);
         
         panel5 = new JPanel();
-        JLabel date = new JLabel("Date : ");
+        JLabel date = new JLabel("Créneau : ");
         panel5.add(date);
         DateTextField picker = new DateTextField();
         panel5.add(picker);
@@ -152,10 +158,6 @@ public class Ajout extends JFrame{
         setVisible(true);
     }
     
-   // btn.addActionListener(new ActionListener(){
-    //  public void actionPerformed(ActionEvent arg0) {        
-      //  NvCours = new Seance(nom.getText(), (String)sexe.getSelectedItem(), getAge(), (String)cheveux.getSelectedItem() ,getTaille());
-        //setVisible(false);
     
     public static void main(String[] args) {
         new Ajout();

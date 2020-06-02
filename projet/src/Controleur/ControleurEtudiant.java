@@ -32,7 +32,7 @@ import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
-import Vue.EdtEtudiant;
+import Vue.Recap;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,7 +103,9 @@ public class ControleurEtudiant {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
         ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
-        EdtEtudiant fenetre = new EdtEtudiant(controleur);
+       // Edt fenetre = new Edt(controleur);
+        Recap fenetre = new Recap(controleur);
+
     }
     
     public Utilisateur getUtilisateur() {return utilisateur; }

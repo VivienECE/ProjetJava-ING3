@@ -37,7 +37,7 @@ public class SeanceDAO extends DAO<Seance> {
     try {
       ResultSet result = this.connect.executeQuery("SELECT * FROM seance WHERE ID = " + id);
       if(result.first())
-        seance = new Seance(id, result.getInt("SEMAINE"),result.getString("DATE"),result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"),result.getInt("ETAT"),result.getInt("ID_COURS"),result.getInt("ID_TYPE")); 
+        seance = new Seance(id, result.getInt("SEMAINE"),result.getDate("DATE").toLocalDate(),result.getTime("HEURE_DEBUT").toLocalTime(), result.getTime("HEURE_FIN").toLocalTime(),result.getInt("ETAT"),result.getInt("ID_COURS"),result.getInt("ID_TYPE")); 
     } catch (SQLException e) {
       e.printStackTrace();
     }

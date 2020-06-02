@@ -5,18 +5,17 @@
  */
 package Modele;
 
-/**
- *
- * @author Vivien
- */
+
+import java.time.*;
+import java.time.temporal.IsoFields;
 
 public class Seance {
   //ID
   private int ID = 0;
   private int SEMAINE = 0;
-  private String DATE = "";
-  private String HEURE_DEBUT = "";
-  private String HEURE_FIN = "";
+  private LocalDate DATE;
+  private LocalTime HEURE_DEBUT;
+  private LocalTime HEURE_FIN;
   private int ETAT = 0;
   private int ID_COURS = 0;
   private int ID_TYPE = 0;
@@ -28,7 +27,7 @@ public class Seance {
   private String SITE = "";
   private String COURS = "";
    
-  public Seance(int id, int SEMAINE, String DATE, String HEURE_DEBUT, String HEURE_FIN ,int ETAT,int ID_COURS,int ID_TYPE) {
+  public Seance(int id, int SEMAINE, LocalDate DATE, LocalTime HEURE_DEBUT, LocalTime HEURE_FIN, int ETAT,int ID_COURS,int ID_TYPE) {
     this.ID = id;
     this.SEMAINE = SEMAINE;
     this.DATE = DATE;
@@ -52,32 +51,32 @@ public class Seance {
     return SEMAINE;
   }
 
-  public void setSEMAINE(int SEMAINE) {
-    this.SEMAINE = SEMAINE;
+  public void setSEMAINE(LocalDate date) {
+    this.SEMAINE = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR );
   }
 
-  public String getDATE() {
+  public LocalDate getDATE() {
     return DATE;
   }
 
-  public void setDATE(String DATE) {
-    this.DATE = DATE;
+  public void setDATE(int annee, int mois, int jour) {
+    this.DATE = LocalDate.of(annee, mois, jour);
   }  
   
-    public String getHEURE_DEBUT() {
+    public LocalTime getHEURE_DEBUT() {
     return HEURE_DEBUT;
   }
 
-  public void setHEURE_DEBUT(String HEURE_DEBUT) {
-    this.HEURE_DEBUT = HEURE_DEBUT;
+  public void setHEURE_DEBUT(int H_DEBUT, int MIN_D) {
+    this.HEURE_DEBUT = LocalTime.of(H_DEBUT, MIN_D);
   }   
   
-    public String getHEURE_FIN() {
+    public LocalTime getHEURE_FIN() {
     return HEURE_FIN;
   }
 
-  public void setHEURE_FIN(String HEURE_FIN) {
-    this.HEURE_FIN = HEURE_FIN;
+  public void setHEURE_FIN(int H_FIN,int MIN_F) {
+    this.HEURE_FIN = LocalTime.of(H_FIN, MIN_F);
   }   
   
    public int getETAT() {
@@ -136,11 +135,24 @@ public class Seance {
     this.SITE = SITE;
   }
   
-   public String getCOURS() {
-    return COURS;
+   public String getCOURS(int ID_C) {
+      if(ID_C ==1)
+        return "Mathematiques";
+      if(ID_C ==2)
+        return "Physique";
+      if(ID_C ==3)
+        return "Electronique";
+      else
+          return "Matière incoonnue";
   }
   
-  public void setCOURS(String COURS) {
-    this.COURS = COURS;
+  public void setCOURS(int ID_C) {
+      if(ID_C ==1)
+        this.COURS = "Mathematiques";
+      if(ID_C ==2)
+        this.COURS = "Physique";
+      if(ID_C ==3)
+        this.COURS = "Electronique";
+   
   }
 }
