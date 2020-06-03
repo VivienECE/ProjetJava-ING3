@@ -103,8 +103,8 @@ public class ControleurEtudiant {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
         ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
-       // Edt fenetre = new Edt(controleur);
-        Recap fenetre = new Recap(controleur);
+        Edt fenetre = new Edt(controleur);
+        //Recap fenetre = new Recap(controleur);
 
     }
     

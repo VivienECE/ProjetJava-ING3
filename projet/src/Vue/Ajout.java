@@ -227,6 +227,7 @@ public class Ajout extends JFrame{
                     IdTYPE = 3;//On considere que si tous les TDs sont selectionnes, il s'agit d'un examen
                     type = "EXAMEN";
                 }
+
                 int nb =0;
                 if(td1.isSelected())nb++;
                 if(td2.isSelected())nb++;
