@@ -18,6 +18,10 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+import java.time.temporal.IsoFields;
 import java.util.Calendar;
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -32,8 +36,27 @@ public class Ajout extends JFrame{
     private JPanel panel4;
     private JPanel panel5;
     private JPanel panel6;
-    private JButton btn;
+    private final JButton btn;
     private JPanel content;
+    private JTextField jour;
+    private JTextField mois;
+    private JTextField annee;
+    private JTextField heureD;
+    private JTextField heureF;
+    private JTextField minD;
+    private JTextField minF;
+    private JComboBox cours;
+    private JRadioButton td1;
+    private JRadioButton td2;
+    private JRadioButton td3;
+    private JRadioButton td4;
+    private JRadioButton td5;
+    private JRadioButton td6;
+    private JRadioButton td7;
+    private JRadioButton td8;
+    private JRadioButton td9;
+    private JRadioButton td10;
+    private JTextField txt2;
     
     public Ajout(){
         this.setTitle("Ajout d'un cours");
@@ -48,10 +71,7 @@ public class Ajout extends JFrame{
         this.add(content, BorderLayout.NORTH);
         btn = new JButton("Ajouter");
         btn.setSize(100, 20);
-        btn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent arg0) {        
-              Seance NvCours = new Seance(nom.getText(), (String)sexe.getSelectedItem(), getAge(), (String)cheveux.getSelectedItem() ,getTaille());
-            }});
+        btn.addActionListener(new AddButtonListener());
         this.add(btn, BorderLayout.SOUTH);
         
     }
@@ -60,13 +80,16 @@ public class Ajout extends JFrame{
         panel1= new JPanel();
         JLabel nom = new JLabel("Intitulé de la séance : ");
         panel1.add(nom);
-        JTextField txt1 = new JTextField(10);
-        panel1.add(txt1);
+        cours = new JComboBox();
+        cours.addItem("Mathematiques");
+        cours.addItem("Physique");
+        cours.addItem("Electronique");
+        panel1.add(cours);
         
         panel2= new JPanel();
         JLabel prof = new JLabel("Professeur : ");
         panel2.add(prof);
-        JTextField txt2 = new JTextField(10);
+        txt2 = new JTextField(10);
         panel2.add(txt2);
         
         
@@ -79,23 +102,19 @@ public class Ajout extends JFrame{
         prom.addItem("ING3");
         prom.addItem("ING4");
         prom.addItem("ING5");
-        prom.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent arg0) {
-        }
-        });
         panel3.add(prom);
         
         panel4= new JPanel();
-        JRadioButton td1 = new JRadioButton("TD1");
-        JRadioButton td2 = new JRadioButton("TD2");
-        JRadioButton td3 = new JRadioButton("TD3");
-        JRadioButton td4 = new JRadioButton("TD4");
-        JRadioButton td5 = new JRadioButton("TD5");
-        JRadioButton td6 = new JRadioButton("TD6");
-        JRadioButton td7 = new JRadioButton("TD7");
-        JRadioButton td8 = new JRadioButton("TD8");
-        JRadioButton td9 = new JRadioButton("TD9");
-        JRadioButton td10 = new JRadioButton("TD10");
+        td1 = new JRadioButton("TD1");
+        td2 = new JRadioButton("TD2");
+        td3 = new JRadioButton("TD3");
+        td4 = new JRadioButton("TD4");
+        td5 = new JRadioButton("TD5");
+        td6 = new JRadioButton("TD6");
+        td7 = new JRadioButton("TD7");
+        td8 = new JRadioButton("TD8");
+        td9 = new JRadioButton("TD9");
+        td10 = new JRadioButton("TD10");
         panel4.add(td1);
         panel4.add(td2);
         panel4.add(td3);
@@ -110,23 +129,31 @@ public class Ajout extends JFrame{
         panel5 = new JPanel();
         JLabel date = new JLabel("Créneau : ");
         panel5.add(date);
-        DateTextField picker = new DateTextField();
-        panel5.add(picker);
+        jour = new JTextField(2);
+        panel5.add(jour);
+        JLabel slach1 = new JLabel(" / ");
+        panel5.add(slach1);
+        mois = new JTextField(2);
+        panel5.add(mois);
+        JLabel slach2 = new JLabel(" / ");
+        panel5.add(slach2);
+        annee = new JTextField(2);
+        panel5.add(annee);
         JLabel a = new JLabel("  de  ");
         panel5.add(a);
-        JTextField heureD = new JTextField(2);
+        heureD = new JTextField(2);
         panel5.add(heureD);
         JLabel b = new JLabel(" h ");
         panel5.add(b);
-        JTextField minD = new JTextField(2);
+        minD = new JTextField(2);
         panel5.add(minD);
         JLabel c = new JLabel("  à  ");
         panel5.add(c);
-        JTextField heureF = new JTextField(2);
+        heureF = new JTextField(2);
         panel5.add(heureF);
         JLabel d = new JLabel(" h ");
         panel5.add(d);
-        JTextField minF = new JTextField(2);
+        minF = new JTextField(2);
         panel5.add(minF);
         
         panel6 = new JPanel();
@@ -158,6 +185,82 @@ public class Ajout extends JFrame{
         setVisible(true);
     }
     
+
+    
+    private class AddButtonListener implements ActionListener {
+        int id; 
+        int sem;
+        LocalDate date;
+        LocalTime HEURE_DEBUT;
+        LocalTime HEURE_FIN; 
+        int etat=0;
+        int IdCOURS=0;
+        int IdTYPE;
+        String type;
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if (e.getSource() == btn) {
+                
+                //id = (Controleur.Seance.getSeances().size())+1; 
+                
+                date = LocalDate.of(Integer.parseInt(annee.getText()), Integer.parseInt(mois.getText()), Integer.parseInt(jour.getText()));
+                
+                sem = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR );
+                
+                HEURE_DEBUT = LocalTime.of(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()), 0);
+                
+                HEURE_FIN = LocalTime.of(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()), 0);
+                
+                //IdCOURS
+                if(cours.getSelectedItem()=="Mathematiques")
+                    IdCOURS = 1;
+                if(cours.getSelectedItem()=="Physique")
+                    IdCOURS = 2;
+                if(cours.getSelectedItem()=="Electronique")
+                    IdCOURS = 3;
+                
+                //IdTYPE
+                if(td1.isSelected()&&td2.isSelected()&&td3.isSelected()&&td4.isSelected()&&td5.isSelected()
+                        &&td6.isSelected()&&td7.isSelected()&&td8.isSelected()&&td9.isSelected()&&td10.isSelected()){
+                    IdTYPE = 3;//On considere que si tous les TDs sont selectionnes, il s'agit d'un examen
+                    type = "EXAMEN";
+                }
+                    
+                
+                if(td1.isSelected()||td2.isSelected()||td3.isSelected()||td4.isSelected()||td5.isSelected()
+                        ||td6.isSelected()||td7.isSelected()||td8.isSelected()||td9.isSelected()||td10.isSelected()){
+                    IdTYPE = 2;
+                    type = "TD";
+                }
+                    
+                else{
+                    IdTYPE = 1;
+                    type = "COURS";
+                }
+                    
+                
+                
+                //Seance NvCours = new Seance(id, sem, date, HEURE_DEBUT, HEURE_FIN, etat, IdCOURS, IdTYPE);
+                //NvCours.setEnseignant(txt2.getText());
+                //NvCours.setType(type);
+                //NvCours.setSalle();
+                //NvCours.setSite();
+                //NvCours.setCours(cours.getSelectedItem());
+                System.out.println(id);
+                System.out.println(sem);
+                System.out.println(date);
+                System.out.println(HEURE_DEBUT);
+                System.out.println(HEURE_FIN);
+                System.out.println(etat);
+                System.out.println(IdCOURS);
+                System.out.println(IdTYPE);
+                System.out.println(type);
+            }
+
+        }
+    }
     
     public static void main(String[] args) {
         new Ajout();

@@ -86,45 +86,6 @@ public class Login extends JFrame {
             if (e.getSource() == Submit) {
                 JOptionPane.showMessageDialog(null, "Connexion à l'emploi du temps");
                 new Edt();
-
-           /*     u = UTextField.getText();
-                p = PTextField.getText();
-                try {
-
-                    Scanner file = new Scanner(new File("/Users/baperondard/Downloads/ProjectBapeLarys/src/projectbapelarys/admin.txt"));
-
-                    while (file.hasNextLine()) {
-                        String scan1 = file.nextLine();
-                        String scan2 = file.nextLine();
-
-                        if (scan1.equals(u)) {
-                            if (scan2.equals(p)) {
-                                j = j + 1;
-
-                            }
-                        }
-                    }
-
-                    if (j > 0) {
-
-                        JOptionPane.showMessageDialog(null, "connection succesful");
-                       
-                        setVisible(false);
-                        dispose();
-
-                    }
-
-                    if (j < 1) {
-
-                        JOptionPane.showMessageDialog(null, "Identifiants incorrects");
-                        UTextField.setText("");
-                        PTextField.setText("");
-
-                    }
-
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
             }
 
         }
