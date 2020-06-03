@@ -227,10 +227,18 @@ public class Ajout extends JFrame{
                     IdTYPE = 3;//On considere que si tous les TDs sont selectionnes, il s'agit d'un examen
                     type = "EXAMEN";
                 }
-                    
-                
-                if(td1.isSelected()||td2.isSelected()||td3.isSelected()||td4.isSelected()||td5.isSelected()
-                        ||td6.isSelected()||td7.isSelected()||td8.isSelected()||td9.isSelected()||td10.isSelected()){
+                int nb =0;
+                if(td1.isSelected())nb++;
+                if(td2.isSelected())nb++;
+                if(td3.isSelected())nb++;
+                if(td4.isSelected())nb++;
+                if(td5.isSelected())nb++;
+                if(td6.isSelected())nb++;
+                if(td7.isSelected())nb++;
+                if(td8.isSelected())nb++;
+                if(td9.isSelected())nb++;
+                if(td10.isSelected())nb++;
+                if(nb>1){
                     IdTYPE = 2;
                     type = "TD";
                 }
