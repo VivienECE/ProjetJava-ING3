@@ -70,7 +70,7 @@ public class Recap extends JFrame{
     
     public Object[][] Tri(ControleurEtudiant controleur){
         
-        //Seance[] total = new Seance[size]; 
+      
         ArrayList<Seance> Seances = controleur.getSeances();
         ArrayList<Integer> lesIdCours = new ArrayList<Integer>();
         LocalDate dO;

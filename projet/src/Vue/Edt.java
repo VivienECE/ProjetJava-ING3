@@ -2,10 +2,18 @@
 package Vue;
 
 import Controleur.ControleurEtudiant;
+import Modele.Seance;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 public class Edt extends JFrame{
     private JPanel panel1;
@@ -39,6 +47,11 @@ public class Edt extends JFrame{
         panel2 = new JPanel();
         
         JPanel Lundi = new JPanel();
+        LocalDate date = LocalDate.of(2020, 06, 01);
+        Object[][] TLundi = Journee(date, controleur);
+        String jour = "Lundi";
+        String  title[] = {jour, "", "", ""};
+        JTable tableau = new JTable(TLundi, title);
         
         JPanel Mardi = new JPanel();
         JPanel Mercredi = new JPanel();
@@ -52,13 +65,63 @@ public class Edt extends JFrame{
         panel2.add(Jeudi);
         panel2.add(Vendredi);
         panel2.add(Samedi);
+        
+        panel2.setLayout(new GridLayout(6,1));
+        
+        //setVisible(true);
     }
     
-    private void Liste(ControleurEtudiant controleur){
+    /*private void Liste(ControleurEtudiant controleur){
         panel2 = new JPanel();
         
         panel2.add();
+    }*/
+    
+    public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
+        ArrayList<Seance> Seances = controleur.getSeances();
+        ArrayList<Seance> CoursAJD = new ArrayList<Seance>();
+        int n=0;
+        
+        //Voir combien de cours dans la journée;
+        for(int i = 1; i < Seances.size(); i++)
+        {
+            if(Seances.get(i).getDATE()==date){
+                 CoursAJD.add(Seances.get(i));
+                n++;
+            }
+               
+        } 
+        
+        Object[][] data = new Object[n][5];
+        Seance [] triees = new Seance [CoursAJD.size()];
+        
+        //Trier par heure
+        for(int k=0; k<CoursAJD.size(); k++)
+            triees[k]=CoursAJD.get(k);
+        
+        for(int x=0; x<triees.length; x++){
+            if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
+                Seance temp;
+		temp = triees[x];
+		triees[x] = triees[x+1];
+		triees[x+1] = temp;
+            }            
+        }
+        
+        for(int y=0; y<triees.length; y++){
+            String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
+            
+            data[y][0]= horaire;
+            data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
+            data[y][2]= controleur.getGroupe();
+            String endroit = triees[y].getSALLE() + " - " + triees[y].getSITE();
+            data[y][3]= endroit;
+            data[y][4]= triees[y].getTYPE();
+        }
+         
+        return data;   
     }
+              
     
     public static void main(String[] args) {
         //new Edt();

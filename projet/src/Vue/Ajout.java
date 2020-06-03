@@ -229,7 +229,7 @@ public class Ajout extends JFrame{
                 }
                     
                 
-                if(td1.isSelected()||td2.isSelected()||td3.isSelected()||td4.isSelected()||td5.isSelected()
+                else if(td1.isSelected()||td2.isSelected()||td3.isSelected()||td4.isSelected()||td5.isSelected()
                         ||td6.isSelected()||td7.isSelected()||td8.isSelected()||td9.isSelected()||td10.isSelected()){
                     IdTYPE = 2;
                     type = "TD";
