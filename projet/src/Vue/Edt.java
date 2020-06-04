@@ -1,6 +1,7 @@
 
 package Vue;
 
+import Controleur.ControleurEnseignant;
 import Controleur.ControleurEtudiant;
 import Modele.Seance;
 import java.awt.BorderLayout;
@@ -38,6 +39,7 @@ public class Edt extends JFrame{
         Infos(controleur);
         this.add(panel1, BorderLayout.NORTH);
         Liste(controleur);
+        //Grille(controleur);
         this.add(panel2, BorderLayout.SOUTH);
     }
     
@@ -62,7 +64,7 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauL));
         
         Mardi = new JPanel();
-        LocalDate dateM = LocalDate.of(2020, 06, 01);
+        LocalDate dateM = LocalDate.of(2020, 06, 02);
         Object[][] TMardi = Journee(dateM, controleur);
         String  titleM[] = {"Mardi", "", "", "",""};
         JTable tableauM = new JTable(TMardi, titleM);
@@ -71,7 +73,7 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauM));
         
         Mercredi = new JPanel();
-        LocalDate dateMe = LocalDate.of(2020, 06, 01);
+        LocalDate dateMe = LocalDate.of(2020, 06, 03);
         Object[][] TMercredi = Journee(dateMe, controleur);
         String  titleMe[] = {"Mercredi", "", "", "",""};
         JTable tableauMe = new JTable(TMercredi, titleMe);
@@ -80,7 +82,7 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauMe));
         
         Jeudi = new JPanel();
-        LocalDate dateJ = LocalDate.of(2020, 06, 01);
+        LocalDate dateJ = LocalDate.of(2020, 06, 04);
         Object[][] TJeudi = Journee(dateJ, controleur);
         String  titleJ[] = {"Jeudi", "", "", "",""};
         JTable tableauJ = new JTable(TJeudi, titleJ);
@@ -89,7 +91,7 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauJ));
         
         Vendredi = new JPanel();
-        LocalDate dateV = LocalDate.of(2020, 06, 01);
+        LocalDate dateV = LocalDate.of(2020, 06, 05);
         Object[][] TVendredi = Journee(dateV, controleur);
         String  titleV[] = {"Vendredi", "", "", "",""};
         JTable tableauV = new JTable(TVendredi, titleV);
@@ -98,7 +100,7 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauV));
         
         Samedi = new JPanel();
-        LocalDate dateS = LocalDate.of(2020, 06, 01);
+        LocalDate dateS = LocalDate.of(2020, 06, 06);
         Object[][] TSamedi = Journee(dateS, controleur);
         String  titleS[] = {"Samedi", "", "", "",""};
         JTable tableauS = new JTable(TSamedi, titleS);
@@ -119,11 +121,26 @@ public class Edt extends JFrame{
         setVisible(true);
     }
     
-    /*private void Grille(ControleurEtudiant controleur){
+    private void Grille(ControleurEtudiant controleur){
+        
+        Lundi = new JPanel();
+        LocalDate dateL = LocalDate.of(2020, 06, 01);
+        Object[][] TLundi = Journee(dateL, controleur);
+        //Object[][] TLundi = null;
+        String  titleL[][] = {{"Lundi", "", "", "",""},{"8h","10h","12h","14h","16h","18h","20h"}};
+        //String  titleL[] = {"Lundi", "", "", "",""};
+        JTable tableauL = new JTable(TLundi, titleL);
+        //tableauL.setGridColor(Color.white);
+        Lundi.add(tableauL);
+        getContentPane().add(new JScrollPane(tableauL));
+        
         panel2 = new JPanel();
         
-        panel2.add();
-    }*/
+        panel2.add(Lundi);
+        
+        //panel2.setLayout(new GridLayout(0,1));
+        setVisible(true);
+    }
     
     public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
         ArrayList<Seance> Seances = controleur.getSeances();
@@ -157,10 +174,11 @@ public class Edt extends JFrame{
         
         for(int y=0; y<triees.length; y++){
             String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
-            
             data[y][0]= horaire;
+            
             data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
             data[y][2]= controleur.getGroupe().getNOM();
+            
             String endroit = triees[y].getSALLE() + " - " + triees[y].getSITE();
             data[y][3]= endroit;
             data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());

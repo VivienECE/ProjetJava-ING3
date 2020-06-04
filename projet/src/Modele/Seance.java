@@ -150,6 +150,20 @@ public class Seance {
         return "Physique";
       if(ID_C ==3)
         return "Electronique";
+      if(ID_C ==4)
+        return "Informatique";
+      if(ID_C ==5)
+        return "Anglais";
+      if(ID_C ==6)
+        return "Théorie des Graphes";
+      if(ID_C ==7)
+        return "Analyse";
+      if(ID_C ==8)
+        return "PSTE";
+      if(ID_C ==9)
+        return "Arabe";
+      if(ID_C ==10)
+        return "Droit du travail";
       else
           return "Matière incoonnue";
   }
@@ -161,6 +175,20 @@ public class Seance {
         this.COURS = "Physique";
       if(ID_C ==3)
         this.COURS = "Electronique";
+      if(ID_C ==4)
+        this.COURS = "Informatique";
+      if(ID_C ==5)
+        this.COURS = "Anglais";
+      if(ID_C ==6)
+        this.COURS = "Théorie des Graphes";
+      if(ID_C ==7)
+        this.COURS = "Analyse";
+      if(ID_C ==8)
+        this.COURS = "PSTE";
+      if(ID_C ==9)
+        this.COURS = "Arabe";
+      if(ID_C ==10)
+        this.COURS = "Droit du travail";
    
   }
 }

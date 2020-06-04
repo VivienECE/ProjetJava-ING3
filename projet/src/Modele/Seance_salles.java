@@ -20,6 +20,7 @@ public class Seance_salles {
     this.ID_SEANCE = id;
     this.ID_SALLE = nom;
   }
+  
   public Seance_salles(){};
      
   public int getID_SALLE() {
