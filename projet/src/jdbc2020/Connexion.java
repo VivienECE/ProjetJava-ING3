@@ -192,5 +192,8 @@ public class Connexion {
         ResultSet result = stmt.executeQuery(query);
         return result;
     }
+    
+    public Statement getStmt()
+    {return stmt;}
 }
 

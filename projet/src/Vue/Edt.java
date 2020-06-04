@@ -1,6 +1,7 @@
 
 package Vue;
 
+import Controleur.Controleur;
 import Controleur.ControleurEtudiant;
 import Modele.Seance;
 import java.awt.BorderLayout;
@@ -27,7 +28,7 @@ public class Edt extends JFrame{
     private JPanel Vendredi;
     private JPanel Samedi;
     
-    public Edt(ControleurEtudiant controleur) {
+    public Edt(Controleur controleur) {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,8 +42,9 @@ public class Edt extends JFrame{
         this.add(panel2, BorderLayout.SOUTH);
     }
     
-    private void Infos(ControleurEtudiant controleur){
+    private void Infos(Controleur controleur){
         panel1 = new JPanel();
+        //SI ETUDIANT
         JLabel infos = new JLabel("Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
                                 +controleur.getUtilisateur().getPRENOM()+" "
                                 +controleur.getGroupe().getNOM()+" "
@@ -50,7 +52,7 @@ public class Edt extends JFrame{
         panel1.add(infos);
     }
     
-    private void Liste(ControleurEtudiant controleur){
+    private void Liste(Controleur controleur){
       
         Lundi = new JPanel();
         LocalDate dateL = LocalDate.of(2020, 06, 01);
@@ -125,7 +127,7 @@ public class Edt extends JFrame{
         panel2.add();
     }*/
     
-    public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
+    public Object[][]Journee(LocalDate date, Controleur controleur){
         ArrayList<Seance> Seances = controleur.getSeances();
         ArrayList<Seance> CoursAJD = new ArrayList<>();
         int n=0;
