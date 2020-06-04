@@ -49,7 +49,6 @@ public class ControleurEnseignant {
     private ArrayList<Site> site= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
-    private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Promotion> promotions= new ArrayList<>();
     
@@ -86,7 +85,9 @@ public class ControleurEnseignant {
                 cours.add(coursDAO.find(i.getID_SEANCE()));
                 type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
                 seance.add(temp_seance);
-                utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance.getID_COURS()).getID_UTILISATEUR()));
+                Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
+                groupes.add(temp_group);
+                promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
             }
            
         } catch (SQLException ex) {
