@@ -4,6 +4,7 @@ package Vue;
 import Controleur.ControleurEtudiant;
 import Modele.Seance;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,11 +14,18 @@ import java.util.Collections;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class Edt extends JFrame{
     private JPanel panel1;
     private JPanel panel2;
+    private JPanel Lundi;
+    private JPanel Mardi;
+    private JPanel Mercredi;
+    private JPanel Jeudi;
+    private JPanel Vendredi;
+    private JPanel Samedi;
     
     public Edt(ControleurEtudiant controleur) {
         this.setTitle("Emploi du temps");
@@ -26,12 +34,11 @@ public class Edt extends JFrame{
         this.setLocationRelativeTo(null);
         Menu m = new Menu(3);
         this.setJMenuBar(m);
-        //this.setLayout(new GridLayout(0,1));
+        this.setLayout(new GridLayout(0,1));
         Infos(controleur);
         this.add(panel1, BorderLayout.NORTH);
-        Grille(controleur);
+        Liste(controleur);
         this.add(panel2, BorderLayout.SOUTH);
-        setVisible(true);
     }
     
     private void Infos(ControleurEtudiant controleur){
@@ -43,21 +50,63 @@ public class Edt extends JFrame{
         panel1.add(infos);
     }
     
-    private void Grille(ControleurEtudiant controleur){
+    private void Liste(ControleurEtudiant controleur){
+      
+        Lundi = new JPanel();
+        LocalDate dateL = LocalDate.of(2020, 06, 01);
+        Object[][] TLundi = Journee(dateL, controleur);
+        String  titleL[] = {"Lundi", "", "", "",""};
+        JTable tableauL = new JTable(TLundi, titleL);
+        tableauL.setGridColor(Color.white);
+        Lundi.add(tableauL);
+        getContentPane().add(new JScrollPane(tableauL));
+        
+        Mardi = new JPanel();
+        LocalDate dateM = LocalDate.of(2020, 06, 01);
+        Object[][] TMardi = Journee(dateM, controleur);
+        String  titleM[] = {"Mardi", "", "", "",""};
+        JTable tableauM = new JTable(TMardi, titleM);
+        tableauM.setGridColor(Color.white);
+        Mardi.add(tableauM);
+        getContentPane().add(new JScrollPane(tableauM));
+        
+        Mercredi = new JPanel();
+        LocalDate dateMe = LocalDate.of(2020, 06, 01);
+        Object[][] TMercredi = Journee(dateMe, controleur);
+        String  titleMe[] = {"Mercredi", "", "", "",""};
+        JTable tableauMe = new JTable(TMercredi, titleMe);
+        tableauMe.setGridColor(Color.white);
+        Mercredi.add(tableauMe);
+        getContentPane().add(new JScrollPane(tableauMe));
+        
+        Jeudi = new JPanel();
+        LocalDate dateJ = LocalDate.of(2020, 06, 01);
+        Object[][] TJeudi = Journee(dateJ, controleur);
+        String  titleJ[] = {"Jeudi", "", "", "",""};
+        JTable tableauJ = new JTable(TJeudi, titleJ);
+        tableauJ.setGridColor(Color.white);
+        Jeudi.add(tableauJ);
+        getContentPane().add(new JScrollPane(tableauJ));
+        
+        Vendredi = new JPanel();
+        LocalDate dateV = LocalDate.of(2020, 06, 01);
+        Object[][] TVendredi = Journee(dateV, controleur);
+        String  titleV[] = {"Vendredi", "", "", "",""};
+        JTable tableauV = new JTable(TVendredi, titleV);
+        tableauV.setGridColor(Color.white);
+        Vendredi.add(tableauV);
+        getContentPane().add(new JScrollPane(tableauV));
+        
+        Samedi = new JPanel();
+        LocalDate dateS = LocalDate.of(2020, 06, 01);
+        Object[][] TSamedi = Journee(dateS, controleur);
+        String  titleS[] = {"Samedi", "", "", "",""};
+        JTable tableauS = new JTable(TSamedi, titleS);
+        tableauS.setGridColor(Color.white);
+        Lundi.add(tableauS);
+        getContentPane().add(new JScrollPane(tableauS));
+        
         panel2 = new JPanel();
-        
-        JPanel Lundi = new JPanel();
-        LocalDate date = LocalDate.of(2020, 06, 01);
-        Object[][] TLundi = Journee(date, controleur);
-        String jour = "Lundi";
-        String  title[] = {jour, "", "", ""};
-        JTable tableau = new JTable(TLundi, title);
-        
-        JPanel Mardi = new JPanel();
-        JPanel Mercredi = new JPanel();
-        JPanel Jeudi = new JPanel();
-        JPanel Vendredi = new JPanel();
-        JPanel Samedi = new JPanel();
         
         panel2.add(Lundi);
         panel2.add(Mardi);
@@ -66,12 +115,11 @@ public class Edt extends JFrame{
         panel2.add(Vendredi);
         panel2.add(Samedi);
         
-        panel2.setLayout(new GridLayout(6,1));
-        
-        //setVisible(true);
+        panel2.setLayout(new GridLayout(0,1));
+        setVisible(true);
     }
     
-    /*private void Liste(ControleurEtudiant controleur){
+    /*private void Grille(ControleurEtudiant controleur){
         panel2 = new JPanel();
         
         panel2.add();
@@ -79,18 +127,17 @@ public class Edt extends JFrame{
     
     public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
         ArrayList<Seance> Seances = controleur.getSeances();
-        ArrayList<Seance> CoursAJD = new ArrayList<Seance>();
+        ArrayList<Seance> CoursAJD = new ArrayList<>();
         int n=0;
         
         //Voir combien de cours dans la journée;
-        for(int i = 1; i < Seances.size(); i++)
+        for(int i = 0; i < Seances.size(); i++)
         {
-            if(Seances.get(i).getDATE()==date){
-                 CoursAJD.add(Seances.get(i));
+            if(date.isEqual(Seances.get(i).getDATE())){
+                CoursAJD.add(Seances.get(i));
                 n++;
-            }
-               
-        } 
+            }  
+        }
         
         Object[][] data = new Object[n][5];
         Seance [] triees = new Seance [CoursAJD.size()];
@@ -99,7 +146,7 @@ public class Edt extends JFrame{
         for(int k=0; k<CoursAJD.size(); k++)
             triees[k]=CoursAJD.get(k);
         
-        for(int x=0; x<triees.length; x++){
+        for(int x=0; x<(triees.length-1); x++){
             if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
                 Seance temp;
 		temp = triees[x];
@@ -113,10 +160,10 @@ public class Edt extends JFrame{
             
             data[y][0]= horaire;
             data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
-            data[y][2]= controleur.getGroupe();
+            data[y][2]= controleur.getGroupe().getNOM();
             String endroit = triees[y].getSALLE() + " - " + triees[y].getSITE();
             data[y][3]= endroit;
-            data[y][4]= triees[y].getTYPE();
+            data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
         }
          
         return data;   

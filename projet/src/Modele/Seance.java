@@ -111,8 +111,16 @@ public class Seance {
     this.ENSEIGNANT = ENSEIGNANT;
   }
   
-   public String getTYPE() {
-    return TYPE;
+   public String getTYPE(int ID_TYPE) {
+       if(ID_TYPE==1)
+           return "COURS";
+       if(ID_TYPE==1)
+           return "TD";
+       if(ID_TYPE==1)
+           return "EXAMEN";
+       else
+           return "Inconnu";
+    
   }
    
   public void setTYPE(String TYPE) {
