@@ -3,6 +3,7 @@ package Vue;
 
 import Modele.Seance;
 import Controleur.ControleurEtudiant;
+import Modele.Cours;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -72,7 +73,9 @@ public class Recap extends JFrame{
         
       
         ArrayList<Seance> Seances = controleur.getSeances();
+        ArrayList<Cours> cours = controleur.getCours();
         //ArrayList<Integer> lesIdCours = new ArrayList<Integer>();
+        
         ArrayList<Seance> chaqueCours = new ArrayList<Seance>();
         LocalDate dO;
         LocalDate dF;
@@ -94,7 +97,7 @@ public class Recap extends JFrame{
             dO = LocalDate.of(2020, 07, 30);
             dF = LocalDate.of(2020, 01, 01);
             n=0;
-            nom = "";
+            nom = cours.get(x).getNOM();
             for(int j=0; j<chaqueCours.size(); j++){
                 if(chaqueCours.get(j).getID_COURS()==x){//si c'est la meme matiere
                     if((chaqueCours.get(j).getDATE()).isBefore(dO))
