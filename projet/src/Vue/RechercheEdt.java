@@ -174,7 +174,7 @@ public class RechercheEdt extends JFrame{
         Etudiant etudiant = etudiantDAO.find(NOM,PRENOM);
     }
     
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new RechercheEdt();
-    }
+    }*/
 }

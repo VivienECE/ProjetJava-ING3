@@ -47,7 +47,7 @@ public class EtudiantDAO extends DAO<Etudiant> {
     return etudiant;
   }
   
-   public Etudiant find(String NOM, String PRENOM) {
+  public Etudiant find(String NOM, String PRENOM) {
     Etudiant etudiant = new Etudiant();      
       
     try {
