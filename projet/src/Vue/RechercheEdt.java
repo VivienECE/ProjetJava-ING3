@@ -156,7 +156,7 @@ public class RechercheEdt extends JFrame{
                 }
             if (e.getSource() == Submit){
                 try {
-                    ResultPanel(controleur,connection);
+                    ResultPanel(controleur);
                 } catch (SQLException ex) {
                     Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -169,7 +169,7 @@ public class RechercheEdt extends JFrame{
     private void ResultPanel(Controleur controleur) throws SQLException, ClassNotFoundException {
         String NOM = nom.getText();
         String PRENOM = prenom.getText();
-        DAO<Etudiant> etudiantDAO = new EtudiantDAO(controleur.getConnection());  
+        DAO<Etudiant> etudiantDAO = new EtudiantDAO(controleur.getConnexion());  
         Etudiant etudiant = etudiantDAO.find(NOM,PRENOM);
     }
     
