@@ -57,4 +57,9 @@ public class Seance_sallesDAO extends DAO<Seance_salles> {
     public ArrayList<Seance_salles> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Seance_salles find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

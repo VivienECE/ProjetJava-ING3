@@ -57,4 +57,9 @@ public class Seance_enseignantsDAO extends DAO<Seance_enseignants> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public Seance_enseignants find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

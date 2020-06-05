@@ -53,4 +53,9 @@ public class SiteDAO extends DAO<Site> {
     public ArrayList<Site> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Site find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

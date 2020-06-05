@@ -53,4 +53,9 @@ public class Type_coursDAO extends DAO<Type_cours> {
     public ArrayList<Type_cours> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Type_cours find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

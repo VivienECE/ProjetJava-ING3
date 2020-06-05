@@ -128,7 +128,7 @@ public class RechercheEdt extends JFrame{
     }
     public class AddButtonListener implements ActionListener {
         Controleur controleur;
-        @Override
+        Connexion connection;
         public void actionPerformed(ActionEvent e) {
             
             if (e.getSource() == Eleve) {
@@ -156,7 +156,7 @@ public class RechercheEdt extends JFrame{
                 }
             if (e.getSource() == Submit){
                 try {
-                    ResultPanel(controleur);
+                    ResultPanel(controleur,connection);
                 } catch (SQLException ex) {
                     Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -169,8 +169,7 @@ public class RechercheEdt extends JFrame{
     private void ResultPanel(Controleur controleur) throws SQLException, ClassNotFoundException {
         String NOM = nom.getText();
         String PRENOM = prenom.getText();
-        Connexion connection = new Connexion("edt", "root", "");
-        DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);  
+        DAO<Etudiant> etudiantDAO = new EtudiantDAO(controleur.getConnection());  
         Etudiant etudiant = etudiantDAO.find(NOM,PRENOM);
     }
     

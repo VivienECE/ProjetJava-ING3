@@ -67,4 +67,9 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
     public ArrayList<Seance_groupes> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Seance_groupes find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

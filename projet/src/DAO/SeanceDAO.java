@@ -55,7 +55,18 @@ public class SeanceDAO extends DAO<Seance> {
 
     @Override
     public ArrayList<Seance> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          ArrayList<Seance> seances = new ArrayList<>();      
+      
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM seance");
+          while(result.next())
+            {
+                seances.add(new Seance(result.getInt("ID"), result.getInt("SEMAINE"),result.getDate("DATE").toLocalDate(),result.getTime("HEURE_DEBUT").toLocalTime(), result.getTime("HEURE_FIN").toLocalTime(),result.getInt("ETAT"),result.getInt("ID_COURS"),result.getInt("ID_TYPE")));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        return seances;
     }
 
     @Override

@@ -34,6 +34,7 @@ import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Recap;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -56,9 +57,9 @@ public class ControleurEtudiant extends Controleur {
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
     
     //Recupère toute les données de l'étudiant ayant le numero d'utilisateur en parametre
-    public ControleurEtudiant(int ID_UTILISATEUR)
+    public ControleurEtudiant(int ID_UTILISATEUR, Connexion connexion)
     {
-        super();
+        super(connexion);
         Connexion connection;
         try {
             connection = new Connexion("edt", "root", "");
@@ -106,7 +107,8 @@ public class ControleurEtudiant extends Controleur {
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
-        ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
+         Connexion connection = null;
+        ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR,connection);
         Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 

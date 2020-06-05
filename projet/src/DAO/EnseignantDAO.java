@@ -53,16 +53,21 @@ public class EnseignantDAO extends DAO<Enseignant> {
     public ArrayList<Enseignant> getAll() {
          ArrayList<Enseignant> enseignants = new ArrayList<>();      
       
-    try {
-      ResultSet result = this.connect.executeQuery("SELECT * FROM enseignant");
-      while(result.next())
-        {
-            enseignants.add(this.find(result.getInt("ID_UTILISATEUR")));
-        }      
-    } catch (SQLException e) {
-      e.printStackTrace();
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM enseignant");
+          while(result.next())
+            {
+                enseignants.add(this.find(result.getInt("ID_UTILISATEUR")));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        return enseignants;
     }
-    return enseignants;
+
+    @Override
+    public Enseignant find(String NOM, String PRENOM) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

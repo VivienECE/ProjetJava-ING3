@@ -29,6 +29,7 @@ import java.util.ArrayList;
  * @author segado + Openclassroom
  */
 public class Controleur {
+    Connexion connection;
 
     /**
      *
@@ -40,25 +41,25 @@ public class Controleur {
         // creation de la fenetre
         try
         {
-            Connexion connection = new Connexion("edt", "root", "");
+            Connexion connection = new Connexion("edt2", "root", "");
             Login log = new Login(connection);      
             int ID_UTILISATEUR = log.getID_UTILISATEUR();
             int DROIT = log.getDROIT();
             System.out.println(""+ID_UTILISATEUR+"+"+DROIT);
-            Controleur controleur=new Controleur();
+            Controleur controleur=new Controleur(connection);
             switch(DROIT)
             {
                 case 1:
-                    controleur= new ControleurAdmin(ID_UTILISATEUR);
+                    controleur= new ControleurAdmin(ID_UTILISATEUR,connection);
                 break;
                 case 2:
-                    controleur= new ControleurAdmin(ID_UTILISATEUR);
+                    controleur= new ControleurAdmin(ID_UTILISATEUR,connection);
                 break;
                 case 3:
-                      controleur= new ControleurEnseignant(ID_UTILISATEUR);
+                      controleur= new ControleurEnseignant(ID_UTILISATEUR,connection);
                 break;
                 case 4:
-                     controleur= new ControleurEtudiant(ID_UTILISATEUR);
+                     controleur= new ControleurEtudiant(ID_UTILISATEUR,connection);
                 break;
                 default:
                 break;
@@ -75,6 +76,10 @@ public class Controleur {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+
+    public Controleur(Connexion connection) {
+        this.connection = connection;
+    }
 
     public Utilisateur getUtilisateur() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -103,6 +108,6 @@ public class Controleur {
       public ArrayList<Utilisateur> getUtilisateurEnseignants(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     
+     public Connexion getConnexion(){return connection;}
 }
 

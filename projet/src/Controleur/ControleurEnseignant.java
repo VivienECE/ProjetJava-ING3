@@ -53,9 +53,9 @@ public class ControleurEnseignant extends Controleur {
     private ArrayList<Promotion> promotions= new ArrayList<>();
     
     //Recupère toute les données
-    public ControleurEnseignant(int ID_UTILISATEUR)
+    public ControleurEnseignant(int ID_UTILISATEUR, Connexion connexion)
     {
-    super();
+     super(connexion);
     Connexion connection;
         try {
             connection = new Connexion("edt", "root", "");
@@ -101,7 +101,8 @@ public class ControleurEnseignant extends Controleur {
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
-        ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
+        Connexion connexion = null;
+        ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR,connexion);
         //Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 
