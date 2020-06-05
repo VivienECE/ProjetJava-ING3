@@ -7,7 +7,9 @@ import Controleur.Controleur;
 import Controleur.ControleurEnseignant;
 
 import Controleur.ControleurEtudiant;
+import Modele.Salle;
 import Modele.Seance;
+import Modele.Utilisateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -16,6 +18,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,7 +35,7 @@ public class Edt extends JFrame{
     private JPanel Vendredi;
     private JPanel Samedi;
     
-    public Edt(Controleur controleur) {
+    public Edt(ControleurEtudiant controleur) {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,14 +60,15 @@ public class Edt extends JFrame{
         panel1.add(infos);
     }
     
-    private void Liste(Controleur controleur){
+    private void Liste(ControleurEtudiant controleur){
       
         Lundi = new JPanel();
         LocalDate dateL = LocalDate.of(2020, 06, 01);
         Object[][] TLundi = Journee(dateL, controleur);
         String  titleL[] = {"Lundi", "", "", "",""};
         JTable tableauL = new JTable(TLundi, titleL);
-        tableauL.setGridColor(Color.white);
+        tableauL.getTableHeader().setBackground(new Color(151,221,255));
+        tableauL.setShowVerticalLines(false);
         Lundi.add(tableauL);
         getContentPane().add(new JScrollPane(tableauL));
         
@@ -73,7 +77,8 @@ public class Edt extends JFrame{
         Object[][] TMardi = Journee(dateM, controleur);
         String  titleM[] = {"Mardi", "", "", "",""};
         JTable tableauM = new JTable(TMardi, titleM);
-        tableauM.setGridColor(Color.white);
+        tableauM.getTableHeader().setBackground(new Color(151,221,255));
+        tableauM.setShowVerticalLines(false);
         Mardi.add(tableauM);
         getContentPane().add(new JScrollPane(tableauM));
         
@@ -82,7 +87,8 @@ public class Edt extends JFrame{
         Object[][] TMercredi = Journee(dateMe, controleur);
         String  titleMe[] = {"Mercredi", "", "", "",""};
         JTable tableauMe = new JTable(TMercredi, titleMe);
-        tableauMe.setGridColor(Color.white);
+        tableauMe.getTableHeader().setBackground(new Color(151,221,255));
+        tableauMe.setShowVerticalLines(false);
         Mercredi.add(tableauMe);
         getContentPane().add(new JScrollPane(tableauMe));
         
@@ -91,7 +97,8 @@ public class Edt extends JFrame{
         Object[][] TJeudi = Journee(dateJ, controleur);
         String  titleJ[] = {"Jeudi", "", "", "",""};
         JTable tableauJ = new JTable(TJeudi, titleJ);
-        tableauJ.setGridColor(Color.white);
+        tableauJ.getTableHeader().setBackground(new Color(151,221,255));
+        tableauJ.setShowVerticalLines(false);
         Jeudi.add(tableauJ);
         getContentPane().add(new JScrollPane(tableauJ));
         
@@ -100,7 +107,8 @@ public class Edt extends JFrame{
         Object[][] TVendredi = Journee(dateV, controleur);
         String  titleV[] = {"Vendredi", "", "", "",""};
         JTable tableauV = new JTable(TVendredi, titleV);
-        tableauV.setGridColor(Color.white);
+        tableauV.getTableHeader().setBackground(new Color(151,221,255));
+        tableauV.setShowVerticalLines(false);
         Vendredi.add(tableauV);
         getContentPane().add(new JScrollPane(tableauV));
         
@@ -109,7 +117,8 @@ public class Edt extends JFrame{
         Object[][] TSamedi = Journee(dateS, controleur);
         String  titleS[] = {"Samedi", "", "", "",""};
         JTable tableauS = new JTable(TSamedi, titleS);
-        tableauS.setGridColor(Color.white);
+        tableauS.getTableHeader().setBackground(new Color(151,221,255));
+        tableauS.setShowVerticalLines(false);
         Lundi.add(tableauS);
         getContentPane().add(new JScrollPane(tableauS));
         
@@ -122,17 +131,17 @@ public class Edt extends JFrame{
         panel2.add(Vendredi);
         panel2.add(Samedi);
         
-        panel2.setLayout(new GridLayout(0,1));
+        panel2.setLayout(new GridLayout(0,1,0,10));
         setVisible(true);
     }
     
-    private void Grille(ControleurEtudiant controleur){
+    private void Grille(Controleur controleur){
         
         Lundi = new JPanel();
         LocalDate dateL = LocalDate.of(2020, 06, 01);
-        Object[][] TLundi = Journee(dateL, controleur);
-        //Object[][] TLundi = null;
-        String  titleL[][] = {{"Lundi", "", "", "",""},{"8h","10h","12h","14h","16h","18h","20h"}};
+        //Object[][] TLundi = Journee(dateL, controleur);
+        Object[][] TLundi = {{"Cours",""},{"Cours",""},{"Cours",""},{"Cours",""},{"Cours",""},{"Cours",""}};
+        String[]  titleL = {"8h-10h","10h-12h","12h-14h","14h-16h","16h-18h","18h-20h"};
         //String  titleL[] = {"Lundi", "", "", "",""};
         JTable tableauL = new JTable(TLundi, titleL);
         //tableauL.setGridColor(Color.white);
@@ -147,8 +156,10 @@ public class Edt extends JFrame{
         setVisible(true);
     }
     
-    public Object[][]Journee(LocalDate date, Controleur controleur){
+    public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
         ArrayList<Seance> Seances = controleur.getSeances();
+        ArrayList<Salle> Salles = controleur.getSalles();
+        ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
         ArrayList<Seance> CoursAJD = new ArrayList<>();
         int n=0;
         
@@ -161,7 +172,7 @@ public class Edt extends JFrame{
             }  
         }
         
-        Object[][] data = new Object[n][5];
+        Object[][] data = new Object[n][6];
         Seance [] triees = new Seance [CoursAJD.size()];
         
         //Trier par heure
@@ -182,15 +193,35 @@ public class Edt extends JFrame{
             data[y][0]= horaire;
             
             data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
-            data[y][2]= controleur.getGroupe().getNOM();
             
-            String endroit = triees[y].getSALLE() + " - " + triees[y].getSITE();
-            data[y][3]= endroit;
-            data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+            
+            data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
+            
+            data[y][3]= controleur.getGroupe().getNOM();
+            String salle = Salles.get(triees[y].getID_COURS()).getNOM();
+            
+            String site = "";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==1)
+                site="E1";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==2)
+                site="E2";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==3)
+                site="E3";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==4)
+                site="E4";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==5)
+                site="E5";
+            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==6)
+                site="CNAM";
+            
+            String endroit = salle + " - " + site;
+            data[y][4]= endroit;
+            data[y][5]= triees[y].getTYPE(triees[y].getID_TYPE());
         }
          
         return data;   
     }
+    
               
     
     public static void main(String[] args) {

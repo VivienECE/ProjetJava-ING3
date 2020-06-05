@@ -72,7 +72,6 @@ public class Recap extends JFrame{
         
       
         ArrayList<Seance> Seances = controleur.getSeances();
-        //ArrayList<Integer> lesIdCours = new ArrayList<Integer>();
         ArrayList<Seance> chaqueCours = new ArrayList<Seance>();
         LocalDate dO;
         LocalDate dF;
@@ -111,60 +110,7 @@ public class Recap extends JFrame{
             data[x-1][2]= dF;
             data[x-1][3]= n;
         }
-            //System.out.println(chaqueCours.get(j).getCOURS(chaqueCours.get(j).getID_COURS()));
         
-        /*     nb[0]++;
-            if(Seances.get(i).getID_COURS()==2)//phy
-                nb[1]++;
-            if(Seances.get(i).getID_COURS()==3)//elec
-                nb[2]++;
-            if(Seances.get(i).getID_COURS()==4)//info
-                nb[2]++;
-            if(Seances.get(i).getID_COURS()==5)//anglais
-                nb[3]++;
-            if(Seances.get(i).getID_COURS()==6)//TDG
-                nb[4]++;
-            if(Seances.get(i).getID_COURS()==7)//Analyse
-                nb[5]++;
-            if(Seances.get(i).getID_COURS()==8)//PSTE
-                nb[6]++;
-            if(Seances.get(i).getID_COURS()==9)//Arabe
-                nb[7]++;
-            if(Seances.get(i).getID_COURS()==10)//DDT
-                nb[9]++;*/
-        
-        /*int cours1 = Seances.get(0).getID_COURS();
-        lesIdCours.add(0,cours1);
-        
-        for(int i = 1; i < Seances.size(); i++)
-        {
-            for(int j=0; j<lesIdCours.size(); j++){
-                if(Seances.get(i).getID_COURS()!= lesIdCours.get(j))
-                {
-                    lesIdCours.add(Seances.get(i).getID_COURS());
-                }
-            }
-        } 
-        System.out.println(Seances.size());
-        System.out.println(lesIdCours.size());
-        
-        
-        //Trier par matière
-        for(int x=0; x<lesIdCours.size(); x++){
-            
-            for(int k=0; k<Seances.size(); k++){
-                if(Seances.get(k).getID_COURS()== lesIdCours.get(x)){
-                    if((Seances.get(k).getDATE()).isBefore(dO))
-                        dO = (Seances.get(k).getDATE());
-                    if((Seances.get(k).getDATE()).isAfter(dF))
-                        dF = (Seances.get(k).getDATE());
-                    
-                    nom = Seances.get(k).getCOURS(lesIdCours.get(x));
-                    n++;//Une séance en plus
-                }
-            }
-            
-        }*/
         return data;
     }
     
