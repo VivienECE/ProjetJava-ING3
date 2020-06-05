@@ -51,7 +51,8 @@ public class ControleurAdmin extends Controleur {
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Promotion> promotions= new ArrayList<>();
-    private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
+    private ArrayList<Utilisateur> enseignants= new ArrayList<>(); //NOM DES ENSEIGNANTS
+    private ArrayList<Utilisateur> etudiants= new ArrayList<>(); //ETUDIANTS
     
     //Recupère toute les données
     public ControleurAdmin(int ID_UTILISATEUR)
@@ -87,6 +88,7 @@ public class ControleurAdmin extends Controleur {
                 seances.add(seanceDAO.find(j));
                 j++;
             }
+            j=1;
            
             for (Seance i : seances)
             {
@@ -99,7 +101,7 @@ public class ControleurAdmin extends Controleur {
                 Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID()).getID_GROUPE());
                 groupes.add(temp_group);
                 promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
-                utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
+                enseignants.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
             }
            
         } catch (SQLException ex) {
@@ -126,6 +128,7 @@ public class ControleurAdmin extends Controleur {
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
     public ArrayList<Promotion> getPromotions(){return promotions;}
-    public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
+    public ArrayList<Utilisateur> getUtilisateurEnseignants(){return enseignants;}
+    public ArrayList<Utilisateur> getUtilisateurEtudiants(){return etudiants;}
     
 }

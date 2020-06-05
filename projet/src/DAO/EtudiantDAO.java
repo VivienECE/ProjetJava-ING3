@@ -46,9 +46,26 @@ public class EtudiantDAO extends DAO<Etudiant> {
     }
     return etudiant;
   }
+  
+   public Etudiant find(String NOM, String PRENOM) {
+    Etudiant etudiant = new Etudiant();      
+      
+    try {
+      ResultSet result = this.connect.executeQuery("SELECT * FROM utilisateur WHERE NOM = " + NOM + " AND PRENOM="+PRENOM);
+      etudiant=this.find(result.getInt("ID"));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return etudiant;
+  }
 
     @Override
     public ArrayList<Etudiant> findAll(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Etudiant> getAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

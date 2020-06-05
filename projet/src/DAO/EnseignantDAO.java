@@ -49,5 +49,21 @@ public class EnseignantDAO extends DAO<Enseignant> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public ArrayList<Enseignant> getAll() {
+         ArrayList<Enseignant> enseignants = new ArrayList<>();      
+      
+    try {
+      ResultSet result = this.connect.executeQuery("SELECT * FROM enseignant");
+      while(result.next())
+        {
+            enseignants.add(this.find(result.getInt("ID_UTILISATEUR")));
+        }      
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return enseignants;
+    }
+
 
 }

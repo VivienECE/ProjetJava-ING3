@@ -62,4 +62,9 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
     }
     return seance_groupes;
   }
+
+    @Override
+    public ArrayList<Seance_groupes> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

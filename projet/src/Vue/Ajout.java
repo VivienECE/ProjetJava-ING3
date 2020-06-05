@@ -28,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.border.Border;
+import java.sql.*;
 
 public class Ajout extends JFrame{
     private JPanel panel1;
