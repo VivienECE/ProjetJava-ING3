@@ -57,12 +57,11 @@ public class ControleurEtudiant extends Controleur {
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
     
     //Recupère toute les données de l'étudiant ayant le numero d'utilisateur en parametre
-    public ControleurEtudiant(int ID_UTILISATEUR, Connexion connexion)
+    public ControleurEtudiant(int ID_UTILISATEUR)
     {
-        super(connexion);
-        Connexion connection;
+        super();
         try {
-            connection = new Connexion("edt", "root", "");
+            connection = new Connexion("edt2", "root", "");
             
             DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);  
             DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);  
@@ -101,6 +100,8 @@ public class ControleurEtudiant extends Controleur {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControleurEtudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.display();
     }
     
     //CE MAIN SERT DE TEST -> ID_UT
@@ -108,7 +109,7 @@ public class ControleurEtudiant extends Controleur {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
          Connexion connection = null;
-        ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR,connection);
+        ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
         Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 
@@ -123,4 +124,11 @@ public class ControleurEtudiant extends Controleur {
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
+    public void display(){
+        System.out.println("Enseignants");
+        utilisateurs.forEach((i) -> { System.out.println(i.getID());});
+
+          System.out.println("Seance");
+          seance.forEach((i) -> { System.out.println(i.getID());});
+    }
 }

@@ -53,47 +53,43 @@ public class ControleurEnseignant extends Controleur {
     private ArrayList<Promotion> promotions= new ArrayList<>();
     
     //Recupère toute les données
-    public ControleurEnseignant(int ID_UTILISATEUR, Connexion connexion)
+    public ControleurEnseignant(int ID_UTILISATEUR)
     {
-     super(connexion);
-    Connexion connection;
+      super();
         try {
-            connection = new Connexion("edt", "root", "");
-            
-            DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);  
-            DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);  
-            DAO<Groupe> groupeDAO = new GroupeDAO(connection);  
-            DAO<Promotion> promotionDAO = new PromotionDAO(connection);  
-            DAO<Seance_groupes> seance_groupesDAO = new Seance_groupesDAO(connection);
-            DAO<Seance> seanceDAO = new SeanceDAO(connection);
-            DAO<Type_cours> type_coursDAO = new Type_coursDAO(connection);
-            DAO<Cours> coursDAO = new CoursDAO(connection);
-            DAO<Salle> salleDAO = new SalleDAO(connection);
-            DAO<Seance_salles> seance_sallesDAO = new Seance_sallesDAO(connection);
-            DAO<Site> siteDAO = new SiteDAO(connection);
-            DAO<Enseignant> enseignantDAO = new EnseignantDAO(connection);
-            DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
-            
-            utilisateur= utilisateurDAO.find(ID_UTILISATEUR);
-            ArrayList<Seance_enseignants> seance_enseignants = seance_enseignantsDAO.findAll(ID_UTILISATEUR);
-            for (Seance_enseignants i : seance_enseignants)
-            {
-                Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
-                Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
-                salle.add(temp_salle);
-                site.add(siteDAO.find(temp_salle.getID_SITE()));
-                cours.add(coursDAO.find(i.getID_SEANCE()));
-                type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
-                seance.add(temp_seance);
-                Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
-                groupes.add(temp_group);
-                promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));    
-            }
-           
+            connection = new Connexion("edt2", "root", "");
+        DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);
+        DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
+        DAO<Groupe> groupeDAO = new GroupeDAO(connection);
+        DAO<Promotion> promotionDAO = new PromotionDAO(connection);
+        DAO<Seance_groupes> seance_groupesDAO = new Seance_groupesDAO(connection);
+        DAO<Seance> seanceDAO = new SeanceDAO(connection);
+        DAO<Type_cours> type_coursDAO = new Type_coursDAO(connection);
+        DAO<Cours> coursDAO = new CoursDAO(connection);
+        DAO<Salle> salleDAO = new SalleDAO(connection);
+        DAO<Seance_salles> seance_sallesDAO = new Seance_sallesDAO(connection);
+        DAO<Site> siteDAO = new SiteDAO(connection);
+        DAO<Enseignant> enseignantDAO = new EnseignantDAO(connection);
+        DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
+        utilisateur= utilisateurDAO.find(ID_UTILISATEUR);
+        ArrayList<Seance_enseignants> seance_enseignants = seance_enseignantsDAO.findAll(ID_UTILISATEUR);
+        for (Seance_enseignants i : seance_enseignants)
+        {
+            Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
+            Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
+            salle.add(temp_salle);
+            site.add(siteDAO.find(temp_salle.getID_SITE()));
+            cours.add(coursDAO.find(i.getID_SEANCE()));
+            type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
+            seance.add(temp_seance);
+            Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
+            groupes.add(temp_group);
+            promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
+        }
         } catch (SQLException ex) {
-            Logger.getLogger(ControleurEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleurEnseignant.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ControleurEtudiant.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControleurEnseignant.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -102,7 +98,7 @@ public class ControleurEnseignant extends Controleur {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
         int ID_UTILISATEUR=1;
         Connexion connexion = null;
-        ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR,connexion);
+        ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
         //Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 

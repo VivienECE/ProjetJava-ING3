@@ -56,7 +56,6 @@ public class SeanceDAO extends DAO<Seance> {
     @Override
     public ArrayList<Seance> getAll() {
           ArrayList<Seance> seances = new ArrayList<>();      
-      
         try {
           ResultSet result = this.connect.executeQuery("SELECT * FROM seance");
           while(result.next())
@@ -66,6 +65,8 @@ public class SeanceDAO extends DAO<Seance> {
         } catch (SQLException e) {
           e.printStackTrace();
         }
+       // System.out.println("SeanceDAO");
+       //  seances.forEach((i) -> { System.out.println(i.getID());});
         return seances;
     }
 

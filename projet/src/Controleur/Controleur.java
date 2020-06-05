@@ -46,20 +46,20 @@ public class Controleur {
             int ID_UTILISATEUR = log.getID_UTILISATEUR();
             int DROIT = log.getDROIT();
             System.out.println(""+ID_UTILISATEUR+"+"+DROIT);
-            Controleur controleur=new Controleur(connection);
+            Controleur controleur=new Controleur();
             switch(DROIT)
             {
                 case 1:
-                    controleur= new ControleurAdmin(ID_UTILISATEUR,connection);
+                    controleur= new ControleurAdmin(ID_UTILISATEUR);
                 break;
                 case 2:
-                    controleur= new ControleurAdmin(ID_UTILISATEUR,connection);
+                    controleur= new ControleurAdmin(ID_UTILISATEUR);
                 break;
                 case 3:
-                      controleur= new ControleurEnseignant(ID_UTILISATEUR,connection);
+                      controleur= new ControleurEnseignant(ID_UTILISATEUR);
                 break;
                 case 4:
-                     controleur= new ControleurEtudiant(ID_UTILISATEUR,connection);
+                     controleur= new ControleurEtudiant(ID_UTILISATEUR);
                 break;
                 default:
                 break;
@@ -76,10 +76,6 @@ public class Controleur {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-
-    public Controleur(Connexion connection) {
-        this.connection = connection;
-    }
 
     public Utilisateur getUtilisateur() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -108,6 +104,11 @@ public class Controleur {
       public ArrayList<Utilisateur> getUtilisateurEnseignants(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     public Connexion getConnexion(){return connection;}
+      
+    public Utilisateur findUtilisateurEtudiant(String NOM, String PRENOM) {
+    return null;
+    }
+     public void display(){}
+     
 }
 

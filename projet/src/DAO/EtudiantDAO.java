@@ -66,7 +66,19 @@ public class EtudiantDAO extends DAO<Etudiant> {
 
     @Override
     public ArrayList<Etudiant> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Etudiant> seances = new ArrayList<>();           
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM etudiant");
+          while(result.next())
+            {
+                seances.add(new Etudiant(result.getInt("ID_UTILISATEUR"), result.getString("NUMERO"),result.getInt("ID_GROUPE")));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+       // System.out.println("SeanceDAO");
+       //  seances.forEach((i) -> { System.out.println(i.getID());});
+        return seances;
     }
 
 }

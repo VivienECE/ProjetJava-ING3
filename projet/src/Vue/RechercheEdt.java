@@ -7,6 +7,7 @@ import Controleur.ControleurEtudiant;
 import DAO.DAO;
 import DAO.EtudiantDAO;
 import Modele.Etudiant;
+import Modele.Utilisateur;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -47,8 +48,10 @@ public class RechercheEdt extends JFrame{
     private JComboBox affichage;
     private JComboBox promo;
     private DateTextField picker;
+    private Controleur controleur;
     
     public RechercheEdt(Controleur controleur) {
+        this.controleur = controleur;
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,7 +90,7 @@ public class RechercheEdt extends JFrame{
         this.setVisible(true);
     }
     
-    private void RecherchePanel(int type, Controleur controleur) {
+    private void RecherchePanel(int type) {
       
        if(type==3){
            JLabel mess1ter = new JLabel("Promotion : ");
@@ -127,36 +130,34 @@ public class RechercheEdt extends JFrame{
 
     }
     public class AddButtonListener implements ActionListener {
-        Controleur controleur;
-        Connexion connection;
         public void actionPerformed(ActionEvent e) {
             
             if (e.getSource() == Eleve) {
-                RecherchePanel(1, controleur);
+                RecherchePanel(1);
                 panelB.setVisible(false);   
             }
             if (e.getSource() == Professeur) {
-                RecherchePanel(2, controleur);
+                RecherchePanel(2);
                 panelB.setVisible(false);
             }
             if (e.getSource() == TD) {
-                RecherchePanel(3, controleur);
+                RecherchePanel(3);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Promotion) {
-                RecherchePanel(4, controleur);
+                RecherchePanel(4);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Salle) {
-                RecherchePanel(5, controleur);
+                RecherchePanel(5);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Submit){
-                    picker.getDate();
+                   //picker.getDate();
                 }
             if (e.getSource() == Submit){
                 try {
-                    ResultPanel(controleur);
+                    ResultPanel();
                 } catch (SQLException ex) {
                     Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ClassNotFoundException ex) {
@@ -166,11 +167,20 @@ public class RechercheEdt extends JFrame{
         }
     }
     
-    private void ResultPanel(Controleur controleur) throws SQLException, ClassNotFoundException {
+    private void ResultPanel() throws SQLException, ClassNotFoundException {
         String NOM = nom.getText();
-        String PRENOM = prenom.getText();
-        DAO<Etudiant> etudiantDAO = new EtudiantDAO(controleur.getConnexion());  
-        Etudiant etudiant = etudiantDAO.find(NOM,PRENOM);
+        String PRENOM = prenom.getText(); 
+        Utilisateur utilisateurEtudiant= new Utilisateur();
+        utilisateurEtudiant=controleur.findUtilisateurEtudiant(NOM,PRENOM);
+        if(utilisateurEtudiant!=null)
+        {
+            System.out.println("Recherche"+utilisateurEtudiant.getID());
+            Controleur controleurRechercheEtudiant = new ControleurEtudiant(utilisateurEtudiant.getID());
+            Edt fenetre = new Edt(controleurRechercheEtudiant);
+        }
+        else
+             JOptionPane.showMessageDialog(null, "Etudiant introuvable");
+        
     }
     
     /*public static void main(String[] args) {
