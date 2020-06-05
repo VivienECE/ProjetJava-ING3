@@ -42,7 +42,7 @@ import jdbc2020.Connexion;
  *
  * @author Vivien
  */
-public class ControleurEtudiant {
+public class ControleurEtudiant extends Controleur {
     private Utilisateur utilisateur;
     private Etudiant etudiant;
     private Groupe groupe;
@@ -57,6 +57,7 @@ public class ControleurEtudiant {
     //Recupère toute les données de l'étudiant ayant le numero d'utilisateur en parametre
     public ControleurEtudiant(int ID_UTILISATEUR)
     {
+        super();
         Connexion connection;
         try {
             connection = new Connexion("edt", "root", "");

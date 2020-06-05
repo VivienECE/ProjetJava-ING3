@@ -42,7 +42,7 @@ import jdbc2020.Connexion;
  *
  * @author Vivien
  */
-public class ControleurEnseignant {
+public class ControleurEnseignant extends Controleur {
     private Utilisateur utilisateur;
     private ArrayList<Seance> seance= new ArrayList<>();
     private ArrayList<Salle> salle= new ArrayList<>();
@@ -55,7 +55,7 @@ public class ControleurEnseignant {
     //Recupère toute les données
     public ControleurEnseignant(int ID_UTILISATEUR)
     {
-        
+    super();
     Connexion connection;
         try {
             connection = new Connexion("edt", "root", "");
@@ -112,7 +112,7 @@ public class ControleurEnseignant {
     public ArrayList<Salle> getSalles() {return salle; }
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
-    public ArrayList<Groupe> getGroupe(){return groupes;}
-    public ArrayList<Promotion> getPromotion(){return promotions;}
+    public ArrayList<Groupe> getGroupes(){return groupes;}
+    public ArrayList<Promotion> getPromotions(){return promotions;}
     
 }
