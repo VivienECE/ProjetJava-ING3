@@ -1,7 +1,12 @@
 
 package Vue;
 
-
+import Controleur.Controleur;
+import Controleur.ControleurEnseignant;
+import Controleur.ControleurEtudiant;
+import DAO.DAO;
+import DAO.EtudiantDAO;
+import Modele.Etudiant;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -11,6 +16,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +29,7 @@ import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import jdbc2020.Connexion;
 
 
 public class RechercheEdt extends JFrame{
@@ -35,12 +42,13 @@ public class RechercheEdt extends JFrame{
     private JButton Promotion;
     private JButton Salle;
     private JButton Submit;
-    private JTextField UTextField;
+    private JTextField nom;
+    private JTextField prenom;
     private JComboBox affichage;
     private JComboBox promo;
     private DateTextField picker;
     
-    public RechercheEdt() {
+    public RechercheEdt(Controleur controleur) {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -79,7 +87,7 @@ public class RechercheEdt extends JFrame{
         this.setVisible(true);
     }
     
-    private void RecherchePanel(int type) {
+    private void RecherchePanel(int type, Controleur controleur) {
       
        if(type==3){
            JLabel mess1ter = new JLabel("Promotion : ");
@@ -94,9 +102,11 @@ public class RechercheEdt extends JFrame{
        }
            
        JLabel mess1bis = new JLabel("Nom : ");
-       UTextField = new JTextField(10);
-       JLabel mess2 = new JLabel(" pendant la semaine du : ");
-       picker = new DateTextField();
+       nom = new JTextField(10);
+       JLabel mess1bisP = new JLabel("Prenom : ");
+       prenom = new JTextField(10);
+       //JLabel mess2 = new JLabel(" pendant la semaine du : ");
+       //picker = new DateTextField();
        Submit = new JButton("Rechercher");
        Submit.addActionListener(new RechercheEdt.AddButtonListener());
        
@@ -105,9 +115,10 @@ public class RechercheEdt extends JFrame{
        affichage.addItem("en liste");
        
         panel1.add(mess1bis);
-        panel1.add(UTextField);
-        panel1.add(mess2);
-        panel1.add(picker);
+        panel1.add(nom);
+        panel1.add(prenom);
+        //panel1.add(mess2);
+        //panel1.add(picker);
         panel1.add(affichage);
         panel1.add(Submit);
 
@@ -116,43 +127,51 @@ public class RechercheEdt extends JFrame{
 
     }
     public class AddButtonListener implements ActionListener {
-        
+        Controleur controleur;
         @Override
         public void actionPerformed(ActionEvent e) {
             
             if (e.getSource() == Eleve) {
-                RecherchePanel(1);
-                panelB.setVisible(false);
-                
+                RecherchePanel(1, controleur);
+                panelB.setVisible(false);   
             }
             if (e.getSource() == Professeur) {
-                RecherchePanel(2);
+                RecherchePanel(2, controleur);
                 panelB.setVisible(false);
             }
             if (e.getSource() == TD) {
-                RecherchePanel(3);
+                RecherchePanel(3, controleur);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Promotion) {
-                RecherchePanel(4);
+                RecherchePanel(4, controleur);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Salle) {
-                RecherchePanel(5);
+                RecherchePanel(5, controleur);
                 panelB.setVisible(false);
             }
             if (e.getSource() == Submit){
                     picker.getDate();
                 }
             if (e.getSource() == Submit){
-                    System.out.print(picker.getDate());
+                try {
+                    ResultPanel(controleur);
+                } catch (SQLException ex) {
+                    Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
         }
     }
     
-    private void ResultPanel() {
-       
-
+    private void ResultPanel(Controleur controleur) throws SQLException, ClassNotFoundException {
+        String NOM = nom.getText();
+        String PRENOM = prenom.getText();
+        Connexion connection = new Connexion("edt", "root", "");
+        DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);  
+        Etudiant etudiant = etudiantDAO.find(NOM,PRENOM);
     }
     
     public static void main(String[] args) {
