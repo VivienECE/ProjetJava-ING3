@@ -6,6 +6,7 @@ package Controleur;
 
 import DAO.DAO;
 import DAO.EtudiantDAO;
+import Modele.Cours;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import jdbc2020.Connexion;
 import Modele.Etudiant;
 import Modele.Groupe;
 import Modele.Promotion;
+import Modele.Salle;
 import Modele.Seance;
 import Modele.Utilisateur;
 import Vue.Edt;
@@ -87,6 +89,14 @@ public class Controleur {
     }
 
     public ArrayList<Seance> getSeances() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     public ArrayList<Salle> getSalles() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     public ArrayList<Cours> getCours() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
