@@ -51,6 +51,7 @@ public class ControleurAdmin extends Controleur {
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Promotion> promotions= new ArrayList<>();
+    private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
     
     //Recupère toute les données
     public ControleurAdmin(int ID_UTILISATEUR)
@@ -74,20 +75,31 @@ public class ControleurAdmin extends Controleur {
             DAO<Enseignant> enseignantDAO = new EnseignantDAO(connection);
             DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
             
+            
             utilisateur= utilisateurDAO.find(ID_UTILISATEUR);
-            ArrayList<Seance_enseignants> seance_enseignants = seance_enseignantsDAO.findAll(ID_UTILISATEUR);
-            for (Seance_enseignants i : seance_enseignants)
+            int j=1;
+            ArrayList<Seance> seances = new ArrayList<>();
+            while (j!=0)
             {
-                Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
-                Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
+                Seance seance_temp=seanceDAO.find(j);
+                if (seance_temp == null)
+                    break;
+                seances.add(seanceDAO.find(j));
+                j++;
+            }
+           
+            for (Seance i : seances)
+            {
+                Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID());
+                Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID()).getID_SALLE());
                 salle.add(temp_salle);
                 site.add(siteDAO.find(temp_salle.getID_SITE()));
-                cours.add(coursDAO.find(i.getID_SEANCE()));
-                type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
-                seance.add(temp_seance);
-                Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
+                cours.add(coursDAO.find(i.getID()));
+                type_cours.add(type_coursDAO.find(i.getID()));
+                Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID()).getID_GROUPE());
                 groupes.add(temp_group);
                 promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
+                utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
             }
            
         } catch (SQLException ex) {
@@ -114,5 +126,6 @@ public class ControleurAdmin extends Controleur {
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
     public ArrayList<Promotion> getPromotions(){return promotions;}
+    public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
     
 }

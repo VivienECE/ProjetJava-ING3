@@ -12,6 +12,7 @@ import DAO.GroupeDAO;
 import DAO.PromotionDAO;
 import DAO.SalleDAO;
 import DAO.SeanceDAO;
+import DAO.Seance_enseignantsDAO;
 import DAO.Seance_groupesDAO;
 import DAO.Seance_sallesDAO;
 import DAO.SiteDAO;
@@ -74,6 +75,7 @@ public class ControleurEtudiant extends Controleur {
             DAO<Seance_salles> seance_sallesDAO = new Seance_sallesDAO(connection);
             DAO<Site> siteDAO = new SiteDAO(connection);
             DAO<Enseignant> enseignantDAO = new EnseignantDAO(connection);
+            DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
             
             utilisateur= utilisateurDAO.find(ID_UTILISATEUR);
             etudiant = etudiantDAO.find(ID_UTILISATEUR);
@@ -83,13 +85,14 @@ public class ControleurEtudiant extends Controleur {
             for (Seance_groupes i : seance_groupes)
             {
                 Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
+                Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID_SEANCE());
                 Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
                 salle.add(temp_salle);
                 site.add(siteDAO.find(temp_salle.getID_SITE()));
                 cours.add(coursDAO.find(i.getID_SEANCE()));
                 type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
                 seance.add(temp_seance);
-                utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance.getID_COURS()).getID_UTILISATEUR()));
+                utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
             }
            
         } catch (SQLException ex) {
