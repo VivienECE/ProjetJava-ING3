@@ -48,6 +48,7 @@ public abstract class DAO<T> {
   * @return T
   */
   public abstract T find(int id);
+   public abstract T find(String NOM, String PRENOM);
   
   public abstract ArrayList<T> findAll(int id);
   
