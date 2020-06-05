@@ -20,6 +20,10 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
   }
 
   public boolean create(Seance_groupes obj) {
+    try {
+       this.connect.executeUpdate("INSERT INTO `seance_groupes`(`ID_SEANCE`,`ID_GROUPE`) VALUES ("+obj.getID_SEANCE()+","+obj.getID_GROUPE()+")"); 
+    } catch (SQLException e)
+        { e.printStackTrace(); }
     return false;
   }
 

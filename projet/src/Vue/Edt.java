@@ -35,7 +35,7 @@ public class Edt extends JFrame{
     private JPanel Vendredi;
     private JPanel Samedi;
     
-    public Edt(ControleurEtudiant controleur) {
+    public Edt(Controleur controleur) {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +60,7 @@ public class Edt extends JFrame{
         panel1.add(infos);
     }
     
-    private void Liste(ControleurEtudiant controleur){
+    private void Liste(Controleur controleur){
       
         Lundi = new JPanel();
         LocalDate dateL = LocalDate.of(2020, 06, 01);
@@ -156,7 +156,7 @@ public class Edt extends JFrame{
         setVisible(true);
     }
     
-    public Object[][]Journee(LocalDate date, ControleurEtudiant controleur){
+    public Object[][]Journee(LocalDate date, Controleur controleur){
         ArrayList<Seance> Seances = controleur.getSeances();
         ArrayList<Salle> Salles = controleur.getSalles();
         ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();

@@ -20,6 +20,10 @@ public class Seance_sallesDAO extends DAO<Seance_salles> {
   }
 
   public boolean create(Seance_salles obj) {
+      try {
+       this.connect.executeUpdate("INSERT INTO `seance_salles`(`ID_SEANCE`,`ID_SALLE`) VALUES ("+obj.getID_SEANCE()+","+obj.getID_SALLE()+")"); 
+    } catch (SQLException e)
+        { e.printStackTrace(); }
     return false;
   }
 

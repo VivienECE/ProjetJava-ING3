@@ -99,5 +99,10 @@ public class Controleur {
      public ArrayList<Cours> getCours() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+      public ArrayList<Utilisateur> getUtilisateurEnseignants(){
+                      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+     
 }
 
