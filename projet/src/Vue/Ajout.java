@@ -38,9 +38,7 @@ public class Ajout extends JFrame{
     private JPanel panel6;
     private final JButton btn;
     private JPanel content;
-    private JTextField jour;
-    private JTextField mois;
-    private JTextField annee;
+    private DateTextField picker;
     private JTextField heureD;
     private JTextField heureF;
     private JTextField minD;
@@ -129,16 +127,8 @@ public class Ajout extends JFrame{
         panel5 = new JPanel();
         JLabel date = new JLabel("Créneau : ");
         panel5.add(date);
-        jour = new JTextField(2);
-        panel5.add(jour);
-        JLabel slach1 = new JLabel(" / ");
-        panel5.add(slach1);
-        mois = new JTextField(2);
-        panel5.add(mois);
-        JLabel slach2 = new JLabel(" / ");
-        panel5.add(slach2);
-        annee = new JTextField(2);
-        panel5.add(annee);
+        picker = new DateTextField();
+        panel5.add(picker);
         JLabel a = new JLabel("  de  ");
         panel5.add(a);
         heureD = new JTextField(2);
@@ -205,7 +195,7 @@ public class Ajout extends JFrame{
                 
                 //id = (Controleur.Seance.getSeances().size())+1; 
                 
-                date = LocalDate.of(Integer.parseInt(annee.getText()), Integer.parseInt(mois.getText()), Integer.parseInt(jour.getText()));
+                date = picker.getDate().toLocalDate();
                 
                 sem = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR );
                 

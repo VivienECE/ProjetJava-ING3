@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
@@ -14,6 +15,9 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.IsoFields;
 import java.util.Calendar;
 import javax.swing.JMenu;
 import javax.swing.JTable;
@@ -24,48 +28,83 @@ import javax.swing.JMenuItem;
 public class RechercheEdt extends JFrame{
     private JPanel panel1;
     private JPanel panel2;
+    private JPanel panelB;
+    private JButton Eleve;
+    private JButton Professeur;
+    private JButton TD;
+    private JButton Promotion;
+    private JButton Salle;
+    private JButton Submit;
+    private JTextField UTextField;
+    private JComboBox affichage;
+    private JComboBox promo;
+    private DateTextField picker;
     
     public RechercheEdt() {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        this.setLayout(new GridLayout(0,1));
         Menu m = new Menu(1);
         this.setJMenuBar(m);
-        RecherchePanel();
+        
+        panelB = new JPanel();
+        JLabel mess1 = new JLabel("Recherche d'emploi du temps d'un(e) : ");
+        panelB.add(mess1);
+        
+        Eleve = new JButton("Elève");
+        Eleve.addActionListener(new RechercheEdt.AddButtonListener());
+        panelB.add(Eleve);
+        Professeur = new JButton("Professeur");
+        Professeur.addActionListener(new RechercheEdt.AddButtonListener());
+        panelB.add(Professeur);
+        TD = new JButton("TD");
+        TD.addActionListener(new RechercheEdt.AddButtonListener());
+        panelB.add(TD);
+        Promotion = new JButton("Promotion");
+        Promotion.addActionListener(new RechercheEdt.AddButtonListener());
+        panelB.add(Promotion);
+        Salle = new JButton("Salle");
+        Salle.addActionListener(new RechercheEdt.AddButtonListener());
+        panelB.add(Salle);
+        this.add(panelB, BorderLayout.NORTH);
+        
+        panel1 = new JPanel();
+        panel2 = new JPanel();
+        //RecherchePanel();
+        //ResultPanel();
         this.add(panel1, BorderLayout.NORTH);
-        ResultPanel();
         this.add(panel2, BorderLayout.SOUTH);
+        this.setVisible(true);
     }
     
-    private void RecherchePanel() {
-       JLabel mess1 = new JLabel("Emploi du temps de : ");
-       
-       JComboBox type = new JComboBox();
-       type.addItem("Saisie du nom");
-       type.addItem("Saisie du TD");
-       type.addItem("Saisie de la promo");
-       type.addItem("Saisie de la salle");
-       type.addActionListener(new ActionListener(){
-       public void actionPerformed(ActionEvent arg0){
-        }
-        });
-       JTextField UTextField = new JTextField(10);
+    private void RecherchePanel(int type) {
+      
+       if(type==3){
+           JLabel mess1ter = new JLabel("Promotion : ");
+           promo = new JComboBox();
+           promo.addItem("2022");
+           promo.addItem("2023");
+           promo.addItem("2024");
+           promo.addItem("2025");
+           promo.addItem("2026");
+           panel1.add(mess1ter);
+           panel1.add(promo);
+       }
+           
+       JLabel mess1bis = new JLabel("Nom : ");
+       UTextField = new JTextField(10);
        JLabel mess2 = new JLabel(" pendant la semaine du : ");
-       DateTextField picker = new DateTextField();
-       JButton Submit = new JButton("Rechercher");
+       picker = new DateTextField();
+       Submit = new JButton("Rechercher");
+       Submit.addActionListener(new RechercheEdt.AddButtonListener());
        
-       JComboBox affichage = new JComboBox();
+       affichage = new JComboBox();
        affichage.addItem("en grille");
        affichage.addItem("en liste");
-       affichage.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent arg0){
-        }
-        });
-
-        panel1 = new JPanel();
-        panel1.add(mess1);
-        panel1.add(type);
+       
+        panel1.add(mess1bis);
         panel1.add(UTextField);
         panel1.add(mess2);
         panel1.add(picker);
@@ -76,11 +115,43 @@ public class RechercheEdt extends JFrame{
         setVisible(true);
 
     }
+    public class AddButtonListener implements ActionListener {
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+            if (e.getSource() == Eleve) {
+                RecherchePanel(1);
+                panelB.setVisible(false);
+                
+            }
+            if (e.getSource() == Professeur) {
+                RecherchePanel(2);
+                panelB.setVisible(false);
+            }
+            if (e.getSource() == TD) {
+                RecherchePanel(3);
+                panelB.setVisible(false);
+            }
+            if (e.getSource() == Promotion) {
+                RecherchePanel(4);
+                panelB.setVisible(false);
+            }
+            if (e.getSource() == Salle) {
+                RecherchePanel(5);
+                panelB.setVisible(false);
+            }
+            if (e.getSource() == Submit){
+                    picker.getDate();
+                }
+            if (e.getSource() == Submit){
+                    System.out.print(picker.getDate());
+                }
+        }
+    }
     
     private void ResultPanel() {
        
-  
-        panel2 = new JPanel();
 
     }
     

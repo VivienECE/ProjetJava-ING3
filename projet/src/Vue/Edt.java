@@ -13,9 +13,11 @@ import Modele.Utilisateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.BorderFactory;
@@ -62,10 +64,25 @@ public class Edt extends JFrame{
     
     private void Liste(Controleur controleur){
       
+        LocalDate ajd= LocalDate.now();
+        DayOfWeek Dday = ajd.getDayOfWeek();
+        
+        if(Dday==DayOfWeek.TUESDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-1);
+        if(Dday==DayOfWeek.WEDNESDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-2);
+        if(Dday==DayOfWeek.THURSDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-3);
+        if(Dday==DayOfWeek.FRIDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-4);
+        if(Dday==DayOfWeek.SATURDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-5);
+        if(Dday==DayOfWeek.SUNDAY)
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+1);
+        
         Lundi = new JPanel();
-        LocalDate dateL = LocalDate.of(2020, 06, 01);
-        Object[][] TLundi = Journee(dateL, controleur);
-        String  titleL[] = {"Lundi", "", "", "",""};
+        Object[][] TLundi = Journee(ajd, controleur);
+        String  titleL[] = {"Lundi " + ajd, "", "", "",""};
         JTable tableauL = new JTable(TLundi, titleL);
         tableauL.getTableHeader().setBackground(new Color(151,221,255));
         tableauL.setShowVerticalLines(false);
@@ -73,9 +90,9 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauL));
         
         Mardi = new JPanel();
-        LocalDate dateM = LocalDate.of(2020, 06, 02);
+        LocalDate dateM = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+1);
         Object[][] TMardi = Journee(dateM, controleur);
-        String  titleM[] = {"Mardi", "", "", "",""};
+        String  titleM[] = {"Mardi " + dateM, "", "", "",""};
         JTable tableauM = new JTable(TMardi, titleM);
         tableauM.getTableHeader().setBackground(new Color(151,221,255));
         tableauM.setShowVerticalLines(false);
@@ -83,9 +100,9 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauM));
         
         Mercredi = new JPanel();
-        LocalDate dateMe = LocalDate.of(2020, 06, 03);
+        LocalDate dateMe = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+2);
         Object[][] TMercredi = Journee(dateMe, controleur);
-        String  titleMe[] = {"Mercredi", "", "", "",""};
+        String  titleMe[] = {"Mercredi "+ dateMe, "", "", "",""};
         JTable tableauMe = new JTable(TMercredi, titleMe);
         tableauMe.getTableHeader().setBackground(new Color(151,221,255));
         tableauMe.setShowVerticalLines(false);
@@ -93,9 +110,9 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauMe));
         
         Jeudi = new JPanel();
-        LocalDate dateJ = LocalDate.of(2020, 06, 04);
+        LocalDate dateJ = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+3);
         Object[][] TJeudi = Journee(dateJ, controleur);
-        String  titleJ[] = {"Jeudi", "", "", "",""};
+        String  titleJ[] = {"Jeudi "+ dateJ, "", "", "",""};
         JTable tableauJ = new JTable(TJeudi, titleJ);
         tableauJ.getTableHeader().setBackground(new Color(151,221,255));
         tableauJ.setShowVerticalLines(false);
@@ -103,9 +120,9 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauJ));
         
         Vendredi = new JPanel();
-        LocalDate dateV = LocalDate.of(2020, 06, 05);
+        LocalDate dateV = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+4);
         Object[][] TVendredi = Journee(dateV, controleur);
-        String  titleV[] = {"Vendredi", "", "", "",""};
+        String  titleV[] = {"Vendredi "+ dateV, "", "", "",""};
         JTable tableauV = new JTable(TVendredi, titleV);
         tableauV.getTableHeader().setBackground(new Color(151,221,255));
         tableauV.setShowVerticalLines(false);
@@ -113,9 +130,9 @@ public class Edt extends JFrame{
         getContentPane().add(new JScrollPane(tableauV));
         
         Samedi = new JPanel();
-        LocalDate dateS = LocalDate.of(2020, 06, 06);
+        LocalDate dateS = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+5);
         Object[][] TSamedi = Journee(dateS, controleur);
-        String  titleS[] = {"Samedi", "", "", "",""};
+        String  titleS[] = {"Samedi "+ dateS, "", "", "",""};
         JTable tableauS = new JTable(TSamedi, titleS);
         tableauS.getTableHeader().setBackground(new Color(151,221,255));
         tableauS.setShowVerticalLines(false);
