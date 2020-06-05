@@ -87,7 +87,7 @@ public class ControleurEnseignant extends Controleur {
                 seance.add(temp_seance);
                 Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
                 groupes.add(temp_group);
-                promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
+                promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));    
             }
            
         } catch (SQLException ex) {

@@ -49,10 +49,10 @@ public class Controleur {
             switch(DROIT)
             {
                 case 1:
-                    //ControleurAdmin...
+                    controleur= new ControleurAdmin(ID_UTILISATEUR);
                 break;
                 case 2:
-                    //ControleurReferent...
+                    controleur= new ControleurAdmin(ID_UTILISATEUR);
                 break;
                 case 3:
                       controleur= new ControleurEnseignant(ID_UTILISATEUR);
