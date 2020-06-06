@@ -76,7 +76,7 @@ public class Edt extends JFrame{
            else
                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-7);
            
-           panel2.setVisible(false);
+           //panel2.removeAll();
            Liste(controleur, ajd);
         }
         });
@@ -101,7 +101,7 @@ public class Edt extends JFrame{
            else
                 ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+7);
            
-           panel2.setVisible(false);
+           //panel2.removeAll();
            Liste(controleur, ajd);
         }
         });
@@ -255,40 +255,41 @@ public class Edt extends JFrame{
     
     public Object[][]Journee(LocalDate date, Controleur controleur){
         Object[][] data;
+        
+        ArrayList<Seance> Seances = controleur.getSeances();
+        ArrayList<Salle> Salles = controleur.getSalles();
+        ArrayList<Seance> CoursAJD = new ArrayList<>();
+        int n=0;
+
+        //Voir combien de cours dans la journée;
+        for(int i = 0; i < Seances.size(); i++)
+        {
+            if(date.isEqual(Seances.get(i).getDATE())){
+                CoursAJD.add(Seances.get(i));
+                n++;
+            }  
+        }
+
+        Seance [] triees = new Seance [CoursAJD.size()];
+
+        //Trier par heure
+        for(int k=0; k<CoursAJD.size(); k++)
+            triees[k]=CoursAJD.get(k);
+
+        for(int x=0; x<(triees.length-1); x++){
+            if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
+                Seance temp;
+                temp = triees[x];
+                triees[x] = triees[x+1];
+                triees[x+1] = temp;
+            }            
+        }
+        
         if((controleur instanceof ControleurEtudiant)== true ||(controleur instanceof ControleurGroupe)== true||
                 (controleur instanceof ControleurPromotion)== true){
             
-            ArrayList<Seance> Seances = controleur.getSeances();
-            ArrayList<Salle> Salles = controleur.getSalles();
-            ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
-            ArrayList<Seance> CoursAJD = new ArrayList<>();
-            int n=0;
-
-            //Voir combien de cours dans la journée;
-            for(int i = 0; i < Seances.size(); i++)
-            {
-                if(date.isEqual(Seances.get(i).getDATE())){
-                    CoursAJD.add(Seances.get(i));
-                    n++;
-                }  
-            }
-
             data = new Object[n][6];
-            Seance [] triees = new Seance [CoursAJD.size()];
-
-            //Trier par heure
-            for(int k=0; k<CoursAJD.size(); k++)
-                triees[k]=CoursAJD.get(k);
-
-            for(int x=0; x<(triees.length-1); x++){
-                if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
-                    Seance temp;
-                    temp = triees[x];
-                    triees[x] = triees[x+1];
-                    triees[x+1] = temp;
-                }            
-            }
-
+            ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
             for(int y=0; y<triees.length; y++){
                 String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
                 data[y][0]= horaire;
@@ -321,8 +322,42 @@ public class Edt extends JFrame{
             }
    
         }
+        
+        if((controleur instanceof ControleurEnseignant)== true){
+            data = new Object[n][5];
+            
+            for(int y=0; y<triees.length; y++){
+                String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
+                data[y][0]= horaire;
+
+                data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
+
+
+                data[y][2]= "JSP";//controleur.getSeances();
+
+                String salle = Salles.get(triees[y].getID_COURS()).getNOM();
+                String site = "";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==1)
+                    site="E1";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==2)
+                    site="E2";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==3)
+                    site="E3";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==4)
+                    site="E4";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==5)
+                    site="E5";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==6)
+                    site="CNAM";
+
+                String endroit = salle + " - " + site;
+                data[y][3]= endroit;
+                data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+            }
+        }
         else
             data = new Object[1][1];
+        
         return data;
     }
     
