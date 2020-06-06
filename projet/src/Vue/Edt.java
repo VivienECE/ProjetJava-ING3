@@ -55,11 +55,15 @@ public class Edt extends JFrame{
     private void Infos(Controleur controleur){
         panel1 = new JPanel();
         //SI ETUDIANT
-        JLabel infos = new JLabel("Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
-                                +controleur.getUtilisateur().getPRENOM()+" "
-                                +controleur.getGroupe().getNOM()+" "
-                                +controleur.getPromotion().getNOM()+" ");
-        panel1.add(infos);
+        if(controleur.getUtilisateur()!=null)
+        {
+            JLabel infos = new JLabel("Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
+                        +controleur.getUtilisateur().getPRENOM()+" "
+                        +controleur.getGroupe().getNOM()+" "
+                        +controleur.getPromotion().getNOM()+" ");
+            panel1.add(infos);
+        }
+                
     }
     
     private void Liste(Controleur controleur){
