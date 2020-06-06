@@ -5,6 +5,8 @@ import Modele.Seance;
 import Controleur.ControleurEtudiant;
 import Modele.Cours;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,21 +23,6 @@ public class Recap extends JFrame{
     private JPanel panel2;
     private JPanel panelB;
     
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
-
-        DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
-        piedataset.setValue( "Physique" , 10);
-        piedataset.setValue( "Physique" , 20);
-        piedataset.setValue( "Physique" , 15);
-        piedataset.setValue( "Physique" , 12);
-        
-        JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
-        PiePlot P=(PiePlot)chart.getPlot();
-        ChartFrame frame = new ChartFrame("Camembert", chart);
-        frame.setVisible(true);
-        frame.setSize(450, 500);
-
-        }
 
     
     public Recap(ControleurEtudiant controleur) {
@@ -46,6 +33,7 @@ public class Recap extends JFrame{
         Menu m = new Menu(3);
         this.setJMenuBar(m);
         JButton btn = new JButton("Stat");
+        
         panelB = new JPanel();
         panelB.add(btn);
         //this.setLayout(new GridLayout(0,1));
@@ -54,11 +42,32 @@ public class Recap extends JFrame{
         this.add(panel2, BorderLayout.SOUTH);
         this.add(panel2, BorderLayout.EAST);
         setVisible(true);
+        
+        btn.addActionListener(new ActionListener() {
+                
+            public void ActionPerformed (java.awt.event.ActionEvent evt){
+                DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
+        piedataset.setValue( "Physique" , 10);
+        piedataset.setValue( "Physique" , 20);
+        piedataset.setValue( "Physique" , 15);
+        piedataset.setValue( "Physique" , 12);
+        
+        JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
+        PiePlot P=(PiePlot)chart.getPlot();
+        ChartFrame frame = new ChartFrame("Camembert", chart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+            }
+        });
+        
+        
 }        
+    
     
     private void ResultPanel(ControleurEtudiant controleur) {
        
         panel1 = new JPanel();
+        
         JLabel infos = new JLabel("Récapitulatif des cours de "+controleur.getUtilisateur().getNOM()+" "
                                 +controleur.getUtilisateur().getPRENOM()+" "
                                 +controleur.getGroupe().getNOM()+" "
@@ -75,6 +84,7 @@ public class Recap extends JFrame{
         panel2 = new JPanel();
         panel2.add(tableau);
         getContentPane().add(new JScrollPane(tableau));
+        
         
 
     }
