@@ -130,13 +130,13 @@ public class Edt extends JFrame{
             informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "+controleur.getUtilisateur().getPRENOM()+" ";
         
         if((controleur instanceof ControleurGroupe)==true)//SI TD
-            informations = "Emploi du temps du "+controleur.getNOM()+" "+controleur.getPROMO()+" ";
+            informations = "Emploi du temps du "+controleur.getGroupe().getNOM()+" "+controleur.getPromotion().getNOM()+" ";
         
         if((controleur instanceof ControleurPromotion)==true)//SI PROMO
-            informations = "Emploi du temps de la "+controleur.getNOM()+" ";
+            informations = "Emploi du temps de la "+controleur.getPromotion().getNOM()+" ";
         
         if((controleur instanceof ControleurSalle)== true)//SI SALLE
-            informations = "Emploi du temps de la "+controleur.getNOM()+" - "+controleur.getSITE()+" ";
+            informations = "Emploi du temps de la "+controleur.getSalle().getNOM()+" - "+controleur.getSite().getNOM()+" ";
         
         JLabel infos = new JLabel(informations);
         panel1.add(infos);

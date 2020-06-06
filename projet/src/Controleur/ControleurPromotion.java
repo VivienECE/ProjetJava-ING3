@@ -79,6 +79,7 @@ public class ControleurPromotion extends Controleur {
             DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
             
             promotion= promotionDAO.find(ID_PROMOTION);
+            //groupe = groupeDAO();
             groupes = groupeDAO.findAll(promotion.getID());
            
             for (Groupe j : groupes)

@@ -50,9 +50,10 @@ public class ControleurSalle extends Controleur {
     private Groupe groupe;
     private Promotion promotion;
     private Salle salle;
+    private Site site;
     private ArrayList<Salle> salles= new ArrayList<>();
     private ArrayList<Seance> seance= new ArrayList<>();
-    private ArrayList<Site> site= new ArrayList<>();
+    private ArrayList<Site> sites= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Promotion> promotions= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
@@ -81,6 +82,7 @@ public class ControleurSalle extends Controleur {
             DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
             
             salle = salleDAO.find(ID_SALLE);
+            site = siteDAO.find(salle.getID_SITE());
             ArrayList<Seance_salles> seance_salles = seance_sallesDAO.findAll(ID_SALLE);
             for (Seance_salles i : seance_salles)
             {
@@ -89,7 +91,7 @@ public class ControleurSalle extends Controleur {
                 Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
                 groupes.add(groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE()));
                 salles.add(salleDAO.find(ID_SALLE));
-                site.add(siteDAO.find(temp_salle.getID_SITE()));
+                sites.add(siteDAO.find(temp_salle.getID_SITE()));
                 cours.add(coursDAO.find(i.getID_SEANCE()));
                 type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
                 seance.add(temp_seance);
@@ -119,6 +121,8 @@ public class ControleurSalle extends Controleur {
     public Utilisateur getUtilisateur() {return utilisateur; }
     public Etudiant getEtudiant() {return etudiant; }
     public Groupe getGroupe() {return groupe; }
+    public Salle getSalle() {return salle; }
+    public Site getSite() {return site; }
     public Promotion getPromotion() {return promotion; }
     public ArrayList<Seance> getSeances() {return seance; }
     public ArrayList<Salle> getSalles() {return salles; }
