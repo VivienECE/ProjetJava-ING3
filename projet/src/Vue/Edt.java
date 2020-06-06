@@ -7,12 +7,17 @@ import Controleur.Controleur;
 import Controleur.ControleurEnseignant;
 
 import Controleur.ControleurEtudiant;
+import Controleur.ControleurGroupe;
+import Controleur.ControleurPromotion;
+import Controleur.ControleurSalle;
 import Modele.Salle;
 import Modele.Seance;
 import Modele.Utilisateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,6 +36,8 @@ import javax.swing.JTable;
 public class Edt extends JFrame{
     private JPanel panel1;
     private JPanel panel2;
+    private LocalDate ajd;
+    private JPanel semaine;
     private JPanel Lundi;
     private JPanel Mardi;
     private JPanel Mercredi;
@@ -44,27 +52,99 @@ public class Edt extends JFrame{
         this.setLocationRelativeTo(null);
         Menu m = new Menu(3);
         this.setJMenuBar(m);
+        
+        ajd = LocalDate.now();
+        semaine = new JPanel();
+        
+        JButton prec = new JButton("Semaine précédente");
+        prec.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+           if(ajd.getDayOfMonth()==1)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 24);
+           if(ajd.getDayOfMonth()==2)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 25);
+           if(ajd.getDayOfMonth()==3)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 26);
+           if(ajd.getDayOfMonth()==4)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 27);
+           if(ajd.getDayOfMonth()==5)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 28);
+           if(ajd.getDayOfMonth()==6)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 29);
+           if(ajd.getDayOfMonth()==7)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 30);
+           else
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-7);
+           
+           panel2.setVisible(false);
+           Liste(controleur, ajd);
+        }
+        });
+        
+        JButton suiv = new JButton("Semaine suivante");
+        suiv.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+           if(ajd.getDayOfMonth()==24)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 1);
+           if(ajd.getDayOfMonth()==25)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 2);
+           if(ajd.getDayOfMonth()==26)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 3);
+           if(ajd.getDayOfMonth()==27)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 4);
+           if(ajd.getDayOfMonth()==28)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 5);
+           if(ajd.getDayOfMonth()==29)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 6);
+           if(ajd.getDayOfMonth()==30)
+               ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()+1, 7);
+           else
+                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+7);
+           
+           panel2.setVisible(false);
+           Liste(controleur, ajd);
+        }
+        });
+        semaine.add(prec);
+        semaine.add(suiv);
+        
         this.setLayout(new GridLayout(0,1));
         Infos(controleur);
         this.add(panel1, BorderLayout.NORTH);
-        Liste(controleur);
+        Liste(controleur, ajd);
         //Grille(controleur);
         this.add(panel2, BorderLayout.SOUTH);
+        this.add(semaine, BorderLayout.SOUTH);
     }
     
     private void Infos(Controleur controleur){
         panel1 = new JPanel();
-        //SI ETUDIANT
-        JLabel infos = new JLabel("Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
-                                +controleur.getUtilisateur().getPRENOM()+" "
-                                +controleur.getGroupe().getNOM()+" "
-                                +controleur.getPromotion().getNOM()+" ");
+        String informations="";
+        if((controleur instanceof ControleurEtudiant)== true)//SI ETUDIANT
+            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
+                    +controleur.getUtilisateur().getPRENOM()+" "
+                    +controleur.getGroupe().getNOM()+" "
+                    +controleur.getPromotion().getNOM()+" ";
+        
+        if((controleur instanceof ControleurEnseignant)== true)//SI ENSEIGNANT
+            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "+controleur.getUtilisateur().getPRENOM()+" ";
+        
+        if((controleur instanceof ControleurGroupe)==true)//SI TD
+            informations = "Emploi du temps du "+controleur.getNOM()+" "+controleur.getPROMO()+" ";
+        
+        if((controleur instanceof ControleurPromotion)==true)//SI PROMO
+            informations = "Emploi du temps de la "+controleur.getNOM()+" ";
+        
+        if((controleur instanceof ControleurSalle)== true)//SI SALLE
+            informations = "Emploi du temps de la "+controleur.getNOM()+" - "+controleur.getSITE()+" ";
+        
+        JLabel infos = new JLabel(informations);
         panel1.add(infos);
     }
     
-    private void Liste(Controleur controleur){
+    private void Liste(Controleur controleur,LocalDate ajd){
       
-        LocalDate ajd= LocalDate.now();
+        
         DayOfWeek Dday = ajd.getDayOfWeek();
         
         if(Dday==DayOfWeek.TUESDAY)
@@ -174,69 +254,76 @@ public class Edt extends JFrame{
     }
     
     public Object[][]Journee(LocalDate date, Controleur controleur){
-        ArrayList<Seance> Seances = controleur.getSeances();
-        ArrayList<Salle> Salles = controleur.getSalles();
-        ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
-        ArrayList<Seance> CoursAJD = new ArrayList<>();
-        int n=0;
-        
-        //Voir combien de cours dans la journée;
-        for(int i = 0; i < Seances.size(); i++)
-        {
-            if(date.isEqual(Seances.get(i).getDATE())){
-                CoursAJD.add(Seances.get(i));
-                n++;
-            }  
+        Object[][] data;
+        if((controleur instanceof ControleurEtudiant)== true ||(controleur instanceof ControleurGroupe)== true||
+                (controleur instanceof ControleurPromotion)== true){
+            
+            ArrayList<Seance> Seances = controleur.getSeances();
+            ArrayList<Salle> Salles = controleur.getSalles();
+            ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
+            ArrayList<Seance> CoursAJD = new ArrayList<>();
+            int n=0;
+
+            //Voir combien de cours dans la journée;
+            for(int i = 0; i < Seances.size(); i++)
+            {
+                if(date.isEqual(Seances.get(i).getDATE())){
+                    CoursAJD.add(Seances.get(i));
+                    n++;
+                }  
+            }
+
+            data = new Object[n][6];
+            Seance [] triees = new Seance [CoursAJD.size()];
+
+            //Trier par heure
+            for(int k=0; k<CoursAJD.size(); k++)
+                triees[k]=CoursAJD.get(k);
+
+            for(int x=0; x<(triees.length-1); x++){
+                if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
+                    Seance temp;
+                    temp = triees[x];
+                    triees[x] = triees[x+1];
+                    triees[x+1] = temp;
+                }            
+            }
+
+            for(int y=0; y<triees.length; y++){
+                String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
+                data[y][0]= horaire;
+
+                data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
+
+
+                data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
+
+                data[y][3]= controleur.getGroupe().getNOM();
+
+                String salle = Salles.get(triees[y].getID_COURS()).getNOM();
+                String site = "";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==1)
+                    site="E1";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==2)
+                    site="E2";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==3)
+                    site="E3";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==4)
+                    site="E4";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==5)
+                    site="E5";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==6)
+                    site="CNAM";
+
+                String endroit = salle + " - " + site;
+                data[y][4]= endroit;
+                data[y][5]= triees[y].getTYPE(triees[y].getID_TYPE());
+            }
+   
         }
-        
-        Object[][] data = new Object[n][6];
-        Seance [] triees = new Seance [CoursAJD.size()];
-        
-        //Trier par heure
-        for(int k=0; k<CoursAJD.size(); k++)
-            triees[k]=CoursAJD.get(k);
-        
-        for(int x=0; x<(triees.length-1); x++){
-            if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
-                Seance temp;
-		temp = triees[x];
-		triees[x] = triees[x+1];
-		triees[x+1] = temp;
-            }            
-        }
-        
-        for(int y=0; y<triees.length; y++){
-            String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
-            data[y][0]= horaire;
-            
-            data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
-            
-            
-            data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
-            
-            data[y][3]= controleur.getGroupe().getNOM();
-            String salle = Salles.get(triees[y].getID_COURS()).getNOM();
-            
-            String site = "";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==1)
-                site="E1";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==2)
-                site="E2";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==3)
-                site="E3";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==4)
-                site="E4";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==5)
-                site="E5";
-            if(Salles.get(triees[y].getID_COURS()).getID_SITE()==6)
-                site="CNAM";
-            
-            String endroit = salle + " - " + site;
-            data[y][4]= endroit;
-            data[y][5]= triees[y].getTYPE(triees[y].getID_TYPE());
-        }
-         
-        return data;   
+        else
+            data = new Object[1][1];
+        return data;
     }
     
               

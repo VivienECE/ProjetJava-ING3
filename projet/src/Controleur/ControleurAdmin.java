@@ -141,6 +141,14 @@ public class ControleurAdmin extends Controleur {
         }
         return null;   
     }
+    public Utilisateur findUtilisateurEnseignant(String NOM, String PRENOM) {
+    for (Utilisateur i : enseignants) {
+            if (i.getNOM().equals(NOM)&&i.getPRENOM().equals(PRENOM)) {
+                return i;
+            }
+        }
+        return null;   
+    }
     
     public void display(){
      System.out.println("Etudiants");

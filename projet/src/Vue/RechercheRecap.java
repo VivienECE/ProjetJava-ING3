@@ -83,70 +83,7 @@ public class RechercheRecap extends JFrame {
 
     }
 
-    /*private class EnterButtonListener implements ActionListener {
-    okBouton.addActionListener(new ActionListener(){
-      public void actionPerformed(ActionEvent arg0) {        
-        zInfo = new ZDialogInfo(nom.getText(), (String)sexe.getSelectedItem(), getAge(), (String)cheveux.getSelectedItem() ,getTaille());
-        setVisible(false);
-      }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-            String u, p;
-            int j = 0;
-
-            if (e.getSource() == customer) {
-                JOptionPane.showMessageDialog(null, "Connected As The Customer");
-                new Customer();
-            }
-
-            if (e.getSource() == Submit) {
-
-                u = UTextField.getText();
-                p = PTextField.getText();
-                try {
-
-                    Scanner file = new Scanner(new File("/Users/baperondard/Downloads/ProjectBapeLarys/src/projectbapelarys/admin.txt"));
-
-                    while (file.hasNextLine()) {
-                        String scan1 = file.nextLine();
-                        String scan2 = file.nextLine();
-
-                        if (scan1.equals(u)) {
-                            if (scan2.equals(p)) {
-                                j = j + 1;
-
-                            }
-                        }
-                    }
-
-                    if (j > 0) {
-
-                        JOptionPane.showMessageDialog(null, "connection succesful");
-                        new admin();
-                        setVisible(false);
-                        dispose();
-
-                    }
-
-                    if (j < 1) {
-
-                        JOptionPane.showMessageDialog(null, "wrong username or password");
-                        UTextField.setText("");
-                        PTextField.setText("");
-
-                    }
-
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-        }
-    }*/
-
- 
     public static void main(String[] args) {
         new RechercheRecap();
     }

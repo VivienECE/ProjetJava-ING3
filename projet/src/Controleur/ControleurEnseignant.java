@@ -57,7 +57,7 @@ public class ControleurEnseignant extends Controleur {
     {
       super();
         try {
-            connection = new Connexion("edt2", "root", "");
+            connection = new Connexion("edt", "root", "");
         DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);
         DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
         DAO<Groupe> groupeDAO = new GroupeDAO(connection);
@@ -99,7 +99,7 @@ public class ControleurEnseignant extends Controleur {
         int ID_UTILISATEUR=1;
         Connexion connexion = null;
         ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
-        //Edt fenetre = new Edt(controleur);
+        Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 
     }

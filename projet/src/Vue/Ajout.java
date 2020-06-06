@@ -1,6 +1,7 @@
 
 package Vue;
 
+import Controleur.Controleur;
 import Modele.Seance;
 //import Controleur.ControleurEtudiant;
 import java.awt.Color;
@@ -56,8 +57,9 @@ public class Ajout extends JFrame{
     private JRadioButton td9;
     private JRadioButton td10;
     private JTextField txt2;
+    private int id;
     
-    public Ajout(){
+    public Ajout(Controleur controleur){
         this.setTitle("Ajout d'un cours");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,6 +73,7 @@ public class Ajout extends JFrame{
         btn = new JButton("Ajouter");
         btn.setSize(100, 20);
         btn.addActionListener(new AddButtonListener());
+        id = (controleur.getSeances().size())+1;
         this.add(btn, BorderLayout.SOUTH);
         
     }
@@ -179,7 +182,7 @@ public class Ajout extends JFrame{
 
     
     private class AddButtonListener implements ActionListener {
-        int id; 
+         
         int sem;
         LocalDate date;
         LocalTime HEURE_DEBUT;
@@ -193,8 +196,6 @@ public class Ajout extends JFrame{
         public void actionPerformed(ActionEvent e) {
             
             if (e.getSource() == btn) {
-                
-                //id = (Controleur.Seance.getSeances().size())+1; 
                 
                 date = picker.getDate().toLocalDate();
                 
