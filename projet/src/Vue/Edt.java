@@ -329,7 +329,7 @@ public class Edt extends JFrame{
    
         }
         
-        /*if((controleur instanceof ControleurEnseignant)== true){
+        if((controleur instanceof ControleurEnseignant)== true){
             ArrayList<Seance> Seances = controleur.getSeances();
             ArrayList<Salle> Salles = controleur.getSalles();
             ArrayList<Seance> CoursAJD = new ArrayList<>();
@@ -359,8 +359,36 @@ public class Edt extends JFrame{
                 }            
             }
             data = new Object[n][5];
-            */
             
+            for(int y=0; y<triees.length; y++){
+                String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
+                data[y][0]= horaire;
+
+                data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
+
+
+                data[y][2]= "JSP";//controleur.getSeances();
+
+                String salle = Salles.get(triees[y].getID_COURS()).getNOM();
+                String site = "";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==1)
+                    site="E1";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==2)
+                    site="E2";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==3)
+                    site="E3";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==4)
+                    site="E4";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==5)
+                    site="E5";
+                if(Salles.get(triees[y].getID_COURS()).getID_SITE()==6)
+                    site="CNAM";
+
+                String endroit = salle + " - " + site;
+                data[y][3]= endroit;
+                data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+            }
+        }      
         else
             data = new Object[1][1];
         
