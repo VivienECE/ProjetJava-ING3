@@ -41,7 +41,7 @@ public class Controleur {
         // creation de la fenetre
         try
         {
-            Connexion connection = new Connexion("edt2", "root", "");
+            Connexion connection = new Connexion("edt", "root", "");
             Login log = new Login(connection);      
             int ID_UTILISATEUR = log.getID_UTILISATEUR();
             int DROIT = log.getDROIT();
