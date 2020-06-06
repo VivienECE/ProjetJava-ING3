@@ -119,6 +119,7 @@ public class RechercheEdt extends JFrame{
        
         panel1.add(mess1bis);
         panel1.add(nom);
+        panel1.add(mess1bisP);
         panel1.add(prenom);
         //panel1.add(mess2);
         //panel1.add(picker);
@@ -152,9 +153,6 @@ public class RechercheEdt extends JFrame{
                 RecherchePanel(5);
                 panelB.setVisible(false);
             }
-            if (e.getSource() == Submit){
-                   //picker.getDate();
-                }
             if (e.getSource() == Submit){
                 try {
                     ResultPanel();
