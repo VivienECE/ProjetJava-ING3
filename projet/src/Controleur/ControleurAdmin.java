@@ -150,6 +150,7 @@ public class ControleurAdmin extends Controleur {
         return null;   
     }
     
+    /*@Override
     public Utilisateur findUtilisateurEnseignant(String NOM, String PRENOM) {
     for (Utilisateur i : etudiants) {
             if (i.getNOM().equals(NOM)&&i.getPRENOM().equals(PRENOM)) {
@@ -157,7 +158,7 @@ public class ControleurAdmin extends Controleur {
             }
         }
         return null;   
-    }
+    }*/
     
     public void display(){
      System.out.println("Etudiants");
