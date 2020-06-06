@@ -58,6 +58,11 @@ public class Recap extends JFrame{
         frame.setVisible(true);
         frame.setSize(450, 500);
             }
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
         });
         
         
