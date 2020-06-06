@@ -61,7 +61,7 @@ public class ControleurAdmin extends Controleur {
     {
         super();
                 try {
-            connection = new Connexion("edt", "root", "");
+            connection = new Connexion("edt2", "root", "");
         DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);
         DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
         DAO<Groupe> groupeDAO = new GroupeDAO(connection);
@@ -85,7 +85,7 @@ public class ControleurAdmin extends Controleur {
         for (Seance i : seances)
         {
             Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID());
-            enseignantsparseance.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
+            enseignantsparseance.add(utilisateurDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()));
             Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID()).getID_SALLE());
             salle.add(temp_salle);
             site.add(siteDAO.find(temp_salle.getID_SITE()));
@@ -150,6 +150,7 @@ public class ControleurAdmin extends Controleur {
         return null;   
     }
     
+    /*@Override
     public Utilisateur findUtilisateurEnseignant(String NOM, String PRENOM) {
     for (Utilisateur i : etudiants) {
             if (i.getNOM().equals(NOM)&&i.getPRENOM().equals(PRENOM)) {
@@ -157,14 +158,14 @@ public class ControleurAdmin extends Controleur {
             }
         }
         return null;   
-    }
+    }*/
     
     public void display(){
      System.out.println("Etudiants");
      etudiants.forEach((i) -> { System.out.println(i.getID());});
      
       System.out.println("Enseignants");
-     enseignants.forEach((i) -> { System.out.println(i.getID());});
+     enseignantsparseance.forEach((i) -> { System.out.println(i.getID());});
      
       System.out.println("Seance");
      seances.forEach((i) -> { System.out.println(i.getID());});

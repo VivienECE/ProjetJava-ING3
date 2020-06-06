@@ -49,8 +49,18 @@ public class Seance_sallesDAO extends DAO<Seance_salles> {
   }
 
     @Override
-    public ArrayList<Seance_salles> findAll(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Seance_salles> findAll(int ID_SALLE) {
+        ArrayList<Seance_salles> seance_groupes = new ArrayList<>();      
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM seance_salles WHERE ID_SALLE  = " + ID_SALLE);
+          while(result.next())
+            {
+                seance_groupes.add(new Seance_salles(result.getInt("ID_SEANCE"),ID_SALLE));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        return seance_groupes;
     }
 
     @Override

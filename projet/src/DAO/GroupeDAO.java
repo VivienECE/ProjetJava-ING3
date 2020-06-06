@@ -45,8 +45,18 @@ public class GroupeDAO extends DAO<Groupe> {
   }
 
     @Override
-    public ArrayList<Groupe> findAll(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Groupe> findAll(int ID_PROMOTION) {
+        ArrayList<Groupe> seance_groupes = new ArrayList<>();      
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM groupe WHERE ID_PROMOTION  = " + ID_PROMOTION);
+          while(result.next())
+            {
+                seance_groupes.add(new Groupe(result.getInt("ID"),result.getString("ID_PROMOTION"),ID_PROMOTION));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        return seance_groupes;
     }
 
     @Override

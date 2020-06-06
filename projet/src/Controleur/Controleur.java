@@ -16,6 +16,7 @@ import Modele.Groupe;
 import Modele.Promotion;
 import Modele.Salle;
 import Modele.Seance;
+import Modele.Site;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Login;
@@ -139,6 +140,14 @@ public class Controleur {
     }
 
     public String getSITE() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Site getSite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Salle getSalle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
      
