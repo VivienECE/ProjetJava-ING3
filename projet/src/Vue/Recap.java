@@ -19,10 +19,9 @@ import org.jfree.data.general.DefaultPieDataset;
 public class Recap extends JFrame{
     private JPanel panel1;
     private JPanel panel2;
+    private JPanel panelB;
     
-    
-    
-            private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
 
         DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
         piedataset.setValue( "Physique" , 10);
@@ -46,10 +45,14 @@ public class Recap extends JFrame{
         this.setLocationRelativeTo(null);
         Menu m = new Menu(3);
         this.setJMenuBar(m);
+        JButton btn = new JButton("Stat");
+        panelB = new JPanel();
+        panelB.add(btn);
         //this.setLayout(new GridLayout(0,1));
         ResultPanel(controleur);
         this.add(panel1, BorderLayout.NORTH);
         this.add(panel2, BorderLayout.SOUTH);
+        this.add(panel2, BorderLayout.EAST);
         setVisible(true);
 }        
     
