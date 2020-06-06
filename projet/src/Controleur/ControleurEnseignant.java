@@ -33,6 +33,7 @@ import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
+import Vue.Recap;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -96,7 +97,7 @@ public class ControleurEnseignant extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_UTILISATEUR=1;
+        int ID_UTILISATEUR=2;
         Connexion connexion = null;
         ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
         Edt fenetre = new Edt(controleur);
