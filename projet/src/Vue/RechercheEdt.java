@@ -4,9 +4,15 @@ package Vue;
 import Controleur.Controleur;
 import Controleur.ControleurEnseignant;
 import Controleur.ControleurEtudiant;
+import Controleur.ControleurGroupe;
+import Controleur.ControleurPromotion;
+import Controleur.ControleurSalle;
 import DAO.DAO;
 import DAO.EtudiantDAO;
 import Modele.Etudiant;
+import Modele.Groupe;
+import Modele.Promotion;
+import Modele.Salle;
 import Modele.Utilisateur;
 import java.awt.Color;
 import java.awt.BorderLayout;
@@ -106,23 +112,35 @@ public class RechercheEdt extends JFrame{
            
        JLabel mess1bis = new JLabel("Nom : ");
        nom = new JTextField(10);
-       JLabel mess1bisP = new JLabel("Prenom : ");
-       prenom = new JTextField(10);
-       //JLabel mess2 = new JLabel(" pendant la semaine du : ");
-       //picker = new DateTextField();
+       panel1.add(mess1bis);
+       panel1.add(nom);
+       
+       if(type==1 || type==2){
+            JLabel mess1bisP = new JLabel("Prenom : ");
+            prenom = new JTextField(10);
+            panel1.add(mess1bisP);
+            panel1.add(prenom);
+       }
+       
        Submit = new JButton("Rechercher");
-       Submit.addActionListener(new RechercheEdt.AddButtonListener());
+       Submit.addActionListener(new ActionListener(){
+       public void actionPerformed(ActionEvent event){
+           try {
+               ResultPanel(type);
+           } catch (SQLException ex) {
+               Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
+           }
+       }
+      });
        
        affichage = new JComboBox();
        affichage.addItem("en grille");
        affichage.addItem("en liste");
        
-        panel1.add(mess1bis);
-        panel1.add(nom);
-        panel1.add(mess1bisP);
-        panel1.add(prenom);
-        //panel1.add(mess2);
-        //panel1.add(picker);
+        
+        
         panel1.add(affichage);
         panel1.add(Submit);
 
@@ -153,35 +171,86 @@ public class RechercheEdt extends JFrame{
                 RecherchePanel(5);
                 panelB.setVisible(false);
             }
-            if (e.getSource() == Submit){
-                try {
-                    ResultPanel();
-                } catch (SQLException ex) {
-                    Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(RechercheEdt.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
     }
     
-    private void ResultPanel() throws SQLException, ClassNotFoundException {
-        String NOM = nom.getText();
-        String PRENOM = prenom.getText(); 
-        Utilisateur utilisateurEtudiant= new Utilisateur();
-        utilisateurEtudiant=controleur.findUtilisateurEtudiant(NOM,PRENOM);
-        if(utilisateurEtudiant!=null)
-        {
-            System.out.println("Recherche"+utilisateurEtudiant.getID());
-            Controleur controleurRechercheEtudiant = new ControleurEtudiant(utilisateurEtudiant.getID());
-            Edt fenetre = new Edt(controleurRechercheEtudiant);
+    private void ResultPanel(int type) throws SQLException, ClassNotFoundException {
+        
+        if(type == 1){//ETUDIANT
+            String NOM = nom.getText().toUpperCase();
+            String PRENOM = prenom.getText(); 
+            Utilisateur utilisateurEtudiant= new Utilisateur();
+            utilisateurEtudiant= controleur.findUtilisateurEtudiant(NOM,PRENOM);
+            if(utilisateurEtudiant!=null)
+            {
+                System.out.println("Recherche"+utilisateurEtudiant.getID());
+                Controleur controleurRechercheEtudiant = new ControleurEtudiant(utilisateurEtudiant.getID());
+                Edt fenetre = new Edt(controleurRechercheEtudiant);
+            }
+            else
+                 JOptionPane.showMessageDialog(null, "Etudiant introuvable");
         }
-        else
-             JOptionPane.showMessageDialog(null, "Etudiant introuvable");
+        
+        if(type == 2){//ENSEIGNANT
+            String NOM = nom.getText().toUpperCase();
+            String PRENOM = prenom.getText(); 
+            Utilisateur utilisateurEnseignant= new Utilisateur();
+            utilisateurEnseignant= controleur.findUtilisateurEnseignant(NOM,PRENOM);
+            if(utilisateurEnseignant!=null)
+            {
+                System.out.println("Recherche"+utilisateurEnseignant.getID());
+                Controleur controleurRechercheEnseignant = new ControleurEnseignant(utilisateurEnseignant.getID());
+                Edt fenetre = new Edt(controleurRechercheEnseignant);
+            }
+            else
+                 JOptionPane.showMessageDialog(null, "Enseignant introuvable");
+        }
+        
+        if(type == 3){//TD
+            String NOM = nom.getText().toUpperCase();
+            String PROMO = promo.getSelectedItem().toString();
+            
+            Groupe td = new Groupe();
+            td = controleur.findGroupe(NOM,PROMO);
+            if(td!=null)
+            {
+                System.out.println("Recherche"+td.getID());
+                Controleur controleurRechercheTD = new ControleurGroupe(td.getID());
+                Edt fenetre = new Edt(controleurRechercheTD);
+            }
+            else
+                 JOptionPane.showMessageDialog(null, "TD introuvable");
+        }
+        
+        if(type == 4){//PROMO
+            String NOM = nom.getText().toUpperCase(); 
+            Promotion promo = new Promotion();
+            promo = controleur.findPromotion(NOM);
+            if(promo!=null)
+            {
+                System.out.println("Recherche"+promo.getID());
+                Controleur controleurRecherchePromo = new ControleurPromotion(promo.getID());
+                Edt fenetre = new Edt(controleurRecherchePromo);
+            }
+            else
+                 JOptionPane.showMessageDialog(null, "Promotion introuvable");
+        }
+        
+        if(type == 5){//SALLE
+            String NOM = nom.getText().toUpperCase();
+            Salle salle = new Salle();
+            salle = controleur.findSalle(NOM);
+            if(salle!=null)
+            {
+                System.out.println("Recherche"+salle.getID());
+                Controleur controleurRechercheSalle = new ControleurSalle(salle.getID());
+                Edt fenetre = new Edt(controleurRechercheSalle);
+            }
+            else
+                 JOptionPane.showMessageDialog(null, "Salle introuvable");
+        }
+        
         
     }
     
-    /*public static void main(String[] args) {
-        new RechercheEdt();
-    }*/
 }

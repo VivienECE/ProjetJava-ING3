@@ -138,3 +138,4 @@ public class ControleurPromotion extends Controleur {
          seance.forEach((i) -> { System.out.println(i.getID());});
     }
 }
+

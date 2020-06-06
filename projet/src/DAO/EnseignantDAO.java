@@ -43,6 +43,18 @@ public class EnseignantDAO extends DAO<Enseignant> {
     }
     return enseignant;
   }
+  
+  public Enseignant find(String NOM, String PRENOM) {
+    Enseignant enseignant = new Enseignant();      
+      
+    try {
+      ResultSet result = this.connect.executeQuery("SELECT * FROM utilisateur WHERE NOM = " + NOM + " AND PRENOM="+PRENOM);
+      enseignant=this.find(result.getInt("ID"));
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return enseignant;
+  }
 
     @Override
     public ArrayList<Enseignant> findAll(int id) {
@@ -65,10 +77,10 @@ public class EnseignantDAO extends DAO<Enseignant> {
         return enseignants;
     }
 
-    @Override
+   /* @Override
     public Enseignant find(String NOM, String PRENOM) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
 
 }
