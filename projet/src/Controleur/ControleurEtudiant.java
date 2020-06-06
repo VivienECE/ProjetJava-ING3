@@ -91,7 +91,7 @@ public class ControleurEtudiant extends Controleur {
                 salles.add(temp_salle);
                 sites.add(siteDAO.find(temp_salle.getID_SITE()));
                 cours.add(coursDAO.find(i.getID_SEANCE()));
-                type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
+                type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
                 seance.add(temp_seance);
                 utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
             }
@@ -111,8 +111,8 @@ public class ControleurEtudiant extends Controleur {
         int ID_UTILISATEUR=1;
          Connexion connection = null;
         ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
-        //Edt fenetre = new Edt(controleur);
-        Recap fenetre = new Recap(controleur);
+        Edt fenetre = new Edt(controleur);
+       // Recap fenetre = new Recap(controleur);
 
     }
     
@@ -136,7 +136,10 @@ public class ControleurEtudiant extends Controleur {
         System.out.println("Site");
         sites.forEach((i) -> { System.out.println(i.getNOM());});
         
-         System.out.println("Salle");
+        System.out.println("Salle");
         salles.forEach((i) -> { System.out.println(i.getNOM());});
+        
+        System.out.println("Type");
+        type_cours.forEach((i) -> { System.out.println(i.getNOM());});
     }
 }

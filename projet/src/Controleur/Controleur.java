@@ -17,6 +17,7 @@ import Modele.Promotion;
 import Modele.Salle;
 import Modele.Seance;
 import Modele.Site;
+import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Login;
@@ -156,5 +157,6 @@ public class Controleur {
     }
     
     public ArrayList<Groupe> getGroupes() { throw new UnsupportedOperationException("Not supported yet."); }
+    public ArrayList<Type_cours> getType_cours(){throw new UnsupportedOperationException("Not supported yet.");}
 }
 

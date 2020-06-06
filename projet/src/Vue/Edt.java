@@ -305,15 +305,15 @@ public class Edt extends JFrame{
                 data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
                 if (controleur instanceof ControleurPromotion)
-                    data[y][3]=  controleur.getGroupes().get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
+                    data[y][3]=  controleur.getGroupes().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 else
-                   data[y][3]= controleur.getGroupe().getNOM();
+                   data[y][3]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
 
                 String salle = controleur.getSalles().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-                data[y][5]= triees[y].getTYPE(triees[y].getID_TYPE());
+                //data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
             }
    
         }
