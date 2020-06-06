@@ -92,6 +92,7 @@ public class ControleurEnseignant extends Controleur {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControleurEnseignant.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.display();
     }
     
     //CE MAIN SERT DE TEST -> ID_UT
@@ -112,5 +113,13 @@ public class ControleurEnseignant extends Controleur {
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
     public ArrayList<Promotion> getPromotions(){return promotions;}
+    
+    public void display(){
+        System.out.println("Groupe");
+        groupes.forEach((i) -> { System.out.println(i.getID());});
+
+         System.out.println("Seance");
+         seance.forEach((i) -> { System.out.println(i.getID());});
+    }
     
 }
