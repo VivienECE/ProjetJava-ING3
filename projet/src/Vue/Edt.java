@@ -254,8 +254,13 @@ public class Edt extends JFrame{
     }
     
     public Object[][]Journee(LocalDate date, Controleur controleur){
+        
+        
         Object[][] data;
         
+        if((controleur instanceof ControleurEtudiant)== true ||(controleur instanceof ControleurGroupe)== true||
+                (controleur instanceof ControleurPromotion)== true){
+            
         ArrayList<Seance> Seances = controleur.getSeances();
         ArrayList<Salle> Salles = controleur.getSalles();
         ArrayList<Seance> CoursAJD = new ArrayList<>();
@@ -285,8 +290,7 @@ public class Edt extends JFrame{
             }            
         }
         
-        if((controleur instanceof ControleurEtudiant)== true ||(controleur instanceof ControleurGroupe)== true||
-                (controleur instanceof ControleurPromotion)== true){
+        
             
             data = new Object[n][6];
             ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
@@ -323,7 +327,35 @@ public class Edt extends JFrame{
    
         }
         
-        if((controleur instanceof ControleurEnseignant)== true){
+        /*if((controleur instanceof ControleurEnseignant)== true){
+            ArrayList<Seance> Seances = controleur.getSeances();
+            ArrayList<Salle> Salles = controleur.getSalles();
+            ArrayList<Seance> CoursAJD = new ArrayList<>();
+            int n=0;
+
+            //Voir combien de cours dans la journée;
+            for(int i = 0; i < Seances.size(); i++)
+            {
+                if(date.isEqual(Seances.get(i).getDATE())){
+                    CoursAJD.add(Seances.get(i));
+                    n++;
+                }  
+            }
+
+            Seance [] triees = new Seance [CoursAJD.size()];
+
+            //Trier par heure
+            for(int k=0; k<CoursAJD.size(); k++)
+                triees[k]=CoursAJD.get(k);
+
+            for(int x=0; x<(triees.length-1); x++){
+                if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
+                    Seance temp;
+                    temp = triees[x];
+                    triees[x] = triees[x+1];
+                    triees[x+1] = temp;
+                }            
+            }
             data = new Object[n][5];
             
             for(int y=0; y<triees.length; y++){
@@ -354,7 +386,7 @@ public class Edt extends JFrame{
                 data[y][3]= endroit;
                 data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
             }
-        }
+        }*/
         else
             data = new Object[1][1];
         
