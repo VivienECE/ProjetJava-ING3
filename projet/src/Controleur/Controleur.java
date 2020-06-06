@@ -150,6 +150,7 @@ public class Controleur {
     public Salle getSalle() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     
+    
+    public ArrayList<Groupe> getGroupes() { throw new UnsupportedOperationException("Not supported yet."); }
 }
 

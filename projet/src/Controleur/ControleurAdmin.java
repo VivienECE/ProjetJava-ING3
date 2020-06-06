@@ -61,7 +61,7 @@ public class ControleurAdmin extends Controleur {
     {
         super();
                 try {
-            connection = new Connexion("edt2", "root", "");
+            connection = new Connexion("edt", "root", "");
         DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);
         DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
         DAO<Groupe> groupeDAO = new GroupeDAO(connection);
