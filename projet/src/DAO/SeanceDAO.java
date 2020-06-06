@@ -21,7 +21,9 @@ public class SeanceDAO extends DAO<Seance> {
 
   public boolean create(Seance obj) {
        try {
-       this.connect.executeUpdate("INSERT INTO `seance`(`ID`,`SEMAINE`,`DATE`,`HEURE_DEBUT`,`HEURE_FIN`,`ETAT`,`ID_COURS`,`ID_TYPE`) VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+")"); 
+       ResultSet result = this.connect.executeQuery("SELECT * from seance WHERE VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+")"); 
+        if(!result.first()) // Si aucun resultat
+             this.connect.executeUpdate("INSERT INTO `seance`(`SEMAINE`,`DATE`,`HEURE_DEBUT`,`HEURE_FIN`,`ETAT`,`ID_COURS`,`ID_TYPE`) VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+")"); 
     } catch (SQLException e)
         { e.printStackTrace(); }
     return false;

@@ -10,6 +10,7 @@ import Controleur.ControleurEtudiant;
 import Controleur.ControleurGroupe;
 import Controleur.ControleurPromotion;
 import Controleur.ControleurSalle;
+import Modele.Groupe;
 import Modele.Salle;
 import Modele.Seance;
 import Modele.Utilisateur;
@@ -261,6 +262,7 @@ public class Edt extends JFrame{
             ArrayList<Seance> Seances = controleur.getSeances();
             ArrayList<Salle> Salles = controleur.getSalles();
             ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
+            ArrayList<Groupe> Groupes = controleur.getGroupes();
             ArrayList<Seance> CoursAJD = new ArrayList<>();
             int n=0;
 
@@ -297,8 +299,11 @@ public class Edt extends JFrame{
 
 
                 data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
-
-                data[y][3]= controleur.getGroupe().getNOM();
+                
+                if (controleur instanceof ControleurPromotion)
+                    data[y][3]= Groupes.get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
+                else
+                   data[y][3]= controleur.getGroupe().getNOM();
 
                 String salle = Salles.get(triees[y].getID_COURS()).getNOM();
                 String site = "";

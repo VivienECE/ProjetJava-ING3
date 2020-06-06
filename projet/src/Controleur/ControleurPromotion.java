@@ -51,6 +51,7 @@ public class ControleurPromotion extends Controleur {
     private Promotion promotion;
     private ArrayList<Seance> seance= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
+    private ArrayList<Groupe> groupesparseance= new ArrayList<>();
     private ArrayList<Salle> salle= new ArrayList<>();
     private ArrayList<Site> site= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
@@ -62,7 +63,7 @@ public class ControleurPromotion extends Controleur {
     {
         super();
         try {
-            connection = new Connexion("edt", "root", "");
+            connection = new Connexion("edt2", "root", "");
             
             DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);  
             DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);  
@@ -79,7 +80,6 @@ public class ControleurPromotion extends Controleur {
             DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
             
             promotion= promotionDAO.find(ID_PROMOTION);
-            //groupe = groupeDAO();
             groupes = groupeDAO.findAll(promotion.getID());
            
             for (Groupe j : groupes)
@@ -96,6 +96,7 @@ public class ControleurPromotion extends Controleur {
                     type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
                     seance.add(temp_seance);
                     utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
+                    groupesparseance.add(groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE()));
                 }
             }
            
@@ -122,6 +123,7 @@ public class ControleurPromotion extends Controleur {
     public Utilisateur getUtilisateur() {return utilisateur; }
     public Etudiant getEtudiant() {return etudiant; }
     public Groupe getGroupe() {return groupe; }
+    public ArrayList<Groupe> getGroupes() {return groupesparseance; }
     public Promotion getPromotion() {return promotion; }
     public ArrayList<Seance> getSeances() {return seance; }
     public ArrayList<Salle> getSalles() {return salle; }
@@ -130,7 +132,7 @@ public class ControleurPromotion extends Controleur {
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
     public void display(){
         System.out.println("Groupe");
-        groupes.forEach((i) -> { System.out.println(i.getID());});
+        groupesparseance.forEach((i) -> { System.out.println(i.getID());});
         
         System.out.println("Enseignants");
         utilisateurs.forEach((i) -> { System.out.println(i.getID());});
