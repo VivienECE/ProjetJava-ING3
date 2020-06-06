@@ -33,6 +33,7 @@ import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
+import Vue.Recap;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

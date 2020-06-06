@@ -329,7 +329,7 @@ public class Edt extends JFrame{
    
         }
         
-        if((controleur instanceof ControleurEnseignant)== true){
+       /* if((controleur instanceof ControleurEnseignant)== true){
             ArrayList<Seance> Seances = controleur.getSeances();
             ArrayList<Salle> Salles = controleur.getSalles();
             ArrayList<Seance> CoursAJD = new ArrayList<>();
@@ -388,7 +388,54 @@ public class Edt extends JFrame{
                 data[y][3]= endroit;
                 data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
             }
-        }      
+        } 
+        if((controleur instanceof ControleurSalle)== true){
+            
+            ArrayList<Seance> Seances = controleur.getSeances();
+            //ArrayList<Groupe> Groupes = controleur.getGroupes();
+            ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
+            ArrayList<Seance> CoursAJD = new ArrayList<>();
+            int n=0;
+
+            //Voir combien de cours dans la journée;
+            for(int i = 0; i < Seances.size(); i++)
+            {
+                if(date.isEqual(Seances.get(i).getDATE())){
+                    CoursAJD.add(Seances.get(i));
+                    n++;
+                }  
+            }
+
+            data = new Object[n][5];
+            Seance [] triees = new Seance [CoursAJD.size()];
+
+            //Trier par heure
+            for(int k=0; k<CoursAJD.size(); k++)
+                triees[k]=CoursAJD.get(k);
+
+            for(int x=0; x<(triees.length-1); x++){
+                if((triees[x+1].getHEURE_DEBUT()).isBefore(triees[x].getHEURE_DEBUT())){
+                    Seance temp;
+                    temp = triees[x];
+                    triees[x] = triees[x+1];
+                    triees[x+1] = temp;
+                }            
+            }
+            
+            for(int y=0; y<triees.length; y++){
+                String horaire = triees[y].getHEURE_DEBUT()+" - "+triees[y].getHEURE_FIN();
+                data[y][0]= horaire;
+
+                data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
+
+                data[y][2]= "Prof";//Profs.get(triees[y].getID_COURS()).getNOM();
+                
+                data[y][3]= "TD";//controleur.getGroupe().getNOM();
+
+                data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+            }
+        }*/
+            
         else
             data = new Object[1][1];
         
