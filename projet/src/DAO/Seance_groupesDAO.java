@@ -62,6 +62,21 @@ public class Seance_groupesDAO extends DAO<Seance_groupes> {
     }
     return seance_groupes;
   }
+  
+   public ArrayList<Seance_groupes> findAll(int ID_SEANCE, int triche) {
+    ArrayList<Seance_groupes> seance_groupes = new ArrayList<>();      
+      
+    try {
+      ResultSet result = this.connect.executeQuery("SELECT ID_GROUPE FROM seance_groupes WHERE ID_SEANCE  = " + ID_SEANCE);
+      while(result.next())
+        {
+            seance_groupes.add(new Seance_groupes(ID_SEANCE,result.getInt("ID_SEANCE")));
+        }      
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return seance_groupes;
+  }
 
     @Override
     public ArrayList<Seance_groupes> getAll() {
