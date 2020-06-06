@@ -262,7 +262,6 @@ public class Edt extends JFrame{
             ArrayList<Seance> Seances = controleur.getSeances();
             ArrayList<Salle> Salles = controleur.getSalles();
             ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
-            ArrayList<Groupe> Groupes = controleur.getGroupes();
             ArrayList<Seance> CoursAJD = new ArrayList<>();
             int n=0;
 
@@ -301,7 +300,7 @@ public class Edt extends JFrame{
                 data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
                 
                 if (controleur instanceof ControleurPromotion)
-                    data[y][3]= Groupes.get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
+                    data[y][3]=  controleur.getGroupes().get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
                 else
                    data[y][3]= controleur.getGroupe().getNOM();
 
