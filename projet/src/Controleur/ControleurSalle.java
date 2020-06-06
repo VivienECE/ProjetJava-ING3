@@ -110,7 +110,7 @@ public class ControleurSalle extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_SALLE=1;
+        int ID_SALLE=2;
          Connexion connection = null;
         ControleurSalle controleur = new ControleurSalle(ID_SALLE);
         Edt fenetre = new Edt(controleur);

@@ -50,8 +50,8 @@ public class ControleurEtudiant extends Controleur {
     private Groupe groupe;
     private Promotion promotion;
     private ArrayList<Seance> seance= new ArrayList<>();
-    private ArrayList<Salle> salle= new ArrayList<>();
-    private ArrayList<Site> site= new ArrayList<>();
+    private ArrayList<Salle> salles= new ArrayList<>();
+    private ArrayList<Site> sites= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
@@ -86,9 +86,10 @@ public class ControleurEtudiant extends Controleur {
             {
                 Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
                 Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID_SEANCE());
+                //System.out.println("ID SALLE:"+seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE()+"ID_SITE:"+salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE()).getID_SITE());
                 Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
-                salle.add(temp_salle);
-                site.add(siteDAO.find(temp_salle.getID_SITE()));
+                salles.add(temp_salle);
+                sites.add(siteDAO.find(temp_salle.getID_SITE()));
                 cours.add(coursDAO.find(i.getID_SEANCE()));
                 type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
                 seance.add(temp_seance);
@@ -120,7 +121,8 @@ public class ControleurEtudiant extends Controleur {
     public Groupe getGroupe() {return groupe; }
     public Promotion getPromotion() {return promotion; }
     public ArrayList<Seance> getSeances() {return seance; }
-    public ArrayList<Salle> getSalles() {return salle; }
+    public ArrayList<Salle> getSalles() {return salles; }
+    public ArrayList<Site> getSites() {return sites;}
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
@@ -128,7 +130,13 @@ public class ControleurEtudiant extends Controleur {
         System.out.println("Enseignants");
         utilisateurs.forEach((i) -> { System.out.println(i.getID());});
 
-          System.out.println("Seance");
-          seance.forEach((i) -> { System.out.println(i.getID());});
+        System.out.println("Seance");
+        seance.forEach((i) -> { System.out.println(i.getID());});
+        
+        System.out.println("Site");
+        sites.forEach((i) -> { System.out.println(i.getNOM());});
+        
+         System.out.println("Salle");
+        salles.forEach((i) -> { System.out.println(i.getNOM());});
     }
 }

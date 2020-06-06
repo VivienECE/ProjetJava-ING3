@@ -105,6 +105,10 @@ public class Controleur {
       public ArrayList<Utilisateur> getUtilisateurEnseignants(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public ArrayList<Site> getSites(){
+                      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
       
     public Utilisateur findUtilisateurEtudiant(String NOM, String PRENOM) {
     return null;
