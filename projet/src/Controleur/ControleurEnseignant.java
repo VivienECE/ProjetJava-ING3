@@ -58,7 +58,7 @@ public class ControleurEnseignant extends Controleur {
     {
       super();
         try {
-            connection = new Connexion("edt", "root", "");
+            connection = new Connexion("edt2", "root", "");
         DAO<Utilisateur> utilisateurDAO = new UtilisateurDAO(connection);
         DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
         DAO<Groupe> groupeDAO = new GroupeDAO(connection);
@@ -81,7 +81,7 @@ public class ControleurEnseignant extends Controleur {
             salle.add(temp_salle);
             site.add(siteDAO.find(temp_salle.getID_SITE()));
             cours.add(coursDAO.find(i.getID_SEANCE()));
-            type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
+            type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
             seance.add(temp_seance);
             Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
             groupes.add(temp_group);

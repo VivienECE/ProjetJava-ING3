@@ -93,7 +93,7 @@ public class ControleurSalle extends Controleur {
                 salles.add(salleDAO.find(ID_SALLE));
                 sites.add(siteDAO.find(temp_salle.getID_SITE()));
                 cours.add(coursDAO.find(i.getID_SEANCE()));
-                type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
+                type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
                 seance.add(temp_seance);
                 utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
             }
@@ -110,7 +110,7 @@ public class ControleurSalle extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_SALLE=1;
+        int ID_SALLE=2;
          Connexion connection = null;
         ControleurSalle controleur = new ControleurSalle(ID_SALLE);
         Edt fenetre = new Edt(controleur);

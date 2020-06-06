@@ -17,6 +17,7 @@ import Modele.Promotion;
 import Modele.Salle;
 import Modele.Seance;
 import Modele.Site;
+import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Login;
@@ -105,6 +106,10 @@ public class Controleur {
       public ArrayList<Utilisateur> getUtilisateurEnseignants(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public ArrayList<Site> getSites(){
+                      throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
       
     public Utilisateur findUtilisateurEtudiant(String NOM, String PRENOM) {
     return null;
@@ -152,5 +157,6 @@ public class Controleur {
     }
     
     public ArrayList<Groupe> getGroupes() { throw new UnsupportedOperationException("Not supported yet."); }
+    public ArrayList<Type_cours> getType_cours(){throw new UnsupportedOperationException("Not supported yet.");}
 }
 

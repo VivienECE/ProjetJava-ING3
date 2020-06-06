@@ -52,8 +52,8 @@ public class ControleurPromotion extends Controleur {
     private ArrayList<Seance> seance= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Groupe> groupesparseance= new ArrayList<>();
-    private ArrayList<Salle> salle= new ArrayList<>();
-    private ArrayList<Site> site= new ArrayList<>();
+    private ArrayList<Salle> salles= new ArrayList<>();
+    private ArrayList<Site> sites= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
@@ -90,10 +90,10 @@ public class ControleurPromotion extends Controleur {
                     Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
                     Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID_SEANCE());
                     Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
-                    salle.add(temp_salle);
-                    site.add(siteDAO.find(temp_salle.getID_SITE()));
+                    salles.add(temp_salle);
+                    sites.add(siteDAO.find(temp_salle.getID_SITE()));
                     cours.add(coursDAO.find(i.getID_SEANCE()));
-                    type_cours.add(type_coursDAO.find(i.getID_SEANCE()));
+                    type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
                     seance.add(temp_seance);
                     utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
                     groupesparseance.add(groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE()));
@@ -126,7 +126,8 @@ public class ControleurPromotion extends Controleur {
     public ArrayList<Groupe> getGroupes() {return groupesparseance; }
     public Promotion getPromotion() {return promotion; }
     public ArrayList<Seance> getSeances() {return seance; }
-    public ArrayList<Salle> getSalles() {return salle; }
+    public ArrayList<Salle> getSalles() {return salles; }
+    public ArrayList<Site> getSites() {return sites; }
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
