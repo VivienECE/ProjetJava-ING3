@@ -4,32 +4,40 @@ package Vue;
 import Modele.Seance;
 import Controleur.ControleurEtudiant;
 import Modele.Cours;
-import java.awt.Color;
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import javax.swing.*;
-import java.awt.event.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
-import javax.swing.JMenu;
 import javax.swing.JTable;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 
 public class Recap extends JFrame{
     private JPanel panel1;
     private JPanel panel2;
+    
+    
+    
+            private void jButton10ActionPerformed(java.awt.event.ActionEvent evt){
+
+        DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
+        piedataset.setValue( "Physique" , 10);
+        piedataset.setValue( "Physique" , 20);
+        piedataset.setValue( "Physique" , 15);
+        piedataset.setValue( "Physique" , 12);
+        
+        JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
+        PiePlot P=(PiePlot)chart.getPlot();
+        ChartFrame frame = new ChartFrame("Camembert", chart);
+        frame.setVisible(true);
+        frame.setSize(450, 500);
+
+        }
+
     
     public Recap(ControleurEtudiant controleur) {
         this.setTitle("Récapitilatif des cours");
@@ -43,8 +51,7 @@ public class Recap extends JFrame{
         this.add(panel1, BorderLayout.NORTH);
         this.add(panel2, BorderLayout.SOUTH);
         setVisible(true);
-        
-    }
+}        
     
     private void ResultPanel(ControleurEtudiant controleur) {
        
@@ -68,6 +75,9 @@ public class Recap extends JFrame{
         
 
     }
+    
+
+    
     
     public Object[][] Tri(ControleurEtudiant controleur){
         
