@@ -51,7 +51,18 @@ public class CoursDAO extends DAO<Cours> {
 
     @Override
     public ArrayList<Cours> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           ArrayList<Cours> enseignants = new ArrayList<>();      
+      
+        try {
+          ResultSet result = this.connect.executeQuery("SELECT * FROM cours");
+          while(result.next())
+            {
+                enseignants.add(new Cours(result.getInt("ID"),result.getString("NOM")));
+            }      
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+        return enseignants;
     }
 
     @Override

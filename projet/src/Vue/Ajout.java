@@ -3,6 +3,8 @@ package Vue;
 
 import Controleur.Controleur;
 import Controleur.ControleurAdmin;
+import Modele.Cours;
+import Modele.Enseignant;
 import Modele.Seance;
 import Modele.Seance_enseignants;
 import Modele.Seance_groupes;
@@ -61,10 +63,11 @@ public class Ajout extends JFrame{
     private JRadioButton e2;
     private JRadioButton e3;
     private JRadioButton e6;
-    private JTextField txt2;
+    private JComboBox txt2;
     private JComboBox prom;
     private int id;
     private ArrayList<Utilisateur> profs;
+    private Controleur controleur;
     
     public Ajout(ControleurAdmin controleur){
         this.setTitle("Ajout d'un cours");
@@ -73,6 +76,7 @@ public class Ajout extends JFrame{
         this.setLocationRelativeTo(null);
         Menu m = new Menu(1);
         this.setJMenuBar(m);
+        this.controleur=controleur;
         //this.setLayout(new GridLayout(6,2));
         Form();
         
@@ -91,23 +95,20 @@ public class Ajout extends JFrame{
         JLabel nom = new JLabel("Intitulé de la séance : ");
         panel1.add(nom);
         cours = new JComboBox();
-        cours.addItem("Mathematiques");
-        cours.addItem("Physique");
-        cours.addItem("Electronique");
-        cours.addItem("Informatique");
-        cours.addItem("Anglais");
-        cours.addItem("Théorie des Graphes");
-        cours.addItem("Analyse");
-        cours.addItem("PSTE");
-        cours.addItem("Arabe");
-        cours.addItem("Droit du Travail");
+        for(Cours i: controleur.getCours())
+                    cours.addItem(i.getNOM());
 
         panel1.add(cours);
         
         panel2= new JPanel();
         JLabel prof = new JLabel("Professeur : ");
-        panel2.add(prof);
-        txt2 = new JTextField(10);
+        txt2 = new JComboBox();
+        for(Enseignant j: controleur.getEnseignants())
+        {
+             if(j.getID_COURS()==1)
+                    txt2.addItem(controleur.getUtilisateurEnseignants().get(controleur.getEnseignants().indexOf(j)).getNOM());
+        }
+        
         panel2.add(txt2);
         
         
@@ -175,6 +176,19 @@ public class Ajout extends JFrame{
         content.setLayout(new GridLayout(6,2));
         
         setVisible(true);
+        cours.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+                Object selected = comboBox.getSelectedItem();
+                txt2.removeAllItems();
+                for(Enseignant j: controleur.getEnseignants())
+                 {
+                      if(controleur.findCours(j.getID_COURS()).getNOM().equals(selected.toString()))
+                    txt2.addItem(controleur.getUtilisateurEnseignants().get(controleur.getEnseignants().indexOf(j)).getNOM());
+                 }
+            }
+        });
+
     }
     
 
@@ -193,7 +207,6 @@ public class Ajout extends JFrame{
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            
             if (e.getSource() == btn) {
                 
                 date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
@@ -205,7 +218,11 @@ public class Ajout extends JFrame{
                 HEURE_FIN = LocalTime.of(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()), 0);
                 
                 //IdCOURS
-                if(cours.getSelectedItem()=="Mathematiques")
+                for(Cours i: controleur.getListeCours())
+                    if(cours.getSelectedItem()==i.getNOM())
+                        IdCOURS = i.getID();
+                
+                /*if(cours.getSelectedItem()=="Mathematiques")
                     IdCOURS = 1;
                 if(cours.getSelectedItem()=="Physique")
                     IdCOURS = 2;
@@ -224,7 +241,7 @@ public class Ajout extends JFrame{
                 if(cours.getSelectedItem()=="Arabe")
                     IdCOURS = 9;
                 if(cours.getSelectedItem()=="Droit du Travail")
-                    IdCOURS = 10;
+                    IdCOURS = 10;*/
                 
                 //IdTYPE
                 if(td1.isSelected()&&td2.isSelected()&&td3.isSelected()){
@@ -247,10 +264,10 @@ public class Ajout extends JFrame{
                 }
                 
                 //Prof
-                for(int i=0; i<profs.size(); i++){
+                /*for(int i=0; i<profs.size(); i++){
                     if(txt2.getText().toLowerCase()== profs.get(i).getNOM().toLowerCase())
                         idEnseignant = profs.get(i).getID();
-                }
+                }*/
                 
                 //PROMO
                 if(prom.getSelectedItem()=="ING1")

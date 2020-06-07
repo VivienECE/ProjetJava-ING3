@@ -7,6 +7,7 @@ package Controleur;
 import DAO.DAO;
 import DAO.EtudiantDAO;
 import Modele.Cours;
+import Modele.Enseignant;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,5 +155,8 @@ public class Controleur {
     
     public ArrayList<Groupe> getGroupes() { throw new UnsupportedOperationException("Not supported yet."); }
     public ArrayList<Type_cours> getType_cours(){throw new UnsupportedOperationException("Not supported yet.");}
+    public ArrayList<Enseignant> getEnseignants() { throw new UnsupportedOperationException("Not supported yet."); }
+    public Cours findCours(int ID) {throw new UnsupportedOperationException("Not supported yet.");}
+     public ArrayList<Cours> getListeCours() {throw new UnsupportedOperationException("Not supported yet.");}
 }
 
