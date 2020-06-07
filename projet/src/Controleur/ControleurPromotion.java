@@ -84,7 +84,7 @@ public class ControleurPromotion extends Controleur {
            
             for (Groupe j : groupes)
             {
-                ArrayList<Seance_groupes> seance_groupes = seance_groupesDAO.findAll(j.getID());
+                 ArrayList<Seance_groupes> seance_groupes = seance_groupesDAO.findAll(j.getID());
                  for (Seance_groupes i : seance_groupes)
                 {
                     Seance temp_seance=seanceDAO.find(i.getID_SEANCE());

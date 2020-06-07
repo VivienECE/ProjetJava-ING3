@@ -129,6 +129,7 @@ public class ControleurSalle extends Controleur {
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}
+    public ArrayList<Groupe> getGroupes(){return groupes;}
     public void display(){
          System.out.println("TD");
         groupes.forEach((i) -> { System.out.println(i.getID());});

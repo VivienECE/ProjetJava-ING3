@@ -204,7 +204,7 @@ public class Edt extends JFrame{
                 public void valueChanged(ListSelectionEvent lse) {
                     //throw new UnsupportedOperationException("Not supported yet.")
                             
-                            ; //To change body of generated methods, choose Tools | Templates.
+                             //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -229,7 +229,7 @@ public class Edt extends JFrame{
             tableauM.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauM.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauM));
@@ -237,7 +237,7 @@ public class Edt extends JFrame{
             tableauM.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -262,7 +262,7 @@ public class Edt extends JFrame{
             tableauMe.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauMe.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauMe));
@@ -270,7 +270,7 @@ public class Edt extends JFrame{
             tableauMe.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -295,7 +295,7 @@ public class Edt extends JFrame{
             tableauJ.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    ; //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauJ.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauJ));
@@ -303,7 +303,7 @@ public class Edt extends JFrame{
             tableauJ.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                     //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -328,7 +328,7 @@ public class Edt extends JFrame{
             tableauV.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauV.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauV));
@@ -336,7 +336,7 @@ public class Edt extends JFrame{
             tableauV.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -361,7 +361,7 @@ public class Edt extends JFrame{
             tableauS.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauS.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauS));
@@ -369,7 +369,7 @@ public class Edt extends JFrame{
             tableauS.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -482,7 +482,8 @@ public class Edt extends JFrame{
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
 
-                if(triees[y].getETAT()==1)
+
+	       if(triees[y].getETAT()==1)
                     data[y][5] = "ANNULEE";
                 else
                     data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
