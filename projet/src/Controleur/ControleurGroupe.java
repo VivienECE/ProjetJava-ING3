@@ -110,8 +110,8 @@ public class ControleurGroupe extends Controleur {
         int ID_GROUPE=1;
          Connexion connection = null;
         ControleurGroupe controleur = new ControleurGroupe(ID_GROUPE);
-        Edt fenetre = new Edt(controleur, false);
-        //Recap fenetre = new Recap(controleur);
+        //Edt fenetre = new Edt(controleur, false);
+        Recap fenetre = new Recap(controleur);
 
     }
     
@@ -121,6 +121,7 @@ public class ControleurGroupe extends Controleur {
     public Promotion getPromotion() {return promotion; }
     public ArrayList<Seance> getSeances() {return seance; }
     public ArrayList<Salle> getSalles() {return salle; }
+    public ArrayList<Site> getSites() {return site;}
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Utilisateur> getUtilisateurEnseignants(){return utilisateurs;}

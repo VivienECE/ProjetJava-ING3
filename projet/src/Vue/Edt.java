@@ -3,6 +3,7 @@ package Vue;
 
 
 import Controleur.Controleur;
+import Controleur.ControleurAdmin;
 
 import Controleur.ControleurEnseignant;
 
@@ -355,6 +356,8 @@ public class Edt extends JFrame{
                 ArrayList<Seance> Seances = controleur.getSeances();
                 ArrayList<Salle> Salles = controleur.getSalles();
                 ArrayList<Seance> CoursAJD = new ArrayList<>();
+                ControleurAdmin Cadmin = new ControleurAdmin(86);
+                ArrayList<Utilisateur> Profs = Cadmin.getUtilisateurEnseignants();
                 int n=0;
 
                 //Voir combien de cours dans la journée;
@@ -389,7 +392,7 @@ public class Edt extends JFrame{
                     data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
 
 
-                    data[y][2]= "JSP";//controleur.getGroupes().get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
+                    data[y][2]= controleur.getGroupes().get(Profs.indexOf(Profs.get(triees[y].getID_COURS()))).getNOM();
 
                     String salle = Salles.get(triees[y].getID_COURS()).getNOM();
                     String site = "";

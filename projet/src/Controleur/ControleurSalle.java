@@ -113,8 +113,8 @@ public class ControleurSalle extends Controleur {
         int ID_SALLE=2;
          Connexion connection = null;
         ControleurSalle controleur = new ControleurSalle(ID_SALLE);
-        //Edt fenetre = new Edt(controleur, false);
-        Recap fenetre = new Recap(controleur);
+        Edt fenetre = new Edt(controleur, false);
+        //Recap fenetre = new Recap(controleur);
 
     }
     
