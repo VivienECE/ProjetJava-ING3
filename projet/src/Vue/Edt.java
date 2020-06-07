@@ -17,6 +17,7 @@ import Modele.Seance;
 import Modele.Utilisateur;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EventObject;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,6 +37,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 public class Edt extends JFrame{
     private JPanel panel1 = new JPanel();
@@ -173,8 +182,32 @@ public class Edt extends JFrame{
         
         Lundi = new JPanel();
         Object[][] TLundi = Journee(ajd, controleur, admin);
-        String  titleL[] = {"Lundi " + ajd, "", "", "",""};
-        JTable tableauL = new JTable(TLundi, titleL);
+        JTable tableauL;
+        if(admin==true){
+            String  titleL[] = {"Lundi " + ajd, "", "", "","", ""," ","  "};
+            tableauL = new JTable(TLundi, titleL);
+            //tableauL.setDefaultRenderer(JButton.class, new TableComponent());
+            tableauL.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauL));
+            tableauL.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauL));
+            tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauL.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauL));
+            tableauL.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauL));
+            tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleL[] = {"Lundi " + ajd, "", "", "",""};
+            tableauL = new JTable(TLundi, titleL);
+        }     
         tableauL.getTableHeader().setBackground(new Color(151,221,255));
         tableauL.setShowVerticalLines(false);
         Lundi.add(tableauL);
@@ -242,7 +275,7 @@ public class Edt extends JFrame{
         this.add(semaine, BorderLayout.SOUTH);
 
         setVisible(true);
-        
+
     }
     
     private void Grille(Controleur controleur){
@@ -278,6 +311,8 @@ public class Edt extends JFrame{
             ArrayList<Salle> Salles = controleur.getSalles();
             ArrayList<Utilisateur> Profs = controleur.getUtilisateurEnseignants();
             ArrayList<Seance> CoursAJD = new ArrayList<>();
+            ArrayList<Integer> annule = new ArrayList<>();
+
             int n=0;
 
             //Voir combien de cours dans la journée;
@@ -350,6 +385,10 @@ public class Edt extends JFrame{
                          }});
                     data[y][6]= mod;
                     data[y][7]= sup;
+                }
+                
+                if(triees[y].getETAT()==1){
+                    annule.add(y);
                 }
             }
    
@@ -472,7 +511,112 @@ public class Edt extends JFrame{
         
     }
     
-              
+   class MyRendererAndEditorSup implements TableCellRenderer, TableCellEditor 
+    {
+      private JButton btn;
+      private int row;
+      MyRendererAndEditorSup(JTable table) {
+        btn = new JButton("Supprimer");
+        btn.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(row);
+          }
+        });
+      }
+      @Override
+      public Component getTableCellRendererComponent(JTable table, Object 
+      value, boolean isSelected, boolean hasFocus, int row, int column) 
+      {
+        return btn;
+      }
+      @Override
+      public Component getTableCellEditorComponent(JTable table, Object 
+      value, boolean isSelected, int row, int column) 
+      {
+        this.row = row;
+        return btn;
+      }
+      @Override
+      public Object getCellEditorValue() { return true; }
+      
+      public boolean isCellEditable(EventObject anEvent) { return true; }
+      
+      public boolean shouldSelectCell(EventObject anEvent) { return true; }
+      @Override
+      public boolean stopCellEditing() { return true; }
+      @Override
+      public void cancelCellEditing() {}
+      
+      public void addCellEditorListener(CellEditorListener l) {}
+      
+      public void removeCellEditorListener(CellEditorListener l) {}
+    }
+   
+   public class TableComponent extends DefaultTableCellRenderer {
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+      //Si la valeur de la cellule est un JButton, on transtype cette valeur
+      if (value instanceof JButton)
+        return (JButton) value;
+      else
+        return this;
+    }
+  } 
+  class MyRendererAndEditorMod implements TableCellRenderer, TableCellEditor 
+    {
+      private JButton btn;
+      private int row;
+      MyRendererAndEditorMod(JTable table) {
+        btn = new JButton("Modifier");
+        btn.addActionListener(new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.removeRow(row);
+          }
+        });
+      }
+      @Override
+      public Component getTableCellRendererComponent(JTable table, Object 
+      value, boolean isSelected, boolean hasFocus, int row, int column) 
+      {
+        return btn;
+      }
+      @Override
+      public Component getTableCellEditorComponent(JTable table, Object 
+      value, boolean isSelected, int row, int column) 
+      {
+        this.row = row;
+        return btn;
+      }
+      @Override
+      public Object getCellEditorValue() { return true; }
+      
+      public boolean isCellEditable(EventObject anEvent) { return true; }
+      
+      public boolean shouldSelectCell(EventObject anEvent) { return true; }
+      @Override
+      public boolean stopCellEditing() { return true; }
+      @Override
+      public void cancelCellEditing() {}
+      
+      public void addCellEditorListener(CellEditorListener l) {}
+      
+      public void removeCellEditorListener(CellEditorListener l) {}
+    }
+   
+  /*public class TableComponent extends DefaultTableCellRenderer {
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+      //Si la valeur de la cellule est un JButton, on transtype cette valeur
+      if (value instanceof JButton)
+        return (JButton) value;
+      else
+        return this;
+    }
+  }*/
     
     public static void main(String[] args) {
         //new Edt();
