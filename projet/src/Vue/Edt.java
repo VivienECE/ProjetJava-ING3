@@ -613,58 +613,6 @@ public class Edt extends JFrame{
         return data;
     }
     
-    public void modifier(ControleurAdmin controleur, int idSeance){
-        
-        ArrayList<Seance> Seances = controleur.getSeances();
-        
-        JFrame f = new JFrame();
-        f.setTitle("Modification d'un cours");
-        f.setSize(600, 600);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setLocationRelativeTo(null);
-        JPanel p = new JPanel();
-        JLabel mess1 = new JLabel("Veuillez sélectionner un nouveau crécaux pour cette séance :");
-        p.add(mess1);
-        DateTextField picker = new DateTextField();
-        p.add(picker);
-        JLabel a = new JLabel("  de  ");
-        p.add(a);
-        JTextField heureD = new JTextField(2);
-        p.add(heureD);
-        JLabel b = new JLabel(" h ");
-        p.add(b);
-        JTextField minD = new JTextField(2);
-        p.add(minD);
-        JLabel c = new JLabel("  à  ");
-        p.add(c);
-        JTextField heureF = new JTextField(2);
-        p.add(heureF);
-        JLabel d = new JLabel(" h ");
-        p.add(d);
-        JTextField minF = new JTextField(2);
-        p.add(minF);
-        
-        JButton ok = new JButton("Valider");
-        ok.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent event){
-                LocalDate date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-                Seances.get(idSeance).setDATE(date);
-                Seances.get(idSeance).setHEURE_DEBUT(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()));
-                Seances.get(idSeance).setHEURE_FIN(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()));
-            }});
-        JButton no = new JButton("Annuler");
-        no.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent event){
-            f.setVisible(false);
-        }});
-        p.add(ok);
-        p.add(no);
-        p.setLayout(new GridLayout(6,2));
-        f.add(p);
-        f.setVisible(true);
-        
-        
-    }
     
    class MyRendererAndEditorSup implements TableCellRenderer, TableCellEditor 
     {
@@ -672,6 +620,8 @@ public class Edt extends JFrame{
       private int row;
       MyRendererAndEditorSup(JTable table) {
         btn = new JButton("Supprimer");
+        btn.setBackground(Color.red);
+        btn.setForeground(Color.white);
         btn.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
             JOptionPane jop = new JOptionPane();			
@@ -733,13 +683,115 @@ public class Edt extends JFrame{
         btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
             Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
-            //seance.setDATE(1);
-           // seance.setHEURE_DEBUT(1);
-            //seance.setHEURE_FIN(1);
-            controleur.updateSeance(seance);
+            
+            JFrame f = new JFrame();
+            f.setTitle("Modification d'un cours");
+            f.setSize(600, 600);
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setLocationRelativeTo(null);
+            JPanel p = new JPanel();
+            JLabel mess1 = new JLabel("Veuillez sélectionner un nouveau crécaux pour cette séance :");
+            p.add(mess1);
+            JPanel panel5 = new JPanel();
+            DateTextField picker = new DateTextField();
+            panel5.add(picker);
+            JLabel a = new JLabel("  de  ");
+            panel5.add(a);
+            JTextField heureD = new JTextField(2);
+            panel5.add(heureD);
+            JLabel b = new JLabel(" h ");
+            panel5.add(b);
+            JTextField minD = new JTextField(2);
+            panel5.add(minD);
+            JLabel c = new JLabel("  à  ");
+            panel5.add(c);
+            JTextField heureF = new JTextField(2);
+            panel5.add(heureF);
+            JLabel d = new JLabel(" h ");
+            panel5.add(d);
+            JTextField minF = new JTextField(2);
+            panel5.add(minF);
+            
+            JPanel panelB = new JPanel();
+            JButton ok = new JButton("Valider");
+            ok.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent event){
+                    LocalDate date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                    seance.setDATE(date);
+                    seance.setHEURE_DEBUT(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()));
+                    seance.setHEURE_FIN(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()));
+                    seance.setETAT(0);
+                    controleur.updateSeance(seance);
+                    f.setVisible(false);
+                }});
+            JButton no = new JButton("Annuler");
+            no.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                f.setVisible(false);
+            }});
+            panelB.add(ok);
+            panelB.add(no);
+            f.add(p);
+            f.add(panel5);
+            f.add(panelB);
+            f.setLayout(new GridLayout(0,1));
+            f.setVisible(true);
           }
         });
       }
+      
+      public void modifier(ControleurAdmin controleur, int idSeance){
+        
+        ArrayList<Seance> Seances = controleur.getSeances();
+        
+        JFrame f = new JFrame();
+        f.setTitle("Modification d'un cours");
+        f.setSize(600, 600);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        JPanel p = new JPanel();
+        JLabel mess1 = new JLabel("Veuillez sélectionner un nouveau crécaux pour cette séance :");
+        p.add(mess1);
+        DateTextField picker = new DateTextField();
+        p.add(picker);
+        JLabel a = new JLabel("  de  ");
+        p.add(a);
+        JTextField heureD = new JTextField(2);
+        p.add(heureD);
+        JLabel b = new JLabel(" h ");
+        p.add(b);
+        JTextField minD = new JTextField(2);
+        p.add(minD);
+        JLabel c = new JLabel("  à  ");
+        p.add(c);
+        JTextField heureF = new JTextField(2);
+        p.add(heureF);
+        JLabel d = new JLabel(" h ");
+        p.add(d);
+        JTextField minF = new JTextField(2);
+        p.add(minF);
+        
+        JButton ok = new JButton("Valider");
+        ok.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                LocalDate date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Seances.get(idSeance).setDATE(date);
+                Seances.get(idSeance).setHEURE_DEBUT(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()));
+                Seances.get(idSeance).setHEURE_FIN(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()));
+                controleur.updateSeance(Seances.get(idSeance));
+            }});
+        JButton no = new JButton("Annuler");
+        no.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            f.setVisible(false);
+        }});
+        p.add(ok);
+        p.add(no);
+        p.setLayout(new GridLayout(6,2));
+        f.add(p);
+        f.setVisible(true);
+        
+    }
       @Override
       public Component getTableCellRendererComponent(JTable table, Object 
       value, boolean isSelected, boolean hasFocus, int row, int column) 
