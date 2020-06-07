@@ -48,8 +48,8 @@ import jdbc2020.Connexion;
 public class ControleurAdmin extends Controleur {
     private Utilisateur utilisateur;
     private ArrayList<Seance> seances= new ArrayList<>();
-    private ArrayList<Salle> salle= new ArrayList<>();
-    private ArrayList<Site> site= new ArrayList<>();
+    private ArrayList<Salle> salles= new ArrayList<>();
+    private ArrayList<Site> sites= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
@@ -89,8 +89,8 @@ public class ControleurAdmin extends Controleur {
             Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID());
             enseignantsparseance.add(utilisateurDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()));
             Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID()).getID_SALLE());
-            salle.add(temp_salle);
-            site.add(siteDAO.find(temp_salle.getID_SITE()));
+            salles.add(temp_salle);
+            sites.add(siteDAO.find(temp_salle.getID_SITE()));
             cours.add(coursDAO.find(i.getID()));
             type_cours.add(type_coursDAO.find(i.getID_TYPE()));
             Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID()).getID_GROUPE());
@@ -129,7 +129,8 @@ public class ControleurAdmin extends Controleur {
     
     public Utilisateur getUtilisateur() {return utilisateur; }
     public ArrayList<Seance> getSeances() {return seances; }
-    public ArrayList<Salle> getSalles() {return salle; }
+    public ArrayList<Salle> getSalles() {return salles; }
+    public ArrayList<Site> getSites() {return sites; }
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
@@ -166,6 +167,14 @@ public class ControleurAdmin extends Controleur {
              for (Groupe j : groupes)
                  if (i.getNOM().equals(PROMO)&&j.getNOM().equals(NOM)) 
                        return j;
+        return null;   
+    }
+    
+     public Salle findSalle(String NOM) {
+        for (Salle i : salles) 
+            if (i.getNOM().equals(NOM)) 
+                return i;
+
         return null;   
     }
 
