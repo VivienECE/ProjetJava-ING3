@@ -36,29 +36,28 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class Edt extends JFrame{
-    private JPanel panel1;
-    private JPanel panel2;
+    private JPanel panel1 = new JPanel();
+    private JPanel panel2 = new JPanel();
+    private JPanel panel3 = new JPanel();
     private LocalDate ajd;
-    private JPanel semaine;
+    private JButton suiv = new JButton("Semaine suivante");
+    private JButton prec = new JButton("Semaine précédente");
+    private JPanel semaine = new JPanel();
     private JPanel Lundi;
     private JPanel Mardi;
     private JPanel Mercredi;
     private JPanel Jeudi;
     private JPanel Vendredi;
     private JPanel Samedi;
+    Controleur controleur;
     
     public Edt(Controleur controleur, boolean admin) {
-        this.setTitle("Emploi du temps");
-        this.setSize(600, 600);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
-        Menu m = new Menu(3);
-        this.setJMenuBar(m);
+       
+        this.controleur=controleur;
+        Initialize();
         
-        ajd = LocalDate.now();
-        semaine = new JPanel();
+
         
-        JButton prec = new JButton("Semaine précédente");
         prec.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent event){
            if(ajd.getDayOfMonth()==1)
@@ -78,12 +77,10 @@ public class Edt extends JFrame{
            else
                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-7);
            
-           panel2.setVisible(false);
            Liste(controleur, ajd, admin);
         }
         });
         
-        JButton suiv = new JButton("Semaine suivante");
         suiv.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent event){
            if(ajd.getDayOfMonth()==24)
@@ -107,20 +104,26 @@ public class Edt extends JFrame{
            Liste(controleur, ajd, admin);
         }
         });
-        semaine.add(prec);
-        semaine.add(suiv);
         
-        this.setLayout(new GridLayout(0,1));
-        Infos(controleur);
-        this.add(panel1, BorderLayout.NORTH);
+        
         Liste(controleur, ajd, admin);
         //Grille(controleur);
-        this.add(panel2, BorderLayout.SOUTH);
-        this.add(semaine, BorderLayout.SOUTH);
+    }
+    
+    private void Initialize ()
+    {
+        this.setTitle("Emploi du temps");
+        this.setSize(600, 600);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        Menu m = new Menu(3);
+        this.setJMenuBar(m);
+        this.setLayout(new GridLayout(0,1));
+        Infos(controleur);
+        ajd = LocalDate.now();
     }
     
     private void Infos(Controleur controleur){
-        panel1 = new JPanel();
         String informations="";
         if((controleur instanceof ControleurEtudiant)== true)//SI ETUDIANT
             informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
@@ -145,9 +148,12 @@ public class Edt extends JFrame{
     }
     
     private void Liste(Controleur controleur,LocalDate ajd, boolean admin){
-      
-        
         DayOfWeek Dday = ajd.getDayOfWeek();
+        getContentPane().removeAll();
+        this.add(panel1, BorderLayout.NORTH);
+        semaine.add(prec);
+        semaine.add(suiv);
+       
         
         if(Dday==DayOfWeek.TUESDAY)
             ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-1);
@@ -218,11 +224,9 @@ public class Edt extends JFrame{
         JTable tableauS = new JTable(TSamedi, titleS);
         tableauS.getTableHeader().setBackground(new Color(151,221,255));
         tableauS.setShowVerticalLines(false);
-        Lundi.add(tableauS);
+        Samedi.add(tableauS);
         getContentPane().add(new JScrollPane(tableauS));
-        
-        panel2 = new JPanel();
-        
+          
         panel2.add(Lundi);
         panel2.add(Mardi);
         panel2.add(Mercredi);
@@ -231,7 +235,11 @@ public class Edt extends JFrame{
         panel2.add(Samedi);
         
         panel2.setLayout(new GridLayout(0,1,0,10));
+        this.add(panel2, BorderLayout.SOUTH);
+        this.add(semaine, BorderLayout.SOUTH);
+
         setVisible(true);
+        
     }
     
     private void Grille(Controleur controleur){
