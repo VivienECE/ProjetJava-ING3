@@ -186,9 +186,7 @@ public class Ajout extends JFrame{
         });
 
     }
-    
-
-    
+   
     private class AddButtonListener implements ActionListener {
          
         int sem;
@@ -215,9 +213,14 @@ public class Ajout extends JFrame{
                 
                 //IdCOURS
                 for(Cours i: controleur.getListeCours())
-                    if(cours.getSelectedItem()==i.getNOM())
+                    if(cours.getSelectedItem().equals(i.getNOM()))
                         IdCOURS = i.getID();
                 
+                 for(Utilisateur i: controleur.getUtilisateurEnseignants())
+                    if(txt2.getSelectedItem().equals(i.getNOM()))
+                        idEnseignant = i.getID();
+                
+                System.out.println("ENSEIGNANT:"+idEnseignant);
                 /*if(cours.getSelectedItem()=="Mathematiques")
                     IdCOURS = 1;
                 if(cours.getSelectedItem()=="Physique")
@@ -319,9 +322,6 @@ public class Ajout extends JFrame{
                     Seance_groupes NvGroupes = new Seance_groupes(id,idGroupe);
                 }
                 
-                
-                
-                
                 //Salle
                 if(e1.isSelected())
                     idSalle = (int)Math.random() * ( 7 - 1 );
@@ -332,11 +332,11 @@ public class Ajout extends JFrame{
                 if(e6.isSelected())
                     idSalle = 22;
                 
-                Seance NvCours = new Seance(id, sem, date, HEURE_DEBUT, HEURE_FIN, etat, IdCOURS, IdTYPE);
+               // Seance NvCours = new Seance(id, sem, date, HEURE_DEBUT, HEURE_FIN, etat, IdCOURS, IdTYPE);
                 
-                Seance_enseignants NvEnseignant = new Seance_enseignants(id, idEnseignant);
+               // Seance_enseignants NvEnseignant = new Seance_enseignants(id, idEnseignant);
                 
-                Seance_salles NvSalles = new Seance_salles(id, idSalle);
+              //  Seance_salles NvSalles = new Seance_salles(id, idSalle);
                 
                 //NvCours.setEnseignant(txt2.getText());
                 //NvCours.setType(type);
@@ -351,7 +351,13 @@ public class Ajout extends JFrame{
                 System.out.println(etat);
                 System.out.println(IdCOURS);
                 System.out.println(IdTYPE);
-                System.out.println(type);
+                // System.out.println(type);
+                Seance seance = new Seance(id,sem,date,HEURE_DEBUT,HEURE_FIN,etat,IdCOURS,IdTYPE);
+                controleur.ajouterSeance(seance);
+                controleur.ajouterSeance_groupes(new Seance_groupes(seance.getID(),idGroupe));
+                controleur.ajouterSeance_enseignants(new Seance_enseignants(seance.getID(),idEnseignant));
+                controleur.ajouterSeance_salles(new Seance_salles(seance.getID(),idSalle));
+                
             }
 
         }
