@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controleur;
 
 import DAO.DAO;
@@ -30,10 +27,10 @@ import Vue.RechercheEdt;
 import java.util.ArrayList;
 
 /**
- *
- * Contrôle l'interrogation de la BDD dans la Fenetre
- *
- * @author segado + Openclassroom
+ * 
+ * Recupère et modifie les données de la BDD
+ * Envoie ces données aux Vues
+ * @author Vivien & Baptiste
  */
 public class Controleur {
     Connexion connection;
@@ -88,52 +85,109 @@ public class Controleur {
             Logger.getLogger(Controleur.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
-
+    
+    /**
+     * Methode qui retourne l'utilisateur authentifier
+     * @return utilisateur
+     */
     public Utilisateur getUtilisateur() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+     /**
+     * Methode qui retourne le groupe authentifier
+     * @return groupe
+     */
     public Groupe getGroupe() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+     /**
+     * Methode qui retourne la promotion authentifier
+     * @return promotion
+     */
     public Promotion getPromotion() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+     /**
+     * Methode qui retourne la liste des séances récupérés par le controleur
+     * @return seances
+     */
     public ArrayList<Seance> getSeances() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+     * Methode qui retourne la liste des salles récupérés par le controleur
+     * @return salles
+     */
      public ArrayList<Salle> getSalles() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+     /**
+     * Methode qui retourne la liste des salles récupérés par le controleur
+     * @return salles
+     */
      public ArrayList<Cours> getCours() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+      /**
+     * Methode qui retourne la liste des utilisateurs etant enseignants récupérés par le controleur
+     * @return utilisateurenseignants
+     */
       public ArrayList<Utilisateur> getUtilisateurEnseignants(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    /**
+    * Methode qui retourne la liste des sites récupérés par le controleur
+    * @return sites
+    */
     public ArrayList<Site> getSites(){
                       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-      
+    
+     /**
+    * Methode qui retourne la liste des utilisateurs etant étudiants récupérés par le controleur
+    * @return utilisateuretudiants
+    */
     public Utilisateur findUtilisateurEtudiant(String NOM, String PRENOM) {
     return null;
     }
+    
+    /**
+    * Methode debugg
+    */
      public void display(){}
 
+      /**
+    * Methode qui retourne un utilisateur en fonction de son nom et prenom
+    * @param String NOM
+    * @param String PRENOM
+    * @return utilisateure
+    */
     public Utilisateur findUtilisateurEnseignant(String NOM, String PRENOM) {
         return null;
     }
 
+     /**
+    * Methode qui retourne un groupe/TD en fonction de son nom et sa promo
+    * @param String NOM
+    * @param String PROMO
+    * @return utilisateure
+    */
     public Groupe findGroupe(String NOM, String PROMO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+     /**
+    * Methode qui retourne une promotion en fonction de son nom
+    * @param String NOM
+    * @return promotion
+    */
     public Promotion findPromotion(String NOM) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

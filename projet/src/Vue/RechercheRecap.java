@@ -34,7 +34,11 @@ import javax.swing.JMenu;
 import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
+/**
+ * 
+ * Vue d'un admin qui recherche un récapitulatif de cours
+ * @author Clemence
+ */
 public class RechercheRecap extends JFrame {
 
     private JPanel panel1;

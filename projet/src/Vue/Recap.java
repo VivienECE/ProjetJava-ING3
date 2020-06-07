@@ -22,7 +22,11 @@ import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
-
+/**
+ * 
+ * Vue qui récapitule les séances de cours
+ * @author Clemence
+ */
 
 public class Recap extends JFrame{
     private JPanel panel1;

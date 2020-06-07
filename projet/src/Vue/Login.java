@@ -17,6 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc2020.Connexion;
 
+/**
+ * 
+ * Vue authentifie l'utilisateur
+ * @author Clemence
+ */
 public class Login extends JFrame {
 
     private JPanel panel;

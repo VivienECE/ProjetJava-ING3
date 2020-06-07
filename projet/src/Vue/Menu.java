@@ -8,7 +8,11 @@ import javax.swing.JMenuItem;
 import javax.swing.*;
 import java.awt.event.*;
 
-
+/**
+ * 
+ * Bar Menu
+ * @author Clemence
+ */
 public class Menu  extends JMenuBar{
     //Admin
     private final JMenuItem m1 = new JMenuItem("Emploi du temps");

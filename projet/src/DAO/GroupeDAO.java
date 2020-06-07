@@ -10,10 +10,10 @@ import Modele.Groupe;
 import java.util.ArrayList;
 
 /**
- *
+ * 
+ * Lien entre le modèle Etudiant et la BDD
  * @author Vivien
  */
-//CTRL + SHIFT + O pour générer les imports
 public class GroupeDAO extends DAO<Groupe> {
   public GroupeDAO(Connexion conn) {
     super(conn);

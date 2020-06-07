@@ -10,10 +10,10 @@ import Modele.Etudiant;
 import java.util.ArrayList;
 
 /**
- *
+ * 
+ * Lien entre le modèle Etudiant et la BDD
  * @author Vivien
  */
-//CTRL + SHIFT + O pour générer les imports
 public class EtudiantDAO extends DAO<Etudiant> {
   public EtudiantDAO(Connexion conn) {
     super(conn);
