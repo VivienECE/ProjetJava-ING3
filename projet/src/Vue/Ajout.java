@@ -59,10 +59,10 @@ public class Ajout extends JFrame{
     private JRadioButton td1;
     private JRadioButton td2;
     private JRadioButton td3;
-    private JRadioButton e1;
-    private JRadioButton e2;
-    private JRadioButton e3;
-    private JRadioButton e6;
+    private JRadioButton e1 = new JRadioButton("E1");
+    private JRadioButton e2 = new JRadioButton("E2");
+    private JRadioButton e3 = new JRadioButton("E3");
+    private JRadioButton e6 = new JRadioButton("CNAM");
     private JComboBox txt2;
     private JComboBox prom;
     private int id;
@@ -156,10 +156,6 @@ public class Ajout extends JFrame{
         panel6 = new JPanel();
         JLabel bat = new JLabel("Site : ");
         panel6.add(bat);
-        JRadioButton e1 = new JRadioButton("E1");
-        JRadioButton e2 = new JRadioButton("E2");
-        JRadioButton e3 = new JRadioButton("E3");
-        JRadioButton e6 = new JRadioButton("CNAM");
         panel6.add(e1);
         panel6.add(e2);
         panel6.add(e3);
