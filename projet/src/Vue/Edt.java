@@ -482,7 +482,7 @@ public class Edt extends JFrame{
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
 
-				if(triees[y].getETAT()==1)
+                if(triees[y].getETAT()==1)
                     data[y][5] = "ANNULEE";
                 else
                     data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
@@ -681,11 +681,9 @@ public class Edt extends JFrame{
             int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
-                //voir BDD Vivien
                Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
                seance.setETAT(1);
                controleur.updateSeance(seance);
-                //Seances.get(triees[y].getID()).setETAT(1);
             }
           }
         });
