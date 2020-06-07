@@ -44,12 +44,11 @@ public class Recap extends JFrame{
         JButton btn = new JButton("Statistiques");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
-                piedataset.setValue( "Physique" , 10);
-                piedataset.setValue( "Physique" , 20);
-                piedataset.setValue( "Physique" , 15);
-                piedataset.setValue( "Physique" , 12);
-
+                DefaultPieDataset piedataset = new DefaultPieDataset ( ) ;
+                for (Cours cours :controleur.getCours())
+                {
+                     piedataset.setValue(cours.getNOM(),1);
+                }
                 JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
                 PiePlot P=(PiePlot)chart.getPlot();
                 ChartFrame frame = new ChartFrame("Camembert", chart);
