@@ -152,6 +152,23 @@ public class ControleurAdmin extends Controleur {
         }
         return null;   
     }
+    public Promotion findPromotion(String NOM) {
+         for (Promotion i : promotions) {
+            if (i.getNOM().equals(NOM)) {
+                return i;
+            }
+        }
+        return null;   
+    }
+    
+    public Groupe findGroupe(String NOM, String PROMO) {
+        for (Promotion i : promotions)
+             for (Groupe j : groupes)
+                 if (i.getNOM().equals(PROMO)&&j.getNOM().equals(NOM)) 
+                       return j;
+        return null;   
+    }
+
     
     /*@Override
     public Utilisateur findUtilisateurEnseignant(String NOM, String PRENOM) {
