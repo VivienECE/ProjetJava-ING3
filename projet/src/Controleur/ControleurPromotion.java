@@ -49,7 +49,7 @@ public class ControleurPromotion extends Controleur {
     private Etudiant etudiant;
     private Groupe groupe;
     private Promotion promotion;
-    private ArrayList<Seance> seance= new ArrayList<>();
+    private ArrayList<Seance> seances= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Groupe> groupesparseance= new ArrayList<>();
     private ArrayList<Salle> salles= new ArrayList<>();
@@ -94,7 +94,7 @@ public class ControleurPromotion extends Controleur {
                     sites.add(siteDAO.find(temp_salle.getID_SITE()));
                     cours.add(coursDAO.find(temp_seance.getID_COURS()));
                     type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
-                    seance.add(temp_seance);
+                    seances.add(temp_seance);
                     utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
                     groupesparseance.add(groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE()));
                 }
@@ -125,7 +125,7 @@ public class ControleurPromotion extends Controleur {
     public Groupe getGroupe() {return groupe; }
     public ArrayList<Groupe> getGroupes() {return groupesparseance; }
     public Promotion getPromotion() {return promotion; }
-    public ArrayList<Seance> getSeances() {return seance; }
+    public ArrayList<Seance> getSeances() {return seances; }
     public ArrayList<Salle> getSalles() {return salles; }
     public ArrayList<Site> getSites() {return sites; }
     public ArrayList<Cours> getCours() {return cours; }
@@ -139,7 +139,13 @@ public class ControleurPromotion extends Controleur {
         utilisateurs.forEach((i) -> { System.out.println(i.getID());});
 
          System.out.println("Seance");
-         seance.forEach((i) -> { System.out.println(i.getID());});
+         seances.forEach((i) -> { System.out.println(i.getID());});
+    }
+    public Seance findSeance(int ID) {
+        for (Seance i : seances)
+                 if (i.getID()==ID)
+                       return i;
+        return null;   
     }
 }
 

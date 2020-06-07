@@ -45,7 +45,7 @@ import jdbc2020.Connexion;
  */
 public class ControleurEnseignant extends Controleur {
     private Utilisateur utilisateur;
-    private ArrayList<Seance> seance= new ArrayList<>();
+    private ArrayList<Seance> seances= new ArrayList<>();
     private ArrayList<Salle> salle= new ArrayList<>();
     private ArrayList<Site> site= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
@@ -82,7 +82,7 @@ public class ControleurEnseignant extends Controleur {
             site.add(siteDAO.find(temp_salle.getID_SITE()));
             cours.add(coursDAO.find(temp_seance.getID_COURS()));
             type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
-            seance.add(temp_seance);
+            seances.add(temp_seance);
             Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
             groupes.add(temp_group);
             promotions.add(promotionDAO.find(temp_group.getID_PROMOTION()));
@@ -107,19 +107,24 @@ public class ControleurEnseignant extends Controleur {
     }
     
     public Utilisateur getUtilisateur() {return utilisateur; }
-    public ArrayList<Seance> getSeances() {return seance; }
+    public ArrayList<Seance> getSeances() {return seances; }
     public ArrayList<Salle> getSalles() {return salle; }
     public ArrayList<Cours> getCours() {return cours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
     public ArrayList<Promotion> getPromotions(){return promotions;}
-    
+    public Seance findSeance(int ID) {
+        for (Seance i : seances)
+                 if (i.getID()==ID)
+                       return i;
+        return null;   
+    }
     public void display(){
         System.out.println("Groupe");
         groupes.forEach((i) -> { System.out.println(i.getID());});
 
          System.out.println("Seance");
-         seance.forEach((i) -> { System.out.println(i.getID());});
+         seances.forEach((i) -> { System.out.println(i.getID());});
          
           System.out.println("Cours");
          cours.forEach((i) -> { System.out.println(i.getNOM());});

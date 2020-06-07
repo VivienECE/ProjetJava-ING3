@@ -52,6 +52,7 @@ public class ControleurEtudiant extends Controleur {
     private ArrayList<Cours> cours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Utilisateur> utilisateurs= new ArrayList<>(); //NOM DES ENSEIGNANTS
+    private DAO<Seance> seanceDAO;
     
     //Recupère toute les données de l'étudiant ayant le numero d'utilisateur en parametre
     public ControleurEtudiant(int ID_UTILISATEUR)
@@ -65,7 +66,7 @@ public class ControleurEtudiant extends Controleur {
             DAO<Groupe> groupeDAO = new GroupeDAO(connection);  
             DAO<Promotion> promotionDAO = new PromotionDAO(connection);  
             DAO<Seance_groupes> seance_groupesDAO = new Seance_groupesDAO(connection);
-            DAO<Seance> seanceDAO = new SeanceDAO(connection);
+            seanceDAO = new SeanceDAO(connection);
             DAO<Type_cours> type_coursDAO = new Type_coursDAO(connection);
             DAO<Cours> coursDAO = new CoursDAO(connection);
             DAO<Salle> salleDAO = new SalleDAO(connection);
@@ -141,4 +142,15 @@ public class ControleurEtudiant extends Controleur {
         System.out.println("Cours");
          cours.forEach((i) -> { System.out.println(i.getNOM());});
     }
+        public Seance findSeance(int ID) {
+        for (Seance i : seance)
+                 if (i.getID()==ID)
+                       return i;
+        return null;   
+       }
+        
+        public void updateSeance(Seance seance)
+         {
+         seanceDAO.update(seance);
+         }
 }

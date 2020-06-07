@@ -56,6 +56,11 @@ public class SeanceDAO extends DAO<Seance> {
   }
    
   public boolean update(Seance obj) {
+     try {
+             System.out.println("UPDATE `seance` SET `SEMAINE`='"+obj.getSEMAINE()+"',`DATE`='"+obj.getDATE()+"',`HEURE_DEBUT`='"+obj.getHEURE_DEBUT()+"',`HEURE_FIN`='"+obj.getHEURE_FIN()+"',`ETAT`='1',`ID_COURS`='"+obj.getID_COURS()+"',`ID_TYPE`='"+obj.getID_TYPE()+"' WHERE ID="+obj.getID());
+             this.connect.executeUpdate("UPDATE `seance` SET `SEMAINE`='"+obj.getSEMAINE()+"',`DATE`='"+obj.getDATE()+"',`HEURE_DEBUT`='"+obj.getHEURE_DEBUT()+"',`HEURE_FIN`='"+obj.getHEURE_FIN()+"',`ETAT`='1',`ID_COURS`='"+obj.getID_COURS()+"',`ID_TYPE`='"+obj.getID_TYPE()+"' WHERE ID="+obj.getID());
+       } catch (SQLException e)
+        { e.printStackTrace(); }
     return false;
   }
    
