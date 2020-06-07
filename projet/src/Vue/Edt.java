@@ -191,7 +191,7 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauL.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauL));
@@ -199,7 +199,9 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    //throw new UnsupportedOperationException("Not supported yet.")
+                            
+                            ; //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -439,7 +441,7 @@ public class Edt extends JFrame{
             }
             
             if(admin==true)
-                data = new Object[n][8];
+                data = new Object[n][9];
             else
                 data = new Object[n][6];
             
@@ -479,27 +481,8 @@ public class Edt extends JFrame{
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
                 data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
-                
-                /*if(admin==true){
-                    JButton mod = new JButton("Modifier");
-                    mod.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            //modifier(triees[y].getID());
-                         }});
-                    JButton sup = new JButton("Supprimer");
-                    sup.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            JOptionPane jop = new JOptionPane();			
-                            int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
-                                    "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if(option == JOptionPane.OK_OPTION){
-                              	//voir BDD Vivien
-                                //Seances.get(triees[y].getID()).setETAT(1);
-                            }
-                         }});
-                    data[y][6]= mod;
-                    data[y][7]= sup;
-                }*/
+                if(admin==true)
+                    data[y][6]=controleur.getSeances().get(controleur.getSeances().indexOf(triees[y])).getID();
                 
                 if(triees[y].getETAT()==1){
                     annule.add(y);
@@ -638,6 +621,13 @@ public class Edt extends JFrame{
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
                 //voir BDD Vivien
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 3));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 4));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 5));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 6));
                 //Seances.get(triees[y].getID()).setETAT(1);
             }
           }
