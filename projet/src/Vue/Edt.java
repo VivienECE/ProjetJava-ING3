@@ -57,8 +57,6 @@ public class Edt extends JFrame{
         this.controleur=controleur;
         Initialize();
         
-
-        
         prec.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent event){
            if(ajd.getDayOfMonth()==1)
@@ -117,7 +115,7 @@ public class Edt extends JFrame{
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        Menu m = new Menu(3);
+        Menu m = new Menu(3,controleur);
         this.setJMenuBar(m);
         this.setLayout(new GridLayout(0,1));
         Infos(controleur);

@@ -59,7 +59,7 @@ public class RechercheRecap extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(0,1));
-        Menu m = new Menu(1);
+        Menu m = new Menu(1,controleur);
         this.setJMenuBar(m);
         
         panelB = new JPanel();

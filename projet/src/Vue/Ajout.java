@@ -69,12 +69,12 @@ public class Ajout extends JFrame{
     private ArrayList<Utilisateur> profs;
     private Controleur controleur;
     
-    public Ajout(ControleurAdmin controleur){
+    public Ajout(Controleur controleur){
         this.setTitle("Ajout d'un cours");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        Menu m = new Menu(1);
+        Menu m = new Menu(1,controleur);
         this.setJMenuBar(m);
         this.controleur=controleur;
         //this.setLayout(new GridLayout(6,2));

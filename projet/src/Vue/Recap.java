@@ -36,7 +36,7 @@ public class Recap extends JFrame{
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        Menu m = new Menu(3);
+        Menu m = new Menu(3,controleur);
         this.setJMenuBar(m);
         
         panelB = new JPanel();

@@ -1,5 +1,6 @@
 package Vue;
 
+import Controleur.Controleur;
 import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,27 +27,73 @@ public class Menu  extends JMenuBar{
     private JMenuItem m1bis = new JMenuItem("Emploi du temps");
     private JMenuItem m2bis = new JMenuItem("Récapitulatif cours");
     
-    public Menu(int droits){///1:admin; 2:Ref. pedag.; 3: profs et élève
+    public Menu(int droits, Controleur controleur){///1:admin; 2:Ref. pedag.; 3: profs et élève
         
         this.m1.setBackground(new Color(0,128,128));
-        this.m1.addActionListener(new EnterButtonListener());
+        //this.m1.addActionListener(new EnterButtonListener());
+        this.m1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new RechercheEdt(controleur);
+            }
+        });
         
         this.m2.setBackground(new Color(0,128,128));
-        this.m2.addActionListener(new EnterButtonListener());
+        //this.m2.addActionListener(new EnterButtonListener());
+        this.m2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new RechercheRecap(controleur);
+            }
+        });
         
         this.m3.setBackground(new Color(0,128,128));
-        this.m3.addActionListener(new EnterButtonListener());
+        //this.m3.addActionListener(new EnterButtonListener());
+        this.m3.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new Ajout(controleur);
+            }
+        });
         
         this.m1bis.setBackground(new Color(0,128,128));
-        this.m1bis.addActionListener(new EnterButtonListener());
+        //this.m1bis.addActionListener(new EnterButtonListener());
+        this.m1bis.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new Edt(controleur,false);
+            }
+        });
         
         this.m2bis.setBackground(new Color(0,128,128));
-        this.m2bis.addActionListener(new EnterButtonListener());
+        //this.m2bis.addActionListener(new EnterButtonListener());
+        this.m2bis.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new Recap(controleur);
+            }
+        });
         
-        this.RechEdt.addActionListener(new EnterButtonListener());
-        this.RechRecap.addActionListener(new EnterButtonListener());
-        this.MonEdt.addActionListener(new EnterButtonListener());
-        this.MonRecap.addActionListener(new EnterButtonListener());
+        //this.RechEdt.addActionListener(new EnterButtonListener());
+        this.RechEdt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new RechercheEdt(controleur);
+            }
+        });
+        
+        //this.RechRecap.addActionListener(new EnterButtonListener());
+        this.RechRecap.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new RechercheRecap(controleur);
+            }
+        });
+        //this.MonEdt.addActionListener(new EnterButtonListener());
+        this.MonEdt.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new Edt(controleur, false);
+            }
+        });
+        //this.MonRecap.addActionListener(new EnterButtonListener());
+        this.MonRecap.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                new Recap(controleur);
+            }
+        });
         
         if(droits==1){//Admin
             this.add(m1);
@@ -75,7 +122,7 @@ public class Menu  extends JMenuBar{
         setVisible(true);
     }
     
-    private class EnterButtonListener implements ActionListener {
+    /*private class EnterButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -102,9 +149,7 @@ public class Menu  extends JMenuBar{
             
 
         }
-    }
+    }*/
     
-    public static void main(String[] args) {
-       new Menu(1);
-    }
+    //public static void main(String[] args) {}
 }
