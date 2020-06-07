@@ -18,7 +18,7 @@ public class Groupe {
    /**
      * Constructeur avec 3 paramètres : nom, prénom et ID
      *
-     * @param nameDatabase
+     * @param nom
      * @param ID
      * @param prénom
      */

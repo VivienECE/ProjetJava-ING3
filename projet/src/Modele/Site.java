@@ -19,7 +19,7 @@ public class Site {
      * Constructeur avec 2 paramètres : nom et ID
      *
      * @param nom
-     * @param ID
+     * @param id
      */
   public Site(int id, String nom) {
     this.ID = id;

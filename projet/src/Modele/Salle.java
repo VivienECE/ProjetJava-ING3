@@ -20,9 +20,10 @@ public class Salle {
   /**
      * Constructeur avec 4 paramètres : nom, ID nom, Capacité et ID du site
      *
-     * @param nameDatabase
-     * @param ID
-     * @param prénom
+     * @param id
+     * @param nom
+     * @param CAPACITE
+     * @param ID_SITE
      */
   public Salle(int id, String nom, int CAPACITE, int ID_SITE) {
     this.ID = id;

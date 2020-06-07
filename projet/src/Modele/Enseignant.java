@@ -18,7 +18,7 @@ public class Enseignant {
    /**
      * Constructeur avec 2 paramètres : nom et ID
      *
-     * @param nameDatabase
+     * @param nom
      * @param ID
      */
   public Enseignant(int id, int nom) {

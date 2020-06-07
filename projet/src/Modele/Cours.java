@@ -19,8 +19,8 @@ public class Cours {
 /**
      * Constructeur avec 2 paramètres : nom et ID
      *
-     * @param nameDatabase
-     * @param ID
+     * @param nom
+     * @param id
      */
   
   public Cours(int id, String nom) {
@@ -45,7 +45,7 @@ public class Cours {
   }
 /**
      * Methode qui retourne le nom
-     * @return nom
+     * @return NOM
      */
   public String getNOM() {
     return NOM;

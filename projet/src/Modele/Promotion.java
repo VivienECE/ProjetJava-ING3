@@ -18,7 +18,7 @@ public class Promotion {
    /**
      * Constructeur avec 2 paramètres : nom et ID
      *
-     * @param nameDatabase
+     * @param nom
      * @param ID
      */
   public Promotion(int id, String nom) {
