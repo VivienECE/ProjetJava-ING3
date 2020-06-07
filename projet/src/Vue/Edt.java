@@ -630,13 +630,9 @@ public class Edt extends JFrame{
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
                 //voir BDD Vivien
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 3));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 4));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 5));
-                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 6));
+               Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
+               seance.setETAT(1);
+               controleur.updateSeance(seance);
                 //Seances.get(triees[y].getID()).setETAT(1);
             }
           }

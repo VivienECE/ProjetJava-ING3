@@ -181,8 +181,15 @@ public class ControleurAdmin extends Controleur {
         return null;   
     }
     
-      public Cours findCours(int ID) {
+    public Cours findCours(int ID) {
         for (Cours i : cours)
+                 if (i.getID()==ID)
+                       return i;
+        return null;   
+    }
+    
+    public Seance findSeance(int ID) {
+        for (Seance i : seances)
                  if (i.getID()==ID)
                        return i;
         return null;   
@@ -237,5 +244,10 @@ public class ControleurAdmin extends Controleur {
     public void ajouterSeance_enseignants(Seance_enseignants seance_enseignants)
     {
          seance_enseignantsDAO.create(seance_enseignants);
+    }
+    
+    public void updateSeance(Seance seance)
+    {
+         seanceDAO.update(seance);
     }
 }

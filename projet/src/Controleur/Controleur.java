@@ -177,5 +177,12 @@ public class Controleur {
     
     public void ajouterSeance_enseignants(Seance_enseignants seance_enseignants)
      {throw new UnsupportedOperationException("Not supported yet.");}
+    
+    public Seance findSeance(int ID){throw new UnsupportedOperationException("Not supported yet.");}
+    
+    public void updateSeance(Seance seance)
+    {
+         throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
 
