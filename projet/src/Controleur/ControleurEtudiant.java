@@ -40,10 +40,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc2020.Connexion;
 
-/**
- *
- * @author Vivien
- */
+
 public class ControleurEtudiant extends Controleur {
     private Utilisateur utilisateur;
     private Etudiant etudiant;
@@ -113,6 +110,7 @@ public class ControleurEtudiant extends Controleur {
          Connexion connection = null;
         ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
         Edt fenetre = new Edt(controleur, false);
+
         //Recap fenetre = new Recap(controleur);
 
     }

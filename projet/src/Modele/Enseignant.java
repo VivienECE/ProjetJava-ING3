@@ -14,9 +14,9 @@ public class Enseignant {
   //ID
   private int ID_UTILISATEUR = 0;
   //Nom de l'élève
-  private String ID_COURS = "";
+  private int ID_COURS = 0;
    
-  public Enseignant(int id, String nom) {
+  public Enseignant(int id, int nom) {
     this.ID_UTILISATEUR = id;
     this.ID_COURS = nom;
   }
@@ -30,11 +30,11 @@ public class Enseignant {
     this.ID_UTILISATEUR = ID;
   }
 
-  public String getID_COURS() {
+  public int getID_COURS() {
     return ID_COURS;
   }
 
-  public void setID_COURS(String NOM) {
+  public void setID_COURS(int NOM) {
     this.ID_COURS = NOM;
   }
 }

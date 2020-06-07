@@ -51,9 +51,11 @@ public class ControleurAdmin extends Controleur {
     private ArrayList<Salle> salles= new ArrayList<>();
     private ArrayList<Site> sites= new ArrayList<>();
     private ArrayList<Cours> cours= new ArrayList<>();
+    private ArrayList<Cours> listecours= new ArrayList<>();
     private ArrayList<Type_cours> type_cours= new ArrayList<>();
     private ArrayList<Groupe> groupes= new ArrayList<>();
     private ArrayList<Promotion> promotions= new ArrayList<>();
+    private ArrayList<Enseignant> listeenseignants= new ArrayList<>();
     private ArrayList<Utilisateur> enseignants= new ArrayList<>(); //NOM DES ENSEIGNANTS
     private ArrayList<Utilisateur> enseignantsparseance= new ArrayList<>(); //NOM DES ENSEIGNANTS
     private ArrayList<Utilisateur> etudiants= new ArrayList<>(); //ETUDIANTS
@@ -81,9 +83,10 @@ public class ControleurAdmin extends Controleur {
         int j=1;
         ArrayList<Etudiant> listeetudiants = etudiantDAO.getAll();
           listeetudiants.forEach((i) -> { etudiants.add(utilisateurDAO.find(i.getID_UTILISATEUR()));});
-       ArrayList<Enseignant> listeenseignants = enseignantDAO.getAll();
+        listeenseignants = enseignantDAO.getAll();
           listeenseignants.forEach((i) -> { enseignants.add(utilisateurDAO.find(i.getID_UTILISATEUR()));});
         seances = seanceDAO.getAll();
+        listecours = coursDAO.getAll();
         for (Seance i : seances)
         {
             Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID());
@@ -129,9 +132,11 @@ public class ControleurAdmin extends Controleur {
     
     public Utilisateur getUtilisateur() {return utilisateur; }
     public ArrayList<Seance> getSeances() {return seances; }
+    public ArrayList<Enseignant> getEnseignants() {return listeenseignants; }
     public ArrayList<Salle> getSalles() {return salles; }
     public ArrayList<Site> getSites() {return sites; }
     public ArrayList<Cours> getCours() {return cours; }
+    public ArrayList<Cours> getListeCours() {return listecours; }
     public ArrayList<Type_cours> getType_cours(){return type_cours;}
     public ArrayList<Groupe> getGroupes(){return groupes;}
     public ArrayList<Promotion> getPromotions(){return promotions;}
@@ -167,6 +172,13 @@ public class ControleurAdmin extends Controleur {
              for (Groupe j : groupes)
                  if (i.getNOM().equals(PROMO)&&j.getNOM().equals(NOM)) 
                        return j;
+        return null;   
+    }
+    
+      public Cours findCours(int ID) {
+        for (Cours i : cours)
+                 if (i.getID()==ID)
+                       return i;
         return null;   
     }
     
