@@ -660,6 +660,12 @@ public class Edt extends JFrame{
         public void actionPerformed(ActionEvent event){
             f.setVisible(false);
         }});
+        p.add(ok);
+        p.add(no);
+        p.setLayout(new GridLayout(6,2));
+        f.add(p);
+        f.setVisible(true);
+        
         
     }
     
@@ -731,13 +737,8 @@ public class Edt extends JFrame{
         btn = new JButton("Modifier");
         btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 3));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 4));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 5));
-            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 6));
+            Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
+            modifier(controleur,seance.getID());
           }
         });
       }
