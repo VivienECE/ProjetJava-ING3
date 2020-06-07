@@ -223,7 +223,7 @@ public class RechercheEdt extends JFrame{
         }
         
         if(type == 4){//PROMO
-            String NOM = nom.getText().toUpperCase(); 
+            String NOM = nom.getText(); 
             Promotion promo = new Promotion();
             promo = controleur.findPromotion(NOM);
             if(promo!=null)
@@ -237,7 +237,7 @@ public class RechercheEdt extends JFrame{
         }
         
         if(type == 5){//SALLE
-            String NOM = nom.getText().toUpperCase();
+            String NOM = nom.getText();
             Salle salle = new Salle();
             salle = controleur.findSalle(NOM);
             if(salle!=null)

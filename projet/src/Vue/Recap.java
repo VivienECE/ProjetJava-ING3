@@ -1,10 +1,16 @@
 
 package Vue;
 
+import Controleur.Controleur;
+import Controleur.ControleurEnseignant;
 import Modele.Seance;
 import Controleur.ControleurEtudiant;
+import Controleur.ControleurGroupe;
+import Controleur.ControleurPromotion;
+import Controleur.ControleurSalle;
 import Modele.Cours;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -25,7 +31,7 @@ public class Recap extends JFrame{
     
 
     
-    public Recap(ControleurEtudiant controleur) {
+    public Recap(Controleur controleur) {
         this.setTitle("Récapitilatif des cours");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,27 +63,43 @@ public class Recap extends JFrame{
             }*/
         });
         panelB.add(btn);
-        //this.setLayout(new GridLayout(0,1));
-        ResultPanel(controleur);
+        this.setLayout(new GridLayout(0,1));
+        Infos(controleur);
         this.add(panel1, BorderLayout.NORTH);
+        ResultPanel(controleur);
         this.add(panel2, BorderLayout.SOUTH);
-        this.add(panelB, BorderLayout.EAST);
+        this.add(panelB, BorderLayout.SOUTH);
         setVisible(true);
-       
-        
-        
-}        
+ 
+    }     
     
-    
-    private void ResultPanel(ControleurEtudiant controleur) {
-       
+    private void Infos(Controleur controleur){
         panel1 = new JPanel();
+        String informations="";
+        if((controleur instanceof ControleurEtudiant)== true)//SI ETUDIANT
+            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
+                    +controleur.getUtilisateur().getPRENOM()+" "
+                    +controleur.getGroupe().getNOM()+" "
+                    +controleur.getPromotion().getNOM()+" ";
         
-        JLabel infos = new JLabel("Récapitulatif des cours de "+controleur.getUtilisateur().getNOM()+" "
-                                +controleur.getUtilisateur().getPRENOM()+" "
-                                +controleur.getGroupe().getNOM()+" "
-                                +controleur.getPromotion().getNOM()+" ");
+        if((controleur instanceof ControleurEnseignant)== true)//SI ENSEIGNANT
+            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "+controleur.getUtilisateur().getPRENOM()+" ";
+        
+        if((controleur instanceof ControleurGroupe)==true)//SI TD
+            informations = "Emploi du temps du "+controleur.getGroupe().getNOM()+" "+controleur.getPromotion().getNOM()+" ";
+        
+        if((controleur instanceof ControleurPromotion)==true)//SI PROMO
+            informations = "Emploi du temps de la "+controleur.getPromotion().getNOM()+" ";
+        
+        if((controleur instanceof ControleurSalle)== true)//SI SALLE
+            informations = "Emploi du temps de la "+controleur.getSalle().getNOM()+" - "+controleur.getSite().getNOM()+" ";
+        
+        JLabel infos = new JLabel(informations);
         panel1.add(infos);
+    }
+    
+    private void ResultPanel(Controleur controleur) {
+       
     //Les données du tableau
         Object[][] data = Tri(controleur);
 
@@ -94,10 +116,8 @@ public class Recap extends JFrame{
 
     }
     
-
     
-    
-    public Object[][] Tri(ControleurEtudiant controleur){
+    public Object[][] Tri(Controleur controleur){
         
       
         ArrayList<Seance> Seances = controleur.getSeances();
@@ -108,7 +128,8 @@ public class Recap extends JFrame{
         LocalDate dO;
         LocalDate dF;
         int n;
-        int[] nb = {0,0,0,0,0,0,0,0,0,0};
+        int nb = 0;
+        int nC;
         String nom;
         
         //Trier par matiere
@@ -121,11 +142,22 @@ public class Recap extends JFrame{
         
         Object[][] data = new Object[10][4];    
         
-        for(int x=1; x<=10; x++){
+        for(int y=1; y<=10; y++){
+            nC = 0;
+            for(int i=0; i<chaqueCours.size();i++){
+                if(chaqueCours.get(i).getID_COURS()==y)
+                    nC++;
+            }
+            if(nC>1)
+                nC=1;
+            nb=nb+nC;
+        }
+        
+        for(int x=1; x<=nb; x++){
             dO = LocalDate.of(2020, 07, 30);
             dF = LocalDate.of(2020, 01, 01);
             n=0;
-            nom = cours.get(x).getNOM();
+            nom = cours.get(x-1).getNOM();
             for(int j=0; j<chaqueCours.size(); j++){
                 if(chaqueCours.get(j).getID_COURS()==x){//si c'est la meme matiere
                     if((chaqueCours.get(j).getDATE()).isBefore(dO))

@@ -34,6 +34,7 @@ import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.RechercheEdt;
+import Vue.RechercheRecap;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,6 +120,7 @@ public class ControleurAdmin extends Controleur {
         }
         ControleurAdmin controleur = new ControleurAdmin(ID_UTILISATEUR);
         RechercheEdt fenetre = new RechercheEdt(controleur);
+        //RechercheRecap fenetre = new RechercheRecap(controleur);
         //Edt fenetre = new Edt(controleur);
         //Recap fenetre = new Recap(controleur);
 
