@@ -186,7 +186,6 @@ public class Edt extends JFrame{
         if(admin==true){
             String  titleL[] = {"Lundi " + ajd, "", "", "","", ""," ","  "};
             tableauL = new JTable(TLundi, titleL);
-            //tableauL.setDefaultRenderer(JButton.class, new TableComponent());
             tableauL.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauL));
             tableauL.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauL));
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
@@ -216,8 +215,31 @@ public class Edt extends JFrame{
         Mardi = new JPanel();
         LocalDate dateM = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+1);
         Object[][] TMardi = Journee(dateM, controleur, admin);
-        String  titleM[] = {"Mardi " + dateM, "", "", "",""};
-        JTable tableauM = new JTable(TMardi, titleM);
+        JTable tableauM;
+        if(admin==true){
+            String  titleM[] = {"Mardi " + ajd, "", "", "","", ""," ","  "};
+            tableauM = new JTable(TMardi, titleM);
+            tableauM.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauM));
+            tableauM.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauM));
+            tableauM.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauM.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauM));
+            tableauM.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauM));
+            tableauM.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleM[] = {"Mardi " + ajd, "", "", "",""};
+            tableauM = new JTable(TMardi, titleM);
+        } 
         tableauM.getTableHeader().setBackground(new Color(151,221,255));
         tableauM.setShowVerticalLines(false);
         Mardi.add(tableauM);
@@ -226,8 +248,31 @@ public class Edt extends JFrame{
         Mercredi = new JPanel();
         LocalDate dateMe = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+2);
         Object[][] TMercredi = Journee(dateMe, controleur, admin);
-        String  titleMe[] = {"Mercredi "+ dateMe, "", "", "",""};
-        JTable tableauMe = new JTable(TMercredi, titleMe);
+        JTable tableauMe;
+        if(admin==true){
+            String  titleMe[] = {"Mardi " + ajd, "", "", "","", ""," ","  "};
+            tableauMe = new JTable(TMercredi, titleMe);
+            tableauMe.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauMe));
+            tableauMe.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauMe));
+            tableauMe.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauMe.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauMe));
+            tableauMe.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauMe));
+            tableauMe.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleMe[] = {"Mercredi " + ajd, "", "", "",""};
+            tableauMe = new JTable(TMercredi, titleMe);
+        } 
         tableauMe.getTableHeader().setBackground(new Color(151,221,255));
         tableauMe.setShowVerticalLines(false);
         Mercredi.add(tableauMe);
@@ -236,8 +281,31 @@ public class Edt extends JFrame{
         Jeudi = new JPanel();
         LocalDate dateJ = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+3);
         Object[][] TJeudi = Journee(dateJ, controleur, admin);
-        String  titleJ[] = {"Jeudi "+ dateJ, "", "", "",""};
-        JTable tableauJ = new JTable(TJeudi, titleJ);
+        JTable tableauJ;
+        if(admin==true){
+            String  titleJ[] = {"Jeudi " + ajd, "", "", "","", ""," ","  "};
+            tableauJ = new JTable(TJeudi, titleJ);
+            tableauJ.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauJ));
+            tableauJ.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauJ));
+            tableauJ.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauJ.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauJ));
+            tableauJ.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauJ));
+            tableauJ.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleJ[] = {"Jeudi " + ajd, "", "", "",""};
+            tableauJ = new JTable(TJeudi, titleJ);
+        } 
         tableauJ.getTableHeader().setBackground(new Color(151,221,255));
         tableauJ.setShowVerticalLines(false);
         Jeudi.add(tableauJ);
@@ -246,8 +314,31 @@ public class Edt extends JFrame{
         Vendredi = new JPanel();
         LocalDate dateV = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+4);
         Object[][] TVendredi = Journee(dateV, controleur, admin);
-        String  titleV[] = {"Vendredi "+ dateV, "", "", "",""};
-        JTable tableauV = new JTable(TVendredi, titleV);
+        JTable tableauV;
+        if(admin==true){
+            String  titleV[] = {"Vendredi " + ajd, "", "", "","", ""," ","  "};
+            tableauV = new JTable(TVendredi, titleV);
+            tableauV.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauV));
+            tableauV.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauV));
+            tableauV.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauV.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauV));
+            tableauV.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauV));
+            tableauV.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleV[] = {"Vendredi " + ajd, "", "", "",""};
+            tableauV = new JTable(TVendredi, titleV);
+        } 
         tableauV.getTableHeader().setBackground(new Color(151,221,255));
         tableauV.setShowVerticalLines(false);
         Vendredi.add(tableauV);
@@ -256,8 +347,31 @@ public class Edt extends JFrame{
         Samedi = new JPanel();
         LocalDate dateS = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+5);
         Object[][] TSamedi = Journee(dateS, controleur, admin);
-        String  titleS[] = {"Samedi "+ dateS, "", "", "",""};
-        JTable tableauS = new JTable(TSamedi, titleS);
+        JTable tableauS;
+        if(admin==true){
+            String  titleS[] = {"Samedi " + ajd, "", "", "","", ""," ","  "};
+            tableauS = new JTable(TSamedi, titleS);
+            tableauS.getColumn(" ").setCellRenderer(new MyRendererAndEditorMod(tableauS));
+            tableauS.getColumn(" ").setCellEditor(new MyRendererAndEditorMod(tableauS));
+            tableauS.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+            tableauS.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauS));
+            tableauS.getColumn("  ").setCellEditor(new MyRendererAndEditorSup(tableauS));
+            tableauS.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
+                @Override
+                public void valueChanged(ListSelectionEvent lse) {
+                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
+        }
+        else{
+            String  titleS[] = {"Samedi " + ajd, "", "", "",""};
+            tableauS = new JTable(TSamedi, titleS);
+        } 
         tableauS.getTableHeader().setBackground(new Color(151,221,255));
         tableauS.setShowVerticalLines(false);
         Samedi.add(tableauS);
@@ -366,7 +480,7 @@ public class Edt extends JFrame{
                 data[y][4]= endroit;
                 data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
-                if(admin==true){
+                /*if(admin==true){
                     JButton mod = new JButton("Modifier");
                     mod.addActionListener(new ActionListener(){
                          public void actionPerformed(ActionEvent event){
@@ -385,7 +499,7 @@ public class Edt extends JFrame{
                          }});
                     data[y][6]= mod;
                     data[y][7]= sup;
-                }
+                }*/
                 
                 if(triees[y].getETAT()==1){
                     annule.add(y);
@@ -455,6 +569,7 @@ public class Edt extends JFrame{
                     data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
                 }
             }
+        
             else if((controleur instanceof ControleurSalle)== true){
 
                 ArrayList<Seance> Seances = controleur.getSeances();
@@ -494,7 +609,6 @@ public class Edt extends JFrame{
 
                     data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
 
-                   // data[y][2]= "Prof";//Profs.get(triees[y].getID_COURS()).getNOM();
                    //CETTE LIGNE MARCHE
                     data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                     data[y][3]= "TD";//controleur.getGroupe().getNOM();
@@ -518,10 +632,14 @@ public class Edt extends JFrame{
       MyRendererAndEditorSup(JTable table) {
         btn = new JButton("Supprimer");
         btn.addActionListener(new ActionListener() {
-          @Override
           public void actionPerformed(ActionEvent e) {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.removeRow(row);
+            JOptionPane jop = new JOptionPane();			
+            int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
+                    "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(option == JOptionPane.OK_OPTION){
+                //voir BDD Vivien
+                //Seances.get(triees[y].getID()).setETAT(1);
+            }
           }
         });
       }
@@ -570,8 +688,7 @@ public class Edt extends JFrame{
       private int row;
       MyRendererAndEditorMod(JTable table) {
         btn = new JButton("Modifier");
-        btn.addActionListener(new ActionListener() {
-          @Override
+        btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             model.removeRow(row);
