@@ -68,10 +68,12 @@ public class Controleur {
                 default:
                 break;
              }
-            if((controleur instanceof ControleurAdmin)== true)
-                RechercheEdt fenetre = new RechercheEdt(controleur);
-            else
-                Edt fenetre = new Edt(controleur);
+            Edt fenetreE;
+            RechercheEdt fenetreA;
+              if((controleur instanceof ControleurAdmin))
+                  fenetreA = new RechercheEdt(controleur);
+              else
+                   fenetreE = new Edt(controleur,false);
               
         }
         

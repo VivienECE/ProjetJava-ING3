@@ -98,7 +98,7 @@ public class ControleurEnseignant extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_UTILISATEUR=13;
+        int ID_UTILISATEUR=2;
         Connexion connexion = null;
         ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
         //Edt fenetre = new Edt(controleur, false);

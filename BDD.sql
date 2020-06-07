@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jun 04, 2020 at 02:41 PM
+-- Generation Time: Jun 07, 2020 at 10:05 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -11,25 +11,25 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: Ok
+-- Database: `Dimanche1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table cours
+-- Table structure for table `cours`
 --
 
-CREATE TABLE cours (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL
+CREATE TABLE `cours` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table cours
+-- Dumping data for table `cours`
 --
 
-INSERT INTO cours (ID, NOM) VALUES
+INSERT INTO `cours` (`ID`, `NOM`) VALUES
 (1, 'Mathematiques'),
 (2, 'Physique\r\n'),
 (3, 'Electronique'),
@@ -44,19 +44,19 @@ INSERT INTO cours (ID, NOM) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table enseignant
+-- Table structure for table `enseignant`
 --
 
-CREATE TABLE enseignant (
-  ID_UTILISATEUR int(11) NOT NULL,
-  ID_COURS int(11) NOT NULL
+CREATE TABLE `enseignant` (
+  `ID_UTILISATEUR` int(11) NOT NULL,
+  `ID_COURS` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table enseignant
+-- Dumping data for table `enseignant`
 --
 
-INSERT INTO enseignant (ID_UTILISATEUR, ID_COURS) VALUES
+INSERT INTO `enseignant` (`ID_UTILISATEUR`, `ID_COURS`) VALUES
 (2, 1),
 (3, 2),
 (10, 3),
@@ -71,20 +71,20 @@ INSERT INTO enseignant (ID_UTILISATEUR, ID_COURS) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table etudiant
+-- Table structure for table `etudiant`
 --
 
-CREATE TABLE etudiant (
-  ID_UTILISATEUR int(11) NOT NULL,
-  NUMERO text NOT NULL,
-  ID_GROUPE int(11) NOT NULL
+CREATE TABLE `etudiant` (
+  `ID_UTILISATEUR` int(11) NOT NULL,
+  `NUMERO` text NOT NULL,
+  `ID_GROUPE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table etudiant
+-- Dumping data for table `etudiant`
 --
 
-INSERT INTO etudiant (ID_UTILISATEUR, NUMERO, ID_GROUPE) VALUES
+INSERT INTO `etudiant` (`ID_UTILISATEUR`, `NUMERO`, `ID_GROUPE`) VALUES
 (1, '1', 1),
 (4, '4', 1),
 (5, '5', 1),
@@ -164,20 +164,20 @@ INSERT INTO etudiant (ID_UTILISATEUR, NUMERO, ID_GROUPE) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table groupe
+-- Table structure for table `groupe`
 --
 
-CREATE TABLE groupe (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL,
-  ID_PROMOTION int(11) NOT NULL
+CREATE TABLE `groupe` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL,
+  `ID_PROMOTION` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table groupe
+-- Dumping data for table `groupe`
 --
 
-INSERT INTO groupe (ID, NOM, ID_PROMOTION) VALUES
+INSERT INTO `groupe` (`ID`, `NOM`, `ID_PROMOTION`) VALUES
 (1, 'TD 1', 1),
 (2, 'TD 2', 1),
 (3, 'TD 3', 1),
@@ -197,19 +197,19 @@ INSERT INTO groupe (ID, NOM, ID_PROMOTION) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table promotion
+-- Table structure for table `promotion`
 --
 
-CREATE TABLE promotion (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL
+CREATE TABLE `promotion` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table promotion
+-- Dumping data for table `promotion`
 --
 
-INSERT INTO promotion (ID, NOM) VALUES
+INSERT INTO `promotion` (`ID`, `NOM`) VALUES
 (1, 'Promo 2022'),
 (2, 'Promo 2023'),
 (3, 'Promo 2024'),
@@ -219,21 +219,21 @@ INSERT INTO promotion (ID, NOM) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table salle
+-- Table structure for table `salle`
 --
 
-CREATE TABLE salle (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL,
-  CAPACITE int(11) NOT NULL,
-  ID_SITE int(11) NOT NULL
+CREATE TABLE `salle` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL,
+  `CAPACITE` int(11) NOT NULL,
+  `ID_SITE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table salle
+-- Dumping data for table `salle`
 --
 
-INSERT INTO salle (ID, NOM, CAPACITE, ID_SITE) VALUES
+INSERT INTO `salle` (`ID`, `NOM`, `CAPACITE`, `ID_SITE`) VALUES
 (1, 'Salle 201', 60, 1),
 (2, 'Salle 206', 50, 1),
 (3, 'Salle 207', 70, 1),
@@ -260,25 +260,25 @@ INSERT INTO salle (ID, NOM, CAPACITE, ID_SITE) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table seance
+-- Table structure for table `seance`
 --
 
-CREATE TABLE seance (
-  ID int(11) NOT NULL,
-  SEMAINE int(11) NOT NULL,
-  DATE date NOT NULL,
-  HEURE_DEBUT time NOT NULL,
-  HEURE_FIN time NOT NULL,
-  ETAT int(11) NOT NULL,
-  ID_COURS int(11) NOT NULL,
-  ID_TYPE int(11) NOT NULL
+CREATE TABLE `seance` (
+  `ID` int(11) NOT NULL,
+  `SEMAINE` int(11) NOT NULL,
+  `DATE` date NOT NULL,
+  `HEURE_DEBUT` time NOT NULL,
+  `HEURE_FIN` time NOT NULL,
+  `ETAT` int(11) NOT NULL,
+  `ID_COURS` int(11) NOT NULL,
+  `ID_TYPE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table seance
+-- Dumping data for table `seance`
 --
 
-INSERT INTO seance (ID, SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT, ID_COURS, ID_TYPE) VALUES
+INSERT INTO `seance` (`ID`, `SEMAINE`, `DATE`, `HEURE_DEBUT`, `HEURE_FIN`, `ETAT`, `ID_COURS`, `ID_TYPE`) VALUES
 (1, 23, '2020-06-01', '08:00:00', '10:00:00', 0, 1, 1),
 (2, 23, '2020-06-01', '11:00:00', '13:00:00', 0, 2, 1),
 (3, 23, '2020-06-01', '15:00:00', '17:00:00', 0, 3, 1),
@@ -320,24 +320,37 @@ INSERT INTO seance (ID, SEMAINE, DATE, HEURE_DEBUT, HEURE_FIN, ETAT, ID_COURS, I
 (39, 23, '2020-06-04', '17:00:00', '19:00:00', 0, 7, 3),
 (40, 23, '2020-06-05', '09:00:00', '11:00:00', 0, 6, 1),
 (41, 23, '2020-06-05', '13:00:00', '15:00:00', 0, 3, 1),
-(42, 23, '2020-06-05', '16:00:00', '17:00:00', 0, 4, 1);
+(42, 23, '2020-06-05', '16:00:00', '17:00:00', 0, 4, 1),
+(43, 24, '2020-06-08', '08:00:00', '10:00:00', 0, 6, 1),
+(44, 24, '2020-06-08', '11:00:00', '13:00:00', 0, 5, 1),
+(45, 24, '2020-06-08', '15:00:00', '17:00:00', 0, 4, 1),
+(46, 24, '2020-06-08', '17:30:00', '19:00:00', 0, 3, 1),
+(47, 24, '2020-06-09', '08:00:00', '10:00:00', 0, 2, 1),
+(48, 24, '2020-06-09', '13:00:00', '15:00:00', 0, 1, 1),
+(49, 24, '2020-06-10', '09:00:00', '11:00:00', 0, 10, 1),
+(50, 24, '2020-06-10', '13:00:00', '15:00:00', 0, 9, 1),
+(51, 24, '2020-06-10', '17:00:00', '19:00:00', 0, 8, 1),
+(52, 24, '2020-06-11', '10:00:00', '12:00:00', 0, 10, 2),
+(53, 24, '2020-06-11', '17:00:00', '19:00:00', 0, 3, 3),
+(54, 24, '2020-06-12', '13:00:00', '15:00:00', 0, 2, 1),
+(55, 24, '2020-06-12', '16:00:00', '17:00:00', 0, 7, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table seance_enseignants
+-- Table structure for table `seance_enseignants`
 --
 
-CREATE TABLE seance_enseignants (
-  ID_SEANCE int(11) NOT NULL,
-  ID_ENSEIGNANT int(11) NOT NULL
+CREATE TABLE `seance_enseignants` (
+  `ID_SEANCE` int(11) NOT NULL,
+  `ID_ENSEIGNANT` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table seance_enseignants
+-- Dumping data for table `seance_enseignants`
 --
 
-INSERT INTO seance_enseignants (ID_SEANCE, ID_ENSEIGNANT) VALUES
+INSERT INTO `seance_enseignants` (`ID_SEANCE`, `ID_ENSEIGNANT`) VALUES
 (1, 1),
 (2, 2),
 (3, 10),
@@ -379,24 +392,38 @@ INSERT INTO seance_enseignants (ID_SEANCE, ID_ENSEIGNANT) VALUES
 (39, 11),
 (40, 13),
 (41, 10),
-(42, 13);
+(42, 13),
+(43, 13),
+(44, 14),
+(45, 13),
+(46, 10),
+(47, 3),
+(48, 2),
+(49, 88),
+(50, 87),
+(51, 15),
+(52, 87),
+(53, 10),
+(54, 3),
+(55, 11);
+
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table seance_groupes
+-- Table structure for table `seance_groupes`
 --
 
-CREATE TABLE seance_groupes (
-  ID_SEANCE int(11) NOT NULL,
-  ID_GROUPE int(11) NOT NULL
+CREATE TABLE `seance_groupes` (
+  `ID_SEANCE` int(11) NOT NULL,
+  `ID_GROUPE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table seance_groupes
+-- Dumping data for table `seance_groupes`
 --
 
-INSERT INTO seance_groupes (ID_SEANCE, ID_GROUPE) VALUES
+INSERT INTO `seance_groupes` (`ID_SEANCE`, `ID_GROUPE`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
@@ -438,24 +465,37 @@ INSERT INTO seance_groupes (ID_SEANCE, ID_GROUPE) VALUES
 (39, 12),
 (40, 13),
 (41, 14),
-(42, 15);
+(42, 15),
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table seance_salles
+-- Table structure for table `seance_salles`
 --
 
-CREATE TABLE seance_salles (
-  ID_SEANCE int(11) NOT NULL,
-  ID_SALLE int(11) NOT NULL
+CREATE TABLE `seance_salles` (
+  `ID_SEANCE` int(11) NOT NULL,
+  `ID_SALLE` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table seance_salles
+-- Dumping data for table `seance_salles`
 --
 
-INSERT INTO seance_salles (ID_SEANCE, ID_SALLE) VALUES
+INSERT INTO `seance_salles` (`ID_SEANCE`, `ID_SALLE`) VALUES
 (1, 1),
 (2, 1),
 (3, 2),
@@ -497,24 +537,38 @@ INSERT INTO seance_salles (ID_SEANCE, ID_SALLE) VALUES
 (39, 20),
 (40, 21),
 (41, 21),
-(42, 22);
+(42, 22),
+(43, 1),
+(44, 1),
+(45, 2),
+(46, 2),
+(47, 3),
+(48, 3),
+(49, 4),
+(50, 4),
+(51, 5),
+(52, 5),
+(53, 6),
+(54, 6),
+(55, 7);
+
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table site
+-- Table structure for table `site`
 --
 
-CREATE TABLE site (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL
+CREATE TABLE `site` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table site
+-- Dumping data for table `site`
 --
 
-INSERT INTO site (ID, NOM) VALUES
+INSERT INTO `site` (`ID`, `NOM`) VALUES
 (1, 'Eiffel 3\r\n'),
 (2, 'Eiffel 2'),
 (3, 'Eiffel 1\r\n\r\n'),
@@ -525,19 +579,19 @@ INSERT INTO site (ID, NOM) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table type_cours
+-- Table structure for table `type_cours`
 --
 
-CREATE TABLE type_cours (
-  ID int(11) NOT NULL,
-  NOM text NOT NULL
+CREATE TABLE `type_cours` (
+  `ID` int(11) NOT NULL,
+  `NOM` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table type_cours
+-- Dumping data for table `type_cours`
 --
 
-INSERT INTO type_cours (ID, NOM) VALUES
+INSERT INTO `type_cours` (`ID`, `NOM`) VALUES
 (1, 'COURS'),
 (2, 'TD'),
 (3, 'EXAMEN');
@@ -545,23 +599,23 @@ INSERT INTO type_cours (ID, NOM) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table utilisateur
+-- Table structure for table `utilisateur`
 --
 
-CREATE TABLE utilisateur (
-  ID int(11) NOT NULL,
-  EMAIL text NOT NULL,
-  PASSWD text NOT NULL,
-  NOM text NOT NULL,
-  PRENOM text NOT NULL,
-  DROIT int(11) NOT NULL
+CREATE TABLE `utilisateur` (
+  `ID` int(11) NOT NULL,
+  `EMAIL` text NOT NULL,
+  `PASSWD` text NOT NULL,
+  `NOM` text NOT NULL,
+  `PRENOM` text NOT NULL,
+  `DROIT` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table utilisateur
+-- Dumping data for table `utilisateur`
 --
 
-INSERT INTO utilisateur (ID, EMAIL, PASSWD, NOM, PRENOM, DROIT) VALUES
+INSERT INTO `utilisateur` (`ID`, `EMAIL`, `PASSWD`, `NOM`, `PRENOM`, `DROIT`) VALUES
 (1, 'vivien.detournay@edu.ece.fr', 'vivien', 'DETOURNAY', 'Vivien', 4),
 (2, 'fabienne.coudray@edu.ece.fr', 'fabienne', 'COUDRAY', 'Fabienne', 2),
 (3, 'm.richaud@edu.ece.fr', 'm', 'RICHAUD', 'M', 3),
@@ -656,125 +710,125 @@ INSERT INTO utilisateur (ID, EMAIL, PASSWD, NOM, PRENOM, DROIT) VALUES
 --
 
 --
--- Indexes for table cours
+-- Indexes for table `cours`
 --
-ALTER TABLE cours
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `cours`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table enseignant
+-- Indexes for table `enseignant`
 --
-ALTER TABLE enseignant
-  ADD PRIMARY KEY (ID_UTILISATEUR,`ID_COURS`);
+ALTER TABLE `enseignant`
+  ADD PRIMARY KEY (`ID_UTILISATEUR`,`ID_COURS`);
 
 --
--- Indexes for table groupe
+-- Indexes for table `groupe`
 --
-ALTER TABLE groupe
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `groupe`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table promotion
+-- Indexes for table `promotion`
 --
-ALTER TABLE promotion
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `promotion`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table salle
+-- Indexes for table `salle`
 --
-ALTER TABLE salle
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `salle`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table seance
+-- Indexes for table `seance`
 --
-ALTER TABLE seance
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `seance`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table seance_enseignants
+-- Indexes for table `seance_enseignants`
 --
-ALTER TABLE seance_enseignants
-  ADD PRIMARY KEY (ID_SEANCE);
+ALTER TABLE `seance_enseignants`
+  ADD PRIMARY KEY (`ID_SEANCE`);
 
 --
--- Indexes for table seance_groupes
+-- Indexes for table `seance_groupes`
 --
-ALTER TABLE seance_groupes
-  ADD PRIMARY KEY (ID_SEANCE);
+ALTER TABLE `seance_groupes`
+  ADD PRIMARY KEY (`ID_SEANCE`);
 
 --
--- Indexes for table seance_salles
+-- Indexes for table `seance_salles`
 --
-ALTER TABLE seance_salles
-  ADD PRIMARY KEY (ID_SEANCE);
+ALTER TABLE `seance_salles`
+  ADD PRIMARY KEY (`ID_SEANCE`);
 
 --
--- Indexes for table site
+-- Indexes for table `site`
 --
-ALTER TABLE site
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `site`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table type_cours
+-- Indexes for table `type_cours`
 --
-ALTER TABLE type_cours
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `type_cours`
+  ADD PRIMARY KEY (`ID`);
 
 --
--- Indexes for table utilisateur
+-- Indexes for table `utilisateur`
 --
-ALTER TABLE utilisateur
-  ADD PRIMARY KEY (ID);
+ALTER TABLE `utilisateur`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table cours
+-- AUTO_INCREMENT for table `cours`
 --
-ALTER TABLE cours
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `cours`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table groupe
+-- AUTO_INCREMENT for table `groupe`
 --
-ALTER TABLE groupe
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `groupe`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table promotion
+-- AUTO_INCREMENT for table `promotion`
 --
-ALTER TABLE promotion
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `promotion`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table salle
+-- AUTO_INCREMENT for table `salle`
 --
-ALTER TABLE salle
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+ALTER TABLE `salle`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table seance
+-- AUTO_INCREMENT for table `seance`
 --
-ALTER TABLE seance
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+ALTER TABLE `seance`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
--- AUTO_INCREMENT for table site
+-- AUTO_INCREMENT for table `site`
 --
-ALTER TABLE site
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `site`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table type_cours
+-- AUTO_INCREMENT for table `type_cours`
 --
-ALTER TABLE type_cours
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `type_cours`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table utilisateur
+-- AUTO_INCREMENT for table `utilisateur`
 --
-ALTER TABLE utilisateur
-  MODIFY ID int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+ALTER TABLE `utilisateur`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
