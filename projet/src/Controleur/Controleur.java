@@ -76,7 +76,7 @@ public class Controleur {
               if((controleur instanceof ControleurAdmin))
                   fenetreA = new RechercheEdt(controleur);
               else
-                   fenetreE = new Edt(controleur);
+                   fenetreE = new Edt(controleur, false);
         }
         
         catch (SQLException e) {
