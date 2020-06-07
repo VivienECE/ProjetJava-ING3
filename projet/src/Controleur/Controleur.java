@@ -22,6 +22,7 @@ import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Login;
 import Vue.Menu;
+import Vue.RechercheEdt;
 import java.util.ArrayList;
 
 /**
@@ -65,8 +66,12 @@ public class Controleur {
                 break;
                 default:
                 break;
-              }
-              Edt fenetre = new Edt(controleur);
+             }
+            if((controleur instanceof ControleurAdmin)== true)
+                RechercheEdt fenetre = new RechercheEdt(controleur);
+            else
+                Edt fenetre = new Edt(controleur);
+              
         }
         
         catch (SQLException e) {

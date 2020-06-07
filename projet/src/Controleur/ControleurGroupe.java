@@ -110,8 +110,8 @@ public class ControleurGroupe extends Controleur {
         int ID_GROUPE=1;
          Connexion connection = null;
         ControleurGroupe controleur = new ControleurGroupe(ID_GROUPE);
-        //Edt fenetre = new Edt(controleur);
-        Recap fenetre = new Recap(controleur);
+        Edt fenetre = new Edt(controleur, false);
+        //Recap fenetre = new Recap(controleur);
 
     }
     
