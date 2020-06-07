@@ -208,7 +208,8 @@ public class RechercheEdt extends JFrame{
         
         if(type == 3){//TD
             String NOM = nom.getText().toUpperCase();
-            String PROMO = promo.getSelectedItem().toString();
+            String PROMO = "Promo " + promo.getSelectedItem().toString();
+            System.out.println(NOM + PROMO);
             
             Groupe td = new Groupe();
             td = controleur.findGroupe(NOM,PROMO);
