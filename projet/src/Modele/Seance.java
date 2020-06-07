@@ -84,14 +84,15 @@ public class Seance {
   public LocalDate getDATE() {
     return DATE;
   }
+
 /**
      * Methode qui définit la date
-     * @param annee
-     * @param mois
-     * @param jour
-     */
-  public void setDATE(int annee, int mois, int jour) {
-    this.DATE = LocalDate.of(annee, mois, jour);
+     * @param LocalDate d
+*/
+
+  public void setDATE(LocalDate d) {
+    this.DATE = d;
+
   }  
   /**
      * Methode qui retourne l'heure de début

@@ -22,9 +22,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -191,7 +194,7 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauL.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauL));
@@ -199,7 +202,9 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    //throw new UnsupportedOperationException("Not supported yet.")
+                            
+                            ; //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -439,7 +444,7 @@ public class Edt extends JFrame{
             }
             
             if(admin==true)
-                data = new Object[n][8];
+                data = new Object[n][9];
             else
                 data = new Object[n][6];
             
@@ -464,8 +469,6 @@ public class Edt extends JFrame{
 
                 data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
 
-
-                //data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
                 //CETTE LIGNE MARCHE
                 data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
@@ -478,32 +481,17 @@ public class Edt extends JFrame{
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-                data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
+
+				if(triees[y].getETAT()==1)
+                    data[y][5] = "ANNULEE";
+                else
+                    data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
-                /*if(admin==true){
-                    JButton mod = new JButton("Modifier");
-                    mod.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            //modifier(triees[y].getID());
-                         }});
-                    JButton sup = new JButton("Supprimer");
-                    sup.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            JOptionPane jop = new JOptionPane();			
-                            int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
-                                    "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if(option == JOptionPane.OK_OPTION){
-                              	//voir BDD Vivien
-                                //Seances.get(triees[y].getID()).setETAT(1);
-                            }
-                         }});
-                    data[y][6]= mod;
-                    data[y][7]= sup;
-                }*/
+                if(admin==true)
+                    data[y][6]=controleur.getSeances().get(controleur.getSeances().indexOf(triees[y])).getID();
                 
-                if(triees[y].getETAT()==1){
-                    annule.add(y);
-                }
+                
+               
             }
    
         }
@@ -566,7 +554,11 @@ public class Edt extends JFrame{
 
                     String endroit = salle + " - " + site;
                     data[y][3]= endroit;
-                    data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+                    
+                    if(triees[y].getETAT()==1)
+                        data[y][4] = "ANNULEE";
+                    else
+                        data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
                 }
             }
         
@@ -612,8 +604,11 @@ public class Edt extends JFrame{
                    //CETTE LIGNE MARCHE
                     data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                     data[y][3]= "TD";//controleur.getGroupe().getNOM();
-
-                    data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+                    
+                    if(triees[y].getETAT()==1)
+                        data[y][4] = "ANNULEE";
+                    else
+                        data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
                 }
             }
             else
@@ -621,7 +616,56 @@ public class Edt extends JFrame{
         return data;
     }
     
-    public void modifier(int idSeance){
+    public void modifier(ControleurAdmin controleur, int idSeance){
+        
+        ArrayList<Seance> Seances = controleur.getSeances();
+        
+        JFrame f = new JFrame();
+        f.setTitle("Modification d'un cours");
+        f.setSize(600, 600);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        JPanel p = new JPanel();
+        JLabel mess1 = new JLabel("Veuillez sélectionner un nouveau crécaux pour cette séance :");
+        p.add(mess1);
+        DateTextField picker = new DateTextField();
+        p.add(picker);
+        JLabel a = new JLabel("  de  ");
+        p.add(a);
+        JTextField heureD = new JTextField(2);
+        p.add(heureD);
+        JLabel b = new JLabel(" h ");
+        p.add(b);
+        JTextField minD = new JTextField(2);
+        p.add(minD);
+        JLabel c = new JLabel("  à  ");
+        p.add(c);
+        JTextField heureF = new JTextField(2);
+        p.add(heureF);
+        JLabel d = new JLabel(" h ");
+        p.add(d);
+        JTextField minF = new JTextField(2);
+        p.add(minF);
+        
+        JButton ok = new JButton("Valider");
+        ok.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                LocalDate date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Seances.get(idSeance).setDATE(date);
+                Seances.get(idSeance).setHEURE_DEBUT(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()));
+                Seances.get(idSeance).setHEURE_FIN(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()));
+            }});
+        JButton no = new JButton("Annuler");
+        no.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            f.setVisible(false);
+        }});
+        p.add(ok);
+        p.add(no);
+        p.setLayout(new GridLayout(6,2));
+        f.add(p);
+        f.setVisible(true);
+        
         
     }
     
@@ -638,6 +682,9 @@ public class Edt extends JFrame{
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
                 //voir BDD Vivien
+               Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
+               seance.setETAT(1);
+               controleur.updateSeance(seance);
                 //Seances.get(triees[y].getID()).setETAT(1);
             }
           }
@@ -690,8 +737,8 @@ public class Edt extends JFrame{
         btn = new JButton("Modifier");
         btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.removeRow(row);
+            Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
+            modifier(controleur,seance.getID());
           }
         });
       }
