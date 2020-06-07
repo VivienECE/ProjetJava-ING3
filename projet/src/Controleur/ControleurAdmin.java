@@ -91,7 +91,7 @@ public class ControleurAdmin extends Controleur {
             Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID()).getID_SALLE());
             salles.add(temp_salle);
             sites.add(siteDAO.find(temp_salle.getID_SITE()));
-            cours.add(coursDAO.find(i.getID()));
+            cours.add(coursDAO.find(i.getID_COURS()));
             type_cours.add(type_coursDAO.find(i.getID_TYPE()));
             Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID()).getID_GROUPE());
             groupes.add(temp_group);

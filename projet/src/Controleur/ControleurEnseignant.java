@@ -80,7 +80,7 @@ public class ControleurEnseignant extends Controleur {
             Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
             salle.add(temp_salle);
             site.add(siteDAO.find(temp_salle.getID_SITE()));
-            cours.add(coursDAO.find(i.getID_SEANCE()));
+            cours.add(coursDAO.find(temp_seance.getID_COURS()));
             type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
             seance.add(temp_seance);
             Groupe temp_group=groupeDAO.find(seance_groupesDAO.find(i.getID_SEANCE()).getID_GROUPE());
@@ -98,7 +98,7 @@ public class ControleurEnseignant extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_UTILISATEUR=2;
+        int ID_UTILISATEUR=13;
         Connexion connexion = null;
         ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
         //Edt fenetre = new Edt(controleur);
@@ -120,6 +120,9 @@ public class ControleurEnseignant extends Controleur {
 
          System.out.println("Seance");
          seance.forEach((i) -> { System.out.println(i.getID());});
+         
+          System.out.println("Cours");
+         cours.forEach((i) -> { System.out.println(i.getNOM());});
     }
     
 }
