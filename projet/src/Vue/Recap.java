@@ -76,22 +76,16 @@ public class Recap extends JFrame{
         panel1 = new JPanel();
         String informations="";
         if((controleur instanceof ControleurEtudiant)== true)//SI ETUDIANT
-            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "
+            informations = "Récapitulatif des cours de "+controleur.getUtilisateur().getNOM()+" "
                     +controleur.getUtilisateur().getPRENOM()+" "
                     +controleur.getGroupe().getNOM()+" "
                     +controleur.getPromotion().getNOM()+" ";
         
         if((controleur instanceof ControleurEnseignant)== true)//SI ENSEIGNANT
-            informations = "Emploi du temps de "+controleur.getUtilisateur().getNOM()+" "+controleur.getUtilisateur().getPRENOM()+" ";
+            informations = "Récapitulatif des cours de "+controleur.getUtilisateur().getNOM()+" "+controleur.getUtilisateur().getPRENOM()+" ";
         
         if((controleur instanceof ControleurGroupe)==true)//SI TD
-            informations = "Emploi du temps du "+controleur.getGroupe().getNOM()+" "+controleur.getPromotion().getNOM()+" ";
-        
-        if((controleur instanceof ControleurPromotion)==true)//SI PROMO
-            informations = "Emploi du temps de la "+controleur.getPromotion().getNOM()+" ";
-        
-        if((controleur instanceof ControleurSalle)== true)//SI SALLE
-            informations = "Emploi du temps de la "+controleur.getSalle().getNOM()+" - "+controleur.getSite().getNOM()+" ";
+            informations = "Récapitulatif des cours du "+controleur.getGroupe().getNOM()+" "+controleur.getPromotion().getNOM()+" ";
         
         JLabel infos = new JLabel(informations);
         panel1.add(infos);

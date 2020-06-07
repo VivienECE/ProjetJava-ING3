@@ -185,7 +185,7 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+utilisateurEtudiant.getID());
                 Controleur controleurRechercheEtudiant = new ControleurEtudiant(utilisateurEtudiant.getID());
-                Edt fenetre = new Edt(controleurRechercheEtudiant);
+                Edt fenetre = new Edt(controleurRechercheEtudiant,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Etudiant introuvable");
@@ -200,7 +200,7 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+utilisateurEnseignant.getID());
                 Controleur controleurRechercheEnseignant = new ControleurEnseignant(utilisateurEnseignant.getID());
-                Edt fenetre = new Edt(controleurRechercheEnseignant);
+                Edt fenetre = new Edt(controleurRechercheEnseignant,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Enseignant introuvable");
@@ -216,7 +216,7 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+td.getID());
                 Controleur controleurRechercheTD = new ControleurGroupe(td.getID());
-                Edt fenetre = new Edt(controleurRechercheTD);
+                Edt fenetre = new Edt(controleurRechercheTD,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "TD introuvable");
@@ -230,7 +230,7 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+promo.getID());
                 Controleur controleurRecherchePromo = new ControleurPromotion(promo.getID());
-                Edt fenetre = new Edt(controleurRecherchePromo);
+                Edt fenetre = new Edt(controleurRecherchePromo,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Promotion introuvable");
@@ -244,7 +244,7 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+salle.getID());
                 Controleur controleurRechercheSalle = new ControleurSalle(salle.getID());
-                Edt fenetre = new Edt(controleurRechercheSalle);
+                Edt fenetre = new Edt(controleurRechercheSalle,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Salle introuvable");

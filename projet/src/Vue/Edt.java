@@ -30,6 +30,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -46,7 +47,7 @@ public class Edt extends JFrame{
     private JPanel Vendredi;
     private JPanel Samedi;
     
-    public Edt(Controleur controleur) {
+    public Edt(Controleur controleur, boolean admin) {
         this.setTitle("Emploi du temps");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +79,7 @@ public class Edt extends JFrame{
                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-7);
            
            panel2.setVisible(false);
-           Liste(controleur, ajd);
+           Liste(controleur, ajd, admin);
         }
         });
         
@@ -103,7 +104,7 @@ public class Edt extends JFrame{
                 ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+7);
            
            panel2.setVisible(false);
-           Liste(controleur, ajd);
+           Liste(controleur, ajd, admin);
         }
         });
         semaine.add(prec);
@@ -112,7 +113,7 @@ public class Edt extends JFrame{
         this.setLayout(new GridLayout(0,1));
         Infos(controleur);
         this.add(panel1, BorderLayout.NORTH);
-        Liste(controleur, ajd);
+        Liste(controleur, ajd, admin);
         //Grille(controleur);
         this.add(panel2, BorderLayout.SOUTH);
         this.add(semaine, BorderLayout.SOUTH);
@@ -143,7 +144,7 @@ public class Edt extends JFrame{
         panel1.add(infos);
     }
     
-    private void Liste(Controleur controleur,LocalDate ajd){
+    private void Liste(Controleur controleur,LocalDate ajd, boolean admin){
       
         
         DayOfWeek Dday = ajd.getDayOfWeek();
@@ -162,7 +163,7 @@ public class Edt extends JFrame{
             ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-6);
         
         Lundi = new JPanel();
-        Object[][] TLundi = Journee(ajd, controleur);
+        Object[][] TLundi = Journee(ajd, controleur, admin);
         String  titleL[] = {"Lundi " + ajd, "", "", "",""};
         JTable tableauL = new JTable(TLundi, titleL);
         tableauL.getTableHeader().setBackground(new Color(151,221,255));
@@ -172,7 +173,7 @@ public class Edt extends JFrame{
         
         Mardi = new JPanel();
         LocalDate dateM = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+1);
-        Object[][] TMardi = Journee(dateM, controleur);
+        Object[][] TMardi = Journee(dateM, controleur, admin);
         String  titleM[] = {"Mardi " + dateM, "", "", "",""};
         JTable tableauM = new JTable(TMardi, titleM);
         tableauM.getTableHeader().setBackground(new Color(151,221,255));
@@ -182,7 +183,7 @@ public class Edt extends JFrame{
         
         Mercredi = new JPanel();
         LocalDate dateMe = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+2);
-        Object[][] TMercredi = Journee(dateMe, controleur);
+        Object[][] TMercredi = Journee(dateMe, controleur, admin);
         String  titleMe[] = {"Mercredi "+ dateMe, "", "", "",""};
         JTable tableauMe = new JTable(TMercredi, titleMe);
         tableauMe.getTableHeader().setBackground(new Color(151,221,255));
@@ -192,7 +193,7 @@ public class Edt extends JFrame{
         
         Jeudi = new JPanel();
         LocalDate dateJ = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+3);
-        Object[][] TJeudi = Journee(dateJ, controleur);
+        Object[][] TJeudi = Journee(dateJ, controleur, admin);
         String  titleJ[] = {"Jeudi "+ dateJ, "", "", "",""};
         JTable tableauJ = new JTable(TJeudi, titleJ);
         tableauJ.getTableHeader().setBackground(new Color(151,221,255));
@@ -202,7 +203,7 @@ public class Edt extends JFrame{
         
         Vendredi = new JPanel();
         LocalDate dateV = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+4);
-        Object[][] TVendredi = Journee(dateV, controleur);
+        Object[][] TVendredi = Journee(dateV, controleur, admin);
         String  titleV[] = {"Vendredi "+ dateV, "", "", "",""};
         JTable tableauV = new JTable(TVendredi, titleV);
         tableauV.getTableHeader().setBackground(new Color(151,221,255));
@@ -212,7 +213,7 @@ public class Edt extends JFrame{
         
         Samedi = new JPanel();
         LocalDate dateS = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+5);
-        Object[][] TSamedi = Journee(dateS, controleur);
+        Object[][] TSamedi = Journee(dateS, controleur, admin);
         String  titleS[] = {"Samedi "+ dateS, "", "", "",""};
         JTable tableauS = new JTable(TSamedi, titleS);
         tableauS.getTableHeader().setBackground(new Color(151,221,255));
@@ -254,7 +255,7 @@ public class Edt extends JFrame{
         setVisible(true);
     }
     
-    public Object[][]Journee(LocalDate date, Controleur controleur){
+    public Object[][]Journee(LocalDate date, Controleur controleur, boolean admin){
         
         
         Object[][] data;
@@ -276,8 +277,12 @@ public class Edt extends JFrame{
                     n++;
                 }  
             }
-
-            data = new Object[n][6];
+            
+            if(admin==true)
+                data = new Object[n][8];
+            else
+                data = new Object[n][6];
+            
             Seance [] triees = new Seance [CoursAJD.size()];
 
             //Trier par heure
@@ -313,7 +318,28 @@ public class Edt extends JFrame{
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-                //data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
+                data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
+                
+               /* if(admin==true){
+                    JButton mod = new JButton("Modifier");
+                    mod.addActionListener(new ActionListener(){
+                         public void actionPerformed(ActionEvent event){
+                            modifier(triees[y].getID());
+                         }});
+                    JButton sup = new JButton("Supprimer");
+                    sup.addActionListener(new ActionListener(){
+                         public void actionPerformed(ActionEvent event){
+                            JOptionPane jop = new JOptionPane();			
+                            int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
+                                    "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                            if(option == JOptionPane.OK_OPTION){
+                              	//voir BDD Vivien
+                                Seances.get(triees[y].getID()).setETAT(1);
+                            }
+                         }});
+                    data[y][6]= mod;
+                    data[y][7]= sup;
+                }*/
             }
    
         }
@@ -427,6 +453,10 @@ public class Edt extends JFrame{
             else
                 data = new Object[1][1];
         return data;
+    }
+    
+    public void modifier(int idSeance){
+        
     }
     
               

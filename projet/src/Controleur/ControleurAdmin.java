@@ -129,9 +129,9 @@ public class ControleurAdmin extends Controleur {
             Logger.getLogger(ControleurAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         ControleurAdmin controleur = new ControleurAdmin(ID_UTILISATEUR);
-        //RechercheEdt fenetre = new RechercheEdt(controleur);
+        RechercheEdt fenetre = new RechercheEdt(controleur);
         //RechercheRecap fenetre = new RechercheRecap(controleur);
-        Ajout fenetre = new Ajout(controleur);
+        //Ajout fenetre = new Ajout(controleur);
         
 
     }

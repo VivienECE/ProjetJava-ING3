@@ -1,6 +1,7 @@
 
 package Vue;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.*;
@@ -46,8 +47,8 @@ public class Login extends JFrame {
     }
 
     private void buildPanel() throws InterruptedException {
-        messageLabel = new JLabel("Veuillez entrer vos "
-                + "identifiants");
+        messageLabel = new JLabel("Veuillez entrer vos identifiants");
+        
         messageLabel1 = new JLabel("Nom d'utilisateur");
         UTextField = new JTextField(10);
         messageLabel2 = new JLabel("Mot de Passe");
@@ -57,6 +58,7 @@ public class Login extends JFrame {
         exit = new JButton("EXIT");
         exit.addActionListener(new EnterButtonListener());
         panel = new JPanel();
+        panel.setBackground(new Color(0,178,178));
 
         panel.add(messageLabel);
         panel.add(messageLabel1);

@@ -101,7 +101,7 @@ public class ControleurEnseignant extends Controleur {
         int ID_UTILISATEUR=13;
         Connexion connexion = null;
         ControleurEnseignant controleur = new ControleurEnseignant(ID_UTILISATEUR);
-        //Edt fenetre = new Edt(controleur);
+        //Edt fenetre = new Edt(controleur, false);
         Recap fenetre = new Recap(controleur);
 
     }

@@ -115,8 +115,8 @@ public class ControleurPromotion extends Controleur {
         int ID_PROMOTION=1;
          Connexion connection = null;
         ControleurPromotion controleur = new ControleurPromotion(ID_PROMOTION);
-        //Edt fenetre = new Edt(controleur);
-        Recap fenetre = new Recap(controleur);
+        Edt fenetre = new Edt(controleur, false);
+        //Recap fenetre = new Recap(controleur);
 
     }
     
