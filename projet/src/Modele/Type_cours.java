@@ -15,25 +15,42 @@ public class Type_cours {
   private int ID = 0;
   //Nom
   private String NOM = "";
-   
+    /**
+     * Constructeur avec 2 paramètres : nom et ID
+     *
+     * @param nom
+     * @param ID
+     */
   public Type_cours(int id, String nom) {
     this.ID = id;
     this.NOM = nom;
   }
   public Type_cours(){};
-     
+     /**
+     * Methode qui retourne l'ID
+     * @return ID
+     */
   public int getID() {
     return ID;
   }
-
+/**
+     * Methode qui définit ID
+     * @param ID
+     */
   public void setID(int ID) {
     this.ID = ID;
   }
-
+/**
+     * Methode qui retourne le nom
+     * @return nom
+     */
   public String getNOM() {
     return NOM;
   }
-
+/**
+     * Methode qui définit le nom
+     * @param NOM
+     */
   public void setNOM(String NOM) {
     this.NOM = NOM;
   }

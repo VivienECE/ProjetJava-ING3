@@ -7,7 +7,7 @@ package Modele;
 
 /**
  *
- * @author Vivien
+ * 
  */
 
 public class Promotion {
@@ -15,25 +15,44 @@ public class Promotion {
   private int ID = 0;
   //Nom de l'élève
   private String NOM = "";
-   
+   /**
+     * Constructeur avec 2 paramètres : nom et ID
+     *
+     * @param nameDatabase
+     * @param ID
+     */
   public Promotion(int id, String nom) {
     this.ID = id;
     this.NOM = nom;
   }
   public Promotion(){};
-     
-  public int getID() {
+
+  /**
+     * Methode qui retourne l'ID
+     * @return ID
+     */
+  
+ public int getID() {
     return ID;
   }
-
+/**
+     * Methode qui définit l'ID
+     * @param ID
+     */
   public void setID(int ID) {
     this.ID = ID;
   }
-
+/**
+     * Methode qui retourne le NOM
+     * @return NOM
+     */
   public String getNOM() {
     return NOM;
   }
-
+/**
+     * Methode qui définit le NOM
+     * @param NOM
+     */
   public void setNOM(String NOM) {
     this.NOM = NOM;
   }
