@@ -22,9 +22,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,6 +39,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -613,7 +616,50 @@ public class Edt extends JFrame{
         return data;
     }
     
-    public void modifier(int idSeance){
+    public void modifier(ControleurAdmin controleur, int idSeance){
+        
+        ArrayList<Seance> Seances = controleur.getSeances();
+        
+        JFrame f = new JFrame();
+        f.setTitle("Modification d'un cours");
+        f.setSize(600, 600);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setLocationRelativeTo(null);
+        JPanel p = new JPanel();
+        JLabel mess1 = new JLabel("Veuillez sélectionner un nouveau crécaux pour cette séance :");
+        p.add(mess1);
+        DateTextField picker = new DateTextField();
+        p.add(picker);
+        JLabel a = new JLabel("  de  ");
+        p.add(a);
+        JTextField heureD = new JTextField(2);
+        p.add(heureD);
+        JLabel b = new JLabel(" h ");
+        p.add(b);
+        JTextField minD = new JTextField(2);
+        p.add(minD);
+        JLabel c = new JLabel("  à  ");
+        p.add(c);
+        JTextField heureF = new JTextField(2);
+        p.add(heureF);
+        JLabel d = new JLabel(" h ");
+        p.add(d);
+        JTextField minF = new JTextField(2);
+        p.add(minF);
+        
+        JButton ok = new JButton("Valider");
+        ok.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent event){
+                LocalDate date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+                Seances.get(idSeance).setDATE(date);
+                Seances.get(idSeance).setHEURE_DEBUT(Integer.parseInt(heureD.getText()), Integer.parseInt(minD.getText()));
+                Seances.get(idSeance).setHEURE_FIN(Integer.parseInt(heureF.getText()), Integer.parseInt(minF.getText()));
+            }});
+        JButton no = new JButton("Annuler");
+        no.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent event){
+            f.setVisible(false);
+        }});
         
     }
     
@@ -629,7 +675,6 @@ public class Edt extends JFrame{
             int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
-                //voir BDD Vivien
                 System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
                 System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
                 System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
@@ -689,8 +734,13 @@ public class Edt extends JFrame{
         btn = new JButton("Modifier");
         btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.removeRow(row);
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 3));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 4));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 5));
+            System.out.println("-"+table.getValueAt(table.getSelectedRow(), 6));
           }
         });
       }

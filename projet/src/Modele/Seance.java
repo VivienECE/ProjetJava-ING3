@@ -59,8 +59,8 @@ public class Seance {
     return DATE;
   }
 
-  public void setDATE(int annee, int mois, int jour) {
-    this.DATE = LocalDate.of(annee, mois, jour);
+  public void setDATE(LocalDate d) {
+    this.DATE = d;
   }  
   
     public LocalTime getHEURE_DEBUT() {
