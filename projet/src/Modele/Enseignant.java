@@ -7,7 +7,7 @@ package Modele;
 
 /**
  *
- * @author Vivien
+ *
  */
 
 public class Enseignant {
@@ -15,25 +15,42 @@ public class Enseignant {
   private int ID_UTILISATEUR = 0;
   //Nom de l'élève
   private int ID_COURS = 0;
-   
+   /**
+     * Constructeur avec 2 paramètres : nom et ID
+     *
+     * @param nom
+     * @param ID
+     */
   public Enseignant(int id, int nom) {
     this.ID_UTILISATEUR = id;
     this.ID_COURS = nom;
   }
   public Enseignant(){};
-     
+     /**
+     * Methode qui retourne l'ID de l'utilisateur
+     * @return ID
+     */
   public int getID_UTILISATEUR() {
     return ID_UTILISATEUR;
   }
-
+    /**
+     * Methode qui définit l'ID Utilisateur
+     * @param ID
+     */
   public void setID_UTILISATEUR(int ID) {
     this.ID_UTILISATEUR = ID;
   }
-
+/**
+     * Methode qui retourne l'ID du cours
+     * @return ID
+     */
   public int getID_COURS() {
     return ID_COURS;
   }
-
+/**
+     * Methode qui définit l'ID du cours
+     * @param ID
+     */
   public void setID_COURS(int NOM) {
     this.ID_COURS = NOM;
   }

@@ -26,7 +26,18 @@ public class Seance {
   private String SALLE = "";
   private String SITE = "";
   private String COURS = "";
-   
+   /**
+     * Constructeur avec 8 paramètres : ID, semaine, date, heure début, heure fin, état, id cours et id type
+     *
+     * @param id
+     * @param semaine
+     * @param date
+     * @param heure_debut
+     * @param heure_fin
+     * @param etat
+     * @param id_cours
+     * @param id_type
+     */
   public Seance(int id, int SEMAINE, LocalDate DATE, LocalTime HEURE_DEBUT, LocalTime HEURE_FIN, int ETAT,int ID_COURS,int ID_TYPE) {
     this.ID = id;
     this.SEMAINE = SEMAINE;
@@ -38,79 +49,146 @@ public class Seance {
     this.ID_TYPE = ID_TYPE;
   }
   public Seance(){};
-     
+     /**
+     * Methode qui retourne l'ID
+     * @return ID
+     */
   public int getID() {
     return ID;
   }
-
+/**
+     * Methode qui définit l'ID
+     * @param ID
+     */
   public void setID(int ID) {
     this.ID = ID;
   }
-
+/**
+     * Methode qui retourne la semaine
+     * @return SEMAINE
+     */
   public int getSEMAINE() {
     return SEMAINE;
   }
-
+/**
+     * Methode qui définit la semaine
+     * @param LocalDate date
+     */
   public void setSEMAINE(LocalDate date) {
     this.SEMAINE = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR );
   }
-
+/**
+     * Methode qui retourne la Date
+     * @return DATE
+     */
   public LocalDate getDATE() {
     return DATE;
   }
 
+/**
+     * Methode qui définit la date
+     * @param LocalDate d
+*/
+
   public void setDATE(LocalDate d) {
     this.DATE = d;
+
   }  
-  
+  /**
+     * Methode qui retourne l'heure de début
+     * @return HEURE_DEBUT
+     */
     public LocalTime getHEURE_DEBUT() {
     return HEURE_DEBUT;
   }
-
+/**
+     * Methode qui définit l'heure de début
+     * @param H_DEBUT
+     * @param MIN_D
+     */
   public void setHEURE_DEBUT(int H_DEBUT, int MIN_D) {
     this.HEURE_DEBUT = LocalTime.of(H_DEBUT, MIN_D);
   }   
-  
+  /**
+     * Methode qui retourne l'heure de fin
+     * @return HEURE_FIN
+     */
     public LocalTime getHEURE_FIN() {
     return HEURE_FIN;
   }
-
+/**
+     * Methode qui définit l'heure de fin
+     * @param H_FIN
+     * @param MIN_F
+     */
   public void setHEURE_FIN(int H_FIN,int MIN_F) {
     this.HEURE_FIN = LocalTime.of(H_FIN, MIN_F);
   }   
-  
+  /**
+     * Methode qui retourne l'Etat
+     * @return ETAT
+     */
    public int getETAT() {
     return ETAT;
   }
-
+/**
+     * Methode qui définit l'état
+     * @param ETAT
+     */
   public void setETAT(int ETAT) {
     this.ETAT = ETAT;
   }   
-  
+    /**
+     * Methode qui retourne l'ID du cours
+     * @return ID_COURS
+     */
    public int getID_COURS() {
     return ID_COURS;
   }
+   /**
+     * Methode qui définit l'ID du cours
+     * @param ID_COURS
+     */
 
   public void setID_COURS(int ID_COURS) {
     this.ID_COURS = ID_COURS;
   }   
-  
+  /**
+     * Methode qui retourne l'ID du type de cours
+     * @return ID_TYPE
+     */
    public int getID_TYPE() {
     return ID_TYPE;
   }
-
+/**
+     * Methode qui définit l'ID du type de cours
+     * @param ID_TYpe
+     */
   public void setID_TYPE(int ID_TYPE) {
     this.ID_TYPE = ID_TYPE;
   }   
-  
+  /**
+     * Methode qui retourne l'enseignant
+     * @return ENSEIGNANT
+     */
      public String getENSEIGNANT() {
     return ENSEIGNANT;
   }
-   
+   /**
+     * Methode qui définit l'Enseignant
+     * @param ENSEIGNANT
+     */
   public void setENSEIGNANT(String ENSEIGNANT) {
     this.ENSEIGNANT = ENSEIGNANT;
   }
-  
+  /**
+     * Methode qui retourne le nom du type de cours en fonction de la valeur associée
+     * @param ID_TYPE
+     * @return COURS
+     * @return TD
+     * @return EXAMEN   
+     * @return Inconnu
+     */
    public String getTYPE(int ID_TYPE) {
        if(ID_TYPE==1)
            return "COURS";
@@ -122,26 +200,54 @@ public class Seance {
            return "Inconnu";
     
   }
-   
+   /**
+     * Methode qui définit le nom du type
+     * @param TYPE
+     */
   public void setTYPE(String TYPE) {
     this.TYPE = TYPE;
   }
-  
+  /**
+     * Methode qui retourne la salle
+     * @return SALLE
+     */
    public String getSALLE() {
     return SALLE;
   }
-  
+  /**
+     * Methode qui définit le nom de la salle
+     * @param SALLE
+     */
   public void setSALLE(String SALLE) {
     this.SALLE = SALLE;
   }
-  
+   /**
+     * Methode qui retourne la site
+     * @return SITE
+     */
    public String getSITE() {
     return SITE;
   }
-  
+   /**
+     * Methode qui définit le site
+     * @param SITE
+     */
   public void setSITE(String SITE) {
     this.SITE = SITE;
-  }
+  } /**
+     * Methode qui retourne le cours en fonction de la valeur du cours
+     * @param ID_C
+     * @return Mathematiques
+     * @return Physique
+     * @return Electronique
+     * @return Informatique
+     * @return Anglais
+     * @return Theorie des Graphes
+     * @return Analyse
+     * @return PSTE
+     * @return Arabe
+     * @return Droit du travail
+     */
   
    public String getCOURS(int ID_C) {
       if(ID_C ==1)
@@ -167,7 +273,10 @@ public class Seance {
       else
           return "Matière incoonnue";
   }
-  
+   /**
+     * Methode qui définit le cours
+     * @param ID_C
+     */
   public void setCOURS(int ID_C) {
       if(ID_C ==1)
         this.COURS = "Mathematiques";
