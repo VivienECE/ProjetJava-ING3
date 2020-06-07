@@ -159,7 +159,7 @@ public class Edt extends JFrame{
         if(Dday==DayOfWeek.SATURDAY)
             ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-5);
         if(Dday==DayOfWeek.SUNDAY)
-            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+1);
+            ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-6);
         
         Lundi = new JPanel();
         Object[][] TLundi = Journee(ajd, controleur);

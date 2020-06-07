@@ -32,38 +32,38 @@ public class Recap extends JFrame{
         this.setLocationRelativeTo(null);
         Menu m = new Menu(3);
         this.setJMenuBar(m);
-        JButton btn = new JButton("Stat");
         
         panelB = new JPanel();
+        
+        JButton btn = new JButton("Statistiques");
+        btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
+                piedataset.setValue( "Physique" , 10);
+                piedataset.setValue( "Physique" , 20);
+                piedataset.setValue( "Physique" , 15);
+                piedataset.setValue( "Physique" , 12);
+
+                JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
+                PiePlot P=(PiePlot)chart.getPlot();
+                ChartFrame frame = new ChartFrame("Camembert", chart);
+                frame.setVisible(true);
+                frame.setSize(450, 500);
+            }
+
+            /*@Override
+            public void actionPerformed(ActionEvent ae) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }*/
+        });
         panelB.add(btn);
         //this.setLayout(new GridLayout(0,1));
         ResultPanel(controleur);
         this.add(panel1, BorderLayout.NORTH);
         this.add(panel2, BorderLayout.SOUTH);
-        this.add(panel2, BorderLayout.EAST);
+        this.add(panelB, BorderLayout.EAST);
         setVisible(true);
-        
-        btn.addActionListener(new ActionListener() {
-                
-            public void ActionPerformed (java.awt.event.ActionEvent evt){
-                DefaultPieDataset piedataset = new DefaultPieDataset ( ) ; 
-        piedataset.setValue( "Physique" , 10);
-        piedataset.setValue( "Physique" , 20);
-        piedataset.setValue( "Physique" , 15);
-        piedataset.setValue( "Physique" , 12);
-        
-        JFreeChart chart = ChartFactory.createPieChart("Répartition", piedataset);
-        PiePlot P=(PiePlot)chart.getPlot();
-        ChartFrame frame = new ChartFrame("Camembert", chart);
-        frame.setVisible(true);
-        frame.setSize(450, 500);
-            }
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
+       
         
         
 }        
