@@ -464,8 +464,6 @@ public class Edt extends JFrame{
 
                 data[y][1]= triees[y].getCOURS(triees[y].getID_COURS());
 
-
-                //data[y][2]=Profs.get(triees[y].getID_COURS()).getNOM();
                 //CETTE LIGNE MARCHE
                 data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
@@ -478,32 +476,12 @@ public class Edt extends JFrame{
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-                data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
-                /*if(admin==true){
-                    JButton mod = new JButton("Modifier");
-                    mod.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            //modifier(triees[y].getID());
-                         }});
-                    JButton sup = new JButton("Supprimer");
-                    sup.addActionListener(new ActionListener(){
-                         public void actionPerformed(ActionEvent event){
-                            JOptionPane jop = new JOptionPane();			
-                            int option = jop.showConfirmDialog(null, "Etes-vous sûr de vouloir supprimer cette séance ?", 
-                                    "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                            if(option == JOptionPane.OK_OPTION){
-                              	//voir BDD Vivien
-                                //Seances.get(triees[y].getID()).setETAT(1);
-                            }
-                         }});
-                    data[y][6]= mod;
-                    data[y][7]= sup;
-                }*/
-                
-                if(triees[y].getETAT()==1){
-                    annule.add(y);
-                }
+                if(triees[y].getETAT()==1)
+                    data[y][5] = "ANNULEE";
+                else
+                    data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
+               
             }
    
         }
@@ -566,7 +544,11 @@ public class Edt extends JFrame{
 
                     String endroit = salle + " - " + site;
                     data[y][3]= endroit;
-                    data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+                    
+                    if(triees[y].getETAT()==1)
+                        data[y][4] = "ANNULEE";
+                    else
+                        data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
                 }
             }
         
@@ -612,8 +594,11 @@ public class Edt extends JFrame{
                    //CETTE LIGNE MARCHE
                     data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                     data[y][3]= "TD";//controleur.getGroupe().getNOM();
-
-                    data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
+                    
+                    if(triees[y].getETAT()==1)
+                        data[y][4] = "ANNULEE";
+                    else
+                        data[y][4]= triees[y].getTYPE(triees[y].getID_TYPE());
                 }
             }
             else
