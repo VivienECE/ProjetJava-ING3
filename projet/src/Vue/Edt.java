@@ -75,7 +75,9 @@ public class Edt extends JFrame{
                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth().getValue()-1, 30);
            else
                ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()-7);
-           
+           panel2.removeAll();
+           panel2.revalidate();
+           panel2.repaint(); 
            Liste(controleur, ajd, admin);
         }
         });
@@ -99,7 +101,9 @@ public class Edt extends JFrame{
            else
                 ajd = LocalDate.of(ajd.getYear(), ajd.getMonth(), ajd.getDayOfMonth()+7);
            
-           panel2.setVisible(false);
+           panel2.removeAll();
+           panel2.revalidate();
+           panel2.repaint();
            Liste(controleur, ajd, admin);
         }
         });
@@ -327,11 +331,11 @@ public class Edt extends JFrame{
                 data[y][4]= endroit;
                 data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
-               /* if(admin==true){
+                if(admin==true){
                     JButton mod = new JButton("Modifier");
                     mod.addActionListener(new ActionListener(){
                          public void actionPerformed(ActionEvent event){
-                            modifier(triees[y].getID());
+                            //modifier(triees[y].getID());
                          }});
                     JButton sup = new JButton("Supprimer");
                     sup.addActionListener(new ActionListener(){
@@ -341,12 +345,12 @@ public class Edt extends JFrame{
                                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                             if(option == JOptionPane.OK_OPTION){
                               	//voir BDD Vivien
-                                Seances.get(triees[y].getID()).setETAT(1);
+                                //Seances.get(triees[y].getID()).setETAT(1);
                             }
                          }});
                     data[y][6]= mod;
                     data[y][7]= sup;
-                }*/
+                }
             }
    
         }
