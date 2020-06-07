@@ -2,6 +2,7 @@
 package Vue;
 
 import Controleur.Controleur;
+import Controleur.ControleurAdmin;
 import Modele.Seance;
 //import Controleur.ControleurEtudiant;
 import java.awt.Color;
@@ -30,6 +31,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.border.Border;
 import java.sql.*;
+import java.time.Instant;
+import java.time.ZoneId;
 
 public class Ajout extends JFrame{
     private JPanel panel1;
@@ -59,7 +62,7 @@ public class Ajout extends JFrame{
     private JTextField txt2;
     private int id;
     
-    public Ajout(Controleur controleur){
+    public Ajout(ControleurAdmin controleur){
         this.setTitle("Ajout d'un cours");
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,6 +89,14 @@ public class Ajout extends JFrame{
         cours.addItem("Mathematiques");
         cours.addItem("Physique");
         cours.addItem("Electronique");
+        cours.addItem("Informatique");
+        cours.addItem("Anglais");
+        cours.addItem("Théorie des Graphes");
+        cours.addItem("Analyse");
+        cours.addItem("PSTE");
+        cours.addItem("Arabe");
+        cours.addItem("Droit du Travail");
+
         panel1.add(cours);
         
         panel2= new JPanel();
@@ -197,7 +208,7 @@ public class Ajout extends JFrame{
             
             if (e.getSource() == btn) {
                 
-                date = picker.getDate().toLocalDate();
+                date = Instant.ofEpochMilli(picker.getDate().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
                 
                 sem = date.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR );
                 
@@ -212,6 +223,20 @@ public class Ajout extends JFrame{
                     IdCOURS = 2;
                 if(cours.getSelectedItem()=="Electronique")
                     IdCOURS = 3;
+                if(cours.getSelectedItem()=="Informatique")
+                    IdCOURS = 4;
+                if(cours.getSelectedItem()=="Anglais")
+                    IdCOURS = 5;
+                if(cours.getSelectedItem()=="Théorie des Graphes")
+                    IdCOURS = 6;
+                if(cours.getSelectedItem()=="Analyse")
+                    IdCOURS = 7;
+                if(cours.getSelectedItem()=="PSTE")
+                    IdCOURS = 8;
+                if(cours.getSelectedItem()=="Arabe")
+                    IdCOURS = 9;
+                if(cours.getSelectedItem()=="Droit du Travail")
+                    IdCOURS = 10;
                 
                 //IdTYPE
                 if(td1.isSelected()&&td2.isSelected()&&td3.isSelected()&&td4.isSelected()&&td5.isSelected()
@@ -263,7 +288,4 @@ public class Ajout extends JFrame{
         }
     }
     
-    public static void main(String[] args) {
-        new Ajout();
-    }
 }

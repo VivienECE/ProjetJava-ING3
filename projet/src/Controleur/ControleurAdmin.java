@@ -32,6 +32,7 @@ import Modele.Seance_salles;
 import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
+import Vue.Ajout;
 import Vue.Edt;
 import Vue.RechercheEdt;
 import Vue.RechercheRecap;
@@ -119,10 +120,10 @@ public class ControleurAdmin extends Controleur {
             Logger.getLogger(ControleurAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
         ControleurAdmin controleur = new ControleurAdmin(ID_UTILISATEUR);
-        RechercheEdt fenetre = new RechercheEdt(controleur);
+        //RechercheEdt fenetre = new RechercheEdt(controleur);
         //RechercheRecap fenetre = new RechercheRecap(controleur);
-        //Edt fenetre = new Edt(controleur);
-        //Recap fenetre = new Recap(controleur);
+        Ajout fenetre = new Ajout(controleur);
+        
 
     }
     
