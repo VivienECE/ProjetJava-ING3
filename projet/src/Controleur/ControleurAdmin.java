@@ -59,6 +59,10 @@ public class ControleurAdmin extends Controleur {
     private ArrayList<Utilisateur> enseignants= new ArrayList<>(); //NOM DES ENSEIGNANTS
     private ArrayList<Utilisateur> enseignantsparseance= new ArrayList<>(); //NOM DES ENSEIGNANTS
     private ArrayList<Utilisateur> etudiants= new ArrayList<>(); //ETUDIANTS
+    DAO<Seance> seanceDAO;
+    DAO<Seance_enseignants> seance_enseignantsDAO;
+    DAO<Seance_groupes> seance_groupesDAO;
+    DAO<Seance_salles> seance_sallesDAO;
     
     //Recupère toute les données
     public ControleurAdmin(int ID_UTILISATEUR)
@@ -70,15 +74,17 @@ public class ControleurAdmin extends Controleur {
         DAO<Etudiant> etudiantDAO = new EtudiantDAO(connection);
         DAO<Groupe> groupeDAO = new GroupeDAO(connection);
         DAO<Promotion> promotionDAO = new PromotionDAO(connection);
-        DAO<Seance_groupes> seance_groupesDAO = new Seance_groupesDAO(connection);
-        DAO<Seance> seanceDAO = new SeanceDAO(connection);
+        seance_groupesDAO = new Seance_groupesDAO(connection);
+        seance_sallesDAO = new Seance_sallesDAO(connection);
+        seanceDAO = new SeanceDAO(connection);
         DAO<Type_cours> type_coursDAO = new Type_coursDAO(connection);
         DAO<Cours> coursDAO = new CoursDAO(connection);
         DAO<Salle> salleDAO = new SalleDAO(connection);
         DAO<Seance_salles> seance_sallesDAO = new Seance_sallesDAO(connection);
         DAO<Site> siteDAO = new SiteDAO(connection);
         DAO<Enseignant> enseignantDAO = new EnseignantDAO(connection);
-        DAO<Seance_enseignants> seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
+        seance_enseignantsDAO = new Seance_enseignantsDAO(connection);
+        
         utilisateur= utilisateurDAO.find(ID_UTILISATEUR);
         int j=1;
         ArrayList<Etudiant> listeetudiants = etudiantDAO.getAll();
@@ -210,5 +216,26 @@ public class ControleurAdmin extends Controleur {
      
       System.out.println("Seance");
      seances.forEach((i) -> { System.out.println(i.getID());});
+    }
+    
+    public int ajouterSeance(Seance seance)
+    {
+        seanceDAO.create(seance);
+        return seance.getID();
+    }
+    
+    public void ajouterSeance_groupes(Seance_groupes seance_groupes)
+    {
+         seance_groupesDAO.create(seance_groupes);
+    }
+    
+    public void ajouterSeance_salles(Seance_salles seance_salles)
+    {
+         seance_sallesDAO.create(seance_salles);
+    }
+    
+    public void ajouterSeance_enseignants(Seance_enseignants seance_enseignants)
+    {
+         seance_enseignantsDAO.create(seance_enseignants);
     }
 }

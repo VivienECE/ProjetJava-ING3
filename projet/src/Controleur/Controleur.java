@@ -17,12 +17,16 @@ import Modele.Groupe;
 import Modele.Promotion;
 import Modele.Salle;
 import Modele.Seance;
+import Modele.Seance_enseignants;
+import Modele.Seance_groupes;
+import Modele.Seance_salles;
 import Modele.Site;
 import Modele.Type_cours;
 import Modele.Utilisateur;
 import Vue.Edt;
 import Vue.Login;
 import Vue.Menu;
+import Vue.RechercheEdt;
 import java.util.ArrayList;
 
 /**
@@ -67,7 +71,12 @@ public class Controleur {
                 default:
                 break;
               }
-              Edt fenetre = new Edt(controleur);
+              Edt fenetreE;
+              RechercheEdt fenetreA;
+              if((controleur instanceof ControleurAdmin))
+                  fenetreA = new RechercheEdt(controleur);
+              else
+                   fenetreE = new Edt(controleur);
         }
         
         catch (SQLException e) {
@@ -157,6 +166,16 @@ public class Controleur {
     public ArrayList<Type_cours> getType_cours(){throw new UnsupportedOperationException("Not supported yet.");}
     public ArrayList<Enseignant> getEnseignants() { throw new UnsupportedOperationException("Not supported yet."); }
     public Cours findCours(int ID) {throw new UnsupportedOperationException("Not supported yet.");}
-     public ArrayList<Cours> getListeCours() {throw new UnsupportedOperationException("Not supported yet.");}
+    public ArrayList<Cours> getListeCours() {throw new UnsupportedOperationException("Not supported yet.");}
+    public int ajouterSeance(Seance seance)
+         {throw new UnsupportedOperationException("Not supported yet.");}
+    
+    public void ajouterSeance_groupes(Seance_groupes seance_groupes)
+        {throw new UnsupportedOperationException("Not supported yet.");}
+    public void ajouterSeance_salles(Seance_salles seance_salles)
+        {throw new UnsupportedOperationException("Not supported yet.");}
+    
+    public void ajouterSeance_enseignants(Seance_enseignants seance_enseignants)
+     {throw new UnsupportedOperationException("Not supported yet.");}
 }
 
