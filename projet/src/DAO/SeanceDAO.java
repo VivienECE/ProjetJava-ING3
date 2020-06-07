@@ -21,10 +21,22 @@ public class SeanceDAO extends DAO<Seance> {
 
   public boolean create(Seance obj) {
        try {
-       ResultSet result = this.connect.executeQuery("SELECT * from seance WHERE VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+")"); 
-        if(!result.first()) // Si aucun resultat
-             this.connect.executeUpdate("INSERT INTO `seance`(`SEMAINE`,`DATE`,`HEURE_DEBUT`,`HEURE_FIN`,`ETAT`,`ID_COURS`,`ID_TYPE`) VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+")"); 
-    } catch (SQLException e)
+             this.connect.executeUpdate("INSERT INTO `seance`(`SEMAINE`,`DATE`,`HEURE_DEBUT`,`HEURE_FIN`,`ETAT`,`ID_COURS`,`ID_TYPE`) "
+                     + "VALUES ("+obj.getID()+","+obj.getSEMAINE()+","+obj.getDATE()+","+obj.getHEURE_DEBUT()+","+obj.getHEURE_FIN()+","+obj.getETAT()+","+obj.getID_COURS()+","+obj.getID_TYPE()+")"); 
+           
+             ResultSet result = this.connect.executeQuery("SELECT ID from seance"
+                     + " WHERE SEMAINE="+obj.getSEMAINE()+" "
+                             + " AND DATE = "+obj.getDATE()+" "
+                                     + "AND HEURE_DEBUT="+obj.getHEURE_DEBUT()+" "
+                                             + "AND HEURE_FIN="+obj.getHEURE_FIN()+" "
+                                                     + "AND ETAT="+obj.getETAT()+" "
+                                                                 + "AND ID_COURS="+obj.getID_COURS()+" "
+                                                                        + "AND ID_TYPE="+obj.getID_TYPE()+" "); 
+             if(result.first())
+                  obj.setID(result.getInt("ID"));
+             else
+                 obj.setID(0);
+       } catch (SQLException e)
         { e.printStackTrace(); }
     return false;
   }
