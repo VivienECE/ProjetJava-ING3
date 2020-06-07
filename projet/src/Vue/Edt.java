@@ -191,7 +191,7 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                   // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             });
             tableauL.getColumn("  ").setCellRenderer(new MyRendererAndEditorSup(tableauL));
@@ -199,7 +199,9 @@ public class Edt extends JFrame{
             tableauL.getSelectionModel().addListSelectionListener(new ListSelectionListener(){ 
                 @Override
                 public void valueChanged(ListSelectionEvent lse) {
-                    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    //throw new UnsupportedOperationException("Not supported yet.")
+                            
+                            ; //To change body of generated methods, choose Tools | Templates.
                 }
             });
         }
@@ -439,7 +441,7 @@ public class Edt extends JFrame{
             }
             
             if(admin==true)
-                data = new Object[n][8];
+                data = new Object[n][9];
             else
                 data = new Object[n][6];
             
@@ -476,11 +478,16 @@ public class Edt extends JFrame{
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-                
-                if(triees[y].getETAT()==1)
+
+				if(triees[y].getETAT()==1)
                     data[y][5] = "ANNULEE";
                 else
                     data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
+                
+                if(admin==true)
+                    data[y][6]=controleur.getSeances().get(controleur.getSeances().indexOf(triees[y])).getID();
+                
+                
                
             }
    
@@ -623,6 +630,13 @@ public class Edt extends JFrame{
                     "Suppression d'une séance", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(option == JOptionPane.OK_OPTION){
                 //voir BDD Vivien
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 0));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 1));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 2));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 3));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 4));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 5));
+                System.out.println("-"+table.getValueAt(table.getSelectedRow(), 6));
                 //Seances.get(triees[y].getID()).setETAT(1);
             }
           }
