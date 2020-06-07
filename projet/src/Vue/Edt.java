@@ -481,17 +481,14 @@ public class Edt extends JFrame{
                 String site = controleur.getSites().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 String endroit = salle + " - " + site;
                 data[y][4]= endroit;
-
+              
 	       if(triees[y].getETAT()==1)
                     data[y][5] = "ANNULEE";
                 else
                     data[y][5]= controleur.getType_cours().get(controleur.getSeances().indexOf(triees[y])).getNOM();
                 
                 if(admin==true)
-                    data[y][6]=controleur.getSeances().get(controleur.getSeances().indexOf(triees[y])).getID();
-                
-                
-               
+                    data[y][6]=controleur.getSeances().get(controleur.getSeances().indexOf(triees[y])).getID();             
             }
    
         }
@@ -738,7 +735,10 @@ public class Edt extends JFrame{
         btn.addActionListener(new ActionListener() {@Override
           public void actionPerformed(ActionEvent e) {
             Seance seance = controleur.findSeance((int)table.getValueAt(table.getSelectedRow(), 6));
-            modifier(controleur,seance.getID());
+            //seance.setDATE(1);
+           // seance.setHEURE_DEBUT(1);
+            //seance.setHEURE_FIN(1);
+            controleur.updateSeance(seance);
           }
         });
       }
