@@ -84,13 +84,14 @@ public class ControleurEtudiant extends Controleur {
             ArrayList<Seance_groupes> seance_groupes = seance_groupesDAO.findAll(etudiant.getID_GROUPE());
             for (Seance_groupes i : seance_groupes)
             {
+                
                 Seance temp_seance=seanceDAO.find(i.getID_SEANCE());
                 Seance_enseignants temp_seance_enseignants = seance_enseignantsDAO.find(i.getID_SEANCE());
                 //System.out.println("ID SALLE:"+seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE()+"ID_SITE:"+salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE()).getID_SITE());
                 Salle temp_salle=salleDAO.find(seance_sallesDAO.find(i.getID_SEANCE()).getID_SALLE());
                 salles.add(temp_salle);
                 sites.add(siteDAO.find(temp_salle.getID_SITE()));
-                cours.add(coursDAO.find(i.getID_SEANCE()));
+                cours.add(coursDAO.find(temp_seance.getID_COURS()));
                 type_cours.add(type_coursDAO.find(temp_seance.getID_TYPE()));
                 seance.add(temp_seance);
                 utilisateurs.add(utilisateurDAO.find(enseignantDAO.find(temp_seance_enseignants.getID_ENSEIGNANT()).getID_UTILISATEUR()));
@@ -108,7 +109,7 @@ public class ControleurEtudiant extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_UTILISATEUR=1;
+        int ID_UTILISATEUR=6;
          Connexion connection = null;
         ControleurEtudiant controleur = new ControleurEtudiant(ID_UTILISATEUR);
         //Edt fenetre = new Edt(controleur);
@@ -139,7 +140,7 @@ public class ControleurEtudiant extends Controleur {
         System.out.println("Salle");
         salles.forEach((i) -> { System.out.println(i.getNOM());});
         
-        System.out.println("Type");
-        type_cours.forEach((i) -> { System.out.println(i.getNOM());});
+        System.out.println("Cours");
+         cours.forEach((i) -> { System.out.println(i.getNOM());});
     }
 }

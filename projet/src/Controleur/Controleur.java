@@ -120,10 +120,6 @@ public class Controleur {
         return null;
     }
 
-    public Groupe findTD(String NOM, String PROMO) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public Groupe findGroupe(String NOM, String PROMO) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
