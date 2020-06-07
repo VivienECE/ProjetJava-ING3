@@ -4,6 +4,10 @@ package Vue;
 import Controleur.Controleur;
 import Controleur.ControleurAdmin;
 import Modele.Seance;
+import Modele.Seance_enseignants;
+import Modele.Seance_groupes;
+import Modele.Seance_salles;
+import Modele.Utilisateur;
 //import Controleur.ControleurEtudiant;
 import java.awt.Color;
 import java.awt.BorderLayout;
@@ -33,6 +37,7 @@ import javax.swing.border.Border;
 import java.sql.*;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.util.ArrayList;
 
 public class Ajout extends JFrame{
     private JPanel panel1;
@@ -52,15 +57,14 @@ public class Ajout extends JFrame{
     private JRadioButton td1;
     private JRadioButton td2;
     private JRadioButton td3;
-    private JRadioButton td4;
-    private JRadioButton td5;
-    private JRadioButton td6;
-    private JRadioButton td7;
-    private JRadioButton td8;
-    private JRadioButton td9;
-    private JRadioButton td10;
+    private JRadioButton e1;
+    private JRadioButton e2;
+    private JRadioButton e3;
+    private JRadioButton e6;
     private JTextField txt2;
+    private JComboBox prom;
     private int id;
+    private ArrayList<Utilisateur> profs;
     
     public Ajout(ControleurAdmin controleur){
         this.setTitle("Ajout d'un cours");
@@ -76,6 +80,7 @@ public class Ajout extends JFrame{
         btn = new JButton("Ajouter");
         btn.setSize(100, 20);
         btn.addActionListener(new AddButtonListener());
+        profs = controleur.getUtilisateurEnseignants();
         id = (controleur.getSeances().size())+1;
         this.add(btn, BorderLayout.SOUTH);
         
@@ -109,7 +114,7 @@ public class Ajout extends JFrame{
         panel3= new JPanel();
         JLabel promo = new JLabel("Promotion : ");
         panel3.add(promo);
-        JComboBox prom = new JComboBox();
+        prom = new JComboBox();
         prom.addItem("ING1");
         prom.addItem("ING2");
         prom.addItem("ING3");
@@ -121,23 +126,9 @@ public class Ajout extends JFrame{
         td1 = new JRadioButton("TD1");
         td2 = new JRadioButton("TD2");
         td3 = new JRadioButton("TD3");
-        td4 = new JRadioButton("TD4");
-        td5 = new JRadioButton("TD5");
-        td6 = new JRadioButton("TD6");
-        td7 = new JRadioButton("TD7");
-        td8 = new JRadioButton("TD8");
-        td9 = new JRadioButton("TD9");
-        td10 = new JRadioButton("TD10");
         panel4.add(td1);
         panel4.add(td2);
         panel4.add(td3);
-        panel4.add(td4);
-        panel4.add(td5);
-        panel4.add(td6);
-        panel4.add(td7);
-        panel4.add(td8);
-        panel4.add(td9);
-        panel4.add(td10);
         
         panel5 = new JPanel();
         JLabel date = new JLabel("Créneau : ");
@@ -167,14 +158,10 @@ public class Ajout extends JFrame{
         JRadioButton e1 = new JRadioButton("E1");
         JRadioButton e2 = new JRadioButton("E2");
         JRadioButton e3 = new JRadioButton("E3");
-        JRadioButton e4 = new JRadioButton("E4");
-        JRadioButton e5 = new JRadioButton("E5");
         JRadioButton e6 = new JRadioButton("CNAM");
         panel6.add(e1);
         panel6.add(e2);
         panel6.add(e3);
-        panel6.add(e4);
-        panel6.add(e5);
         panel6.add(e6);
         
         content = new JPanel();
@@ -200,8 +187,9 @@ public class Ajout extends JFrame{
         LocalTime HEURE_FIN; 
         int etat=0;
         int IdCOURS=0;
-        int IdTYPE;
+        int IdTYPE, idEnseignant, idSalle, idGroupe, idProm;
         String type;
+        
         
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -239,8 +227,7 @@ public class Ajout extends JFrame{
                     IdCOURS = 10;
                 
                 //IdTYPE
-                if(td1.isSelected()&&td2.isSelected()&&td3.isSelected()&&td4.isSelected()&&td5.isSelected()
-                        &&td6.isSelected()&&td7.isSelected()&&td8.isSelected()&&td9.isSelected()&&td10.isSelected()){
+                if(td1.isSelected()&&td2.isSelected()&&td3.isSelected()){
                     IdTYPE = 3;//On considere que si tous les TDs sont selectionnes, il s'agit d'un examen
                     type = "EXAMEN";
                 }
@@ -249,13 +236,6 @@ public class Ajout extends JFrame{
                 if(td1.isSelected())nb++;
                 if(td2.isSelected())nb++;
                 if(td3.isSelected())nb++;
-                if(td4.isSelected())nb++;
-                if(td5.isSelected())nb++;
-                if(td6.isSelected())nb++;
-                if(td7.isSelected())nb++;
-                if(td8.isSelected())nb++;
-                if(td9.isSelected())nb++;
-                if(td10.isSelected())nb++;
                 if(nb>1){
                     IdTYPE = 2;
                     type = "TD";
@@ -265,10 +245,86 @@ public class Ajout extends JFrame{
                     IdTYPE = 1;
                     type = "COURS";
                 }
-                    
+                
+                //Prof
+                for(int i=0; i<profs.size(); i++){
+                    if(txt2.getText().toLowerCase()== profs.get(i).getNOM().toLowerCase())
+                        idEnseignant = profs.get(i).getID();
+                }
+                
+                //PROMO
+                if(prom.getSelectedItem()=="ING1")
+                    idProm=1;
+                if(prom.getSelectedItem()=="ING2")
+                    idProm=2;
+                if(prom.getSelectedItem()=="ING3")
+                    idProm=3;
+                if(prom.getSelectedItem()=="ING4")
+                    idProm=4;
+                if(prom.getSelectedItem()=="ING5")
+                    idProm=5;
+                  
+                //TD
+                if(td1.isSelected()){
+                    if(idProm==1)
+                        idGroupe=1;
+                    if(idProm==2)
+                        idGroupe=4;
+                    if(idProm==3)
+                        idGroupe=7;
+                    if(idProm==4)
+                        idGroupe=10;
+                    if(idProm==5)
+                        idGroupe=13;
+                    Seance_groupes NvGroupes = new Seance_groupes(id,idGroupe);
+                }
+                if(td2.isSelected()){
+                    if(idProm==1)
+                        idGroupe=2;
+                    if(idProm==2)
+                        idGroupe=5;
+                    if(idProm==3)
+                        idGroupe=8;
+                    if(idProm==4)
+                        idGroupe=11;
+                    if(idProm==5)
+                        idGroupe=14;
+                    Seance_groupes NvGroupes = new Seance_groupes(id,idGroupe);
+                }
+
+                if(td3.isSelected()){
+                    if(idProm==1)
+                        idGroupe=3;
+                    if(idProm==2)
+                        idGroupe=6;
+                    if(idProm==3)
+                        idGroupe=9;
+                    if(idProm==4)
+                        idGroupe=12;
+                    if(idProm==5)
+                        idGroupe=15;
+                    Seance_groupes NvGroupes = new Seance_groupes(id,idGroupe);
+                }
                 
                 
-                //Seance NvCours = new Seance(id, sem, date, HEURE_DEBUT, HEURE_FIN, etat, IdCOURS, IdTYPE);
+                
+                
+                //Salle
+                if(e1.isSelected())
+                    idSalle = (int)Math.random() * ( 7 - 1 );
+                if(e2.isSelected())
+                    idSalle = (int)Math.random() * ( 13 - 8 );
+                if(e3.isSelected())
+                    idSalle = (int)Math.random() * ( 21 - 14 );
+                if(e6.isSelected())
+                    idSalle = 22;
+                
+                Seance NvCours = new Seance(id, sem, date, HEURE_DEBUT, HEURE_FIN, etat, IdCOURS, IdTYPE);
+                
+                Seance_enseignants NvEnseignant = new Seance_enseignants(id, idEnseignant);
+                
+                Seance_salles NvSalles = new Seance_salles(id, idSalle);
+                
                 //NvCours.setEnseignant(txt2.getText());
                 //NvCours.setType(type);
                 //NvCours.setSalle();
