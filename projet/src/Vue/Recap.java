@@ -40,7 +40,13 @@ public class Recap extends JFrame{
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        Menu m = new Menu(3,controleur);
+        Menu m;
+        if(controleur.getUtilisateur().getDROIT()==2)//ref
+            m = new Menu(2,controleur);
+        else if(controleur.getUtilisateur().getDROIT()==1)//admin
+            m = new Menu(1,controleur);
+        else
+            m = new Menu(3,controleur);
         this.setJMenuBar(m);
         
         panelB = new JPanel();
@@ -115,61 +121,117 @@ public class Recap extends JFrame{
     
     
     public Object[][] Tri(Controleur controleur){
+        Object[][] data= new Object[10][4];
         
-      
-        ArrayList<Seance> Seances = controleur.getSeances();
+        if((controleur instanceof ControleurEtudiant)== true ||(controleur instanceof ControleurGroupe)== true||
+                (controleur instanceof ControleurPromotion)== true){
+            ArrayList<Seance> Seances = controleur.getSeances();
 
-        ArrayList<Cours> cours = controleur.getCours();
+            ArrayList<Cours> cours = controleur.getCours();
 
-        ArrayList<Seance> chaqueCours = new ArrayList<Seance>();
-        LocalDate dO;
-        LocalDate dF;
-        int n;
-        int nb = 0;
-        int nC;
-        String nom;
-        
-        //Trier par matiere
-        for(int k=1; k<=10; k++){
-            for(int i=0; i<Seances.size();i++){
-                if(Seances.get(i).getID_COURS()==k)
-                    chaqueCours.add(Seances.get(i));
-            }
-        }
-        
-        Object[][] data = new Object[10][4];    
-        
-        for(int y=1; y<=10; y++){
-            nC = 0;
-            for(int i=0; i<chaqueCours.size();i++){
-                if(chaqueCours.get(i).getID_COURS()==y)
-                    nC++;
-            }
-            if(nC>1)
-                nC=1;
-            nb=nb+nC;
-        }
-        
-        for(int x=1; x<=nb; x++){
-            dO = LocalDate.of(2020, 07, 30);
-            dF = LocalDate.of(2020, 01, 01);
-            n=0;
-            nom = cours.get(x-1).getNOM();
-            for(int j=0; j<chaqueCours.size(); j++){
-                if(chaqueCours.get(j).getID_COURS()==x){//si c'est la meme matiere
-                    if((chaqueCours.get(j).getDATE()).isBefore(dO))
-                            dO = (chaqueCours.get(j).getDATE());
-                        if((chaqueCours.get(j).getDATE()).isAfter(dF))
-                            dF = (chaqueCours.get(j).getDATE());
+            ArrayList<Seance> chaqueCours = new ArrayList<Seance>();
+            LocalDate dO;
+            LocalDate dF;
+            int n;
+            int nb = 0;
+            int nC;
+            String nom;
 
-                    nom = chaqueCours.get(j).getCOURS(chaqueCours.get(j).getID_COURS());
-                    n++;//Une séance en plus
+            //Trier par matiere
+            for(int k=1; k<=10; k++){
+                for(int i=0; i<Seances.size();i++){
+                    if(Seances.get(i).getID_COURS()==k)
+                        chaqueCours.add(Seances.get(i));
                 }
             }
-            data[x-1][0]= nom;
-            data[x-1][1]= dO;
-            data[x-1][2]= dF;
-            data[x-1][3]= n;
+            
+            for(int y=1; y<=10; y++){
+                nC = 0;
+                for(int i=0; i<chaqueCours.size();i++){
+                    if(chaqueCours.get(i).getID_COURS()==y)
+                        nC++;
+                }
+                if(nC>1)
+                    nC=1;
+                nb=nb+nC;
+            }
+
+            for(int x=1; x<=nb; x++){
+                dO = LocalDate.of(2020, 07, 30);
+                dF = LocalDate.of(2020, 01, 01);
+                n=0;
+                nom = cours.get(x-1).getNOM();
+                for(int j=0; j<chaqueCours.size(); j++){
+                    if(chaqueCours.get(j).getID_COURS()==x){//si c'est la meme matiere
+                        if((chaqueCours.get(j).getDATE()).isBefore(dO))
+                                dO = (chaqueCours.get(j).getDATE());
+                            if((chaqueCours.get(j).getDATE()).isAfter(dF))
+                                dF = (chaqueCours.get(j).getDATE());
+
+                        nom = chaqueCours.get(j).getCOURS(chaqueCours.get(j).getID_COURS());
+                        n++;//Une séance en plus
+                    }
+                }
+                data[x-1][0]= nom;
+                data[x-1][1]= dO;
+                data[x-1][2]= dF;
+                data[x-1][3]= n;
+            }
+        }
+        else if ((controleur instanceof ControleurEnseignant)== true){
+            
+            ArrayList<Seance> Seances = controleur.getSeances();
+
+            ArrayList<Cours> cours = controleur.getCours();
+
+            ArrayList<Seance> chaqueCours = new ArrayList<Seance>();
+            LocalDate dO;
+            LocalDate dF;
+            int n;
+            int nb = 0;
+            int nC;
+            String nom;
+
+            //Trier par matiere
+            for(int k=1; k<=10; k++){
+                for(int i=0; i<Seances.size();i++){
+                    if(Seances.get(i).getID_COURS()==k)
+                        chaqueCours.add(Seances.get(i));
+                }
+            }
+            
+            for(int y=1; y<=10; y++){
+                nC = 0;
+                for(int i=0; i<chaqueCours.size();i++){
+                    if(chaqueCours.get(i).getID_COURS()==y)
+                        nC++;
+                }
+                if(nC>1)
+                    nC=1;
+                nb=nb+nC;
+            }
+
+            for(int x=1; x<=nb; x++){
+                dO = LocalDate.of(2020, 07, 30);
+                dF = LocalDate.of(2020, 01, 01);
+                n=0;
+                nom = cours.get(x-1).getNOM();
+                for(int j=0; j<chaqueCours.size()-1; j++){
+                    if(chaqueCours.get(j).getID_COURS()==chaqueCours.get(j+1).getID_COURS()){//si c'est la meme matiere
+                        if((chaqueCours.get(j).getDATE()).isBefore(dO))
+                                dO = (chaqueCours.get(j).getDATE());
+                            if((chaqueCours.get(j).getDATE()).isAfter(dF))
+                                dF = (chaqueCours.get(j).getDATE());
+
+                        nom = chaqueCours.get(j).getCOURS(chaqueCours.get(j).getID_COURS());
+                        n++;//Une séance en plus
+                    }
+                }
+                data[x-1][0]= nom;
+                data[x-1][1]= dO;
+                data[x-1][2]= dF;
+                data[x-1][3]= n;
+            }
         }
         
         return data;

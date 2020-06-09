@@ -119,7 +119,7 @@ public class ControleurAdmin extends Controleur {
     //CE MAIN SERT DE TEST -> ID_UT
     public static void main(String[] s) {
         // Recupère toutes les informations de l'étudiant avec ID_UTILISATEUR=1
-        int ID_UTILISATEUR=1;
+        int ID_UTILISATEUR=86;
         Connexion connection = null;
         try {
             connection = new Connexion("edt", "root", "");

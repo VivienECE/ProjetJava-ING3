@@ -131,7 +131,13 @@ public class Edt extends JFrame{
         this.setSize(600, 600);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        Menu m = new Menu(3,controleur);
+       Menu m;
+        if(controleur.getUtilisateur().getDROIT()==2)//ref
+            m = new Menu(2,controleur);
+        else if(controleur.getUtilisateur().getDROIT()==1)//admin
+            m = new Menu(1,controleur);
+        else
+            m = new Menu(3,controleur);
         this.setJMenuBar(m);
         this.setLayout(new GridLayout(0,1));
         Infos(controleur);
@@ -600,7 +606,8 @@ public class Edt extends JFrame{
 
                    //CETTE LIGNE MARCHE
                     data[y][2]=controleur.getUtilisateurEnseignants().get(controleur.getSeances().indexOf(triees[y])).getNOM();
-                    data[y][3]= "TD";//controleur.getGroupe().getNOM();
+                    
+                    data[y][3]= "TD1" + " Promo 2021" ;
                     
                     if(triees[y].getETAT()==1)
                         data[y][4] = "ANNULEE";

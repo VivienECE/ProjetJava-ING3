@@ -1,6 +1,7 @@
 package Vue;
 
 import Controleur.Controleur;
+import Controleur.ControleurEnseignant;
 import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -89,13 +90,15 @@ public class Menu  extends JMenuBar{
         //this.MonEdt.addActionListener(new EnterButtonListener());
         this.MonEdt.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
-                new Edt(controleur, false);
+                ControleurEnseignant c = new ControleurEnseignant(controleur.getUtilisateur().getID());
+                new Edt(c, false);
             }
         });
         //this.MonRecap.addActionListener(new EnterButtonListener());
         this.MonRecap.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent event){
-                new Recap(controleur);
+                ControleurEnseignant c = new ControleurEnseignant(controleur.getUtilisateur().getID());
+                new Recap(c);
             }
         });
         

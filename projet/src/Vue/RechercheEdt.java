@@ -63,7 +63,11 @@ public class RechercheEdt extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(0,1));
-        Menu m = new Menu(1,controleur);
+        Menu m;
+        if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+            m = new Menu(2,controleur);
+        else
+            m = new Menu(1,controleur);
         this.setJMenuBar(m);
         
         panelB = new JPanel();
@@ -185,7 +189,11 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+utilisateurEtudiant.getID());
                 Controleur controleurRechercheEtudiant = new ControleurEtudiant(utilisateurEtudiant.getID());
-                Edt fenetre = new Edt(controleurRechercheEtudiant,true);
+                Edt fenetre;
+                if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+                    fenetre = new Edt(controleurRechercheEtudiant,false);
+                else //admin
+                    fenetre = new Edt(controleurRechercheEtudiant,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Etudiant introuvable");
@@ -200,7 +208,11 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+utilisateurEnseignant.getID());
                 Controleur controleurRechercheEnseignant = new ControleurEnseignant(utilisateurEnseignant.getID());
-                Edt fenetre = new Edt(controleurRechercheEnseignant,true);
+                Edt fenetre;
+                if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+                    fenetre = new Edt(controleurRechercheEnseignant,false);
+                else //admin
+                    fenetre = new Edt(controleurRechercheEnseignant,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Enseignant introuvable");
@@ -217,7 +229,11 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+td.getID());
                 Controleur controleurRechercheTD = new ControleurGroupe(td.getID());
-                Edt fenetre = new Edt(controleurRechercheTD,true);
+                Edt fenetre;
+                if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+                    fenetre = new Edt(controleurRechercheTD,false);
+                else //admin
+                    fenetre = new Edt(controleurRechercheTD,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "TD introuvable");
@@ -231,7 +247,11 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+promo.getID());
                 Controleur controleurRecherchePromo = new ControleurPromotion(promo.getID());
-                Edt fenetre = new Edt(controleurRecherchePromo,true);
+                Edt fenetre;
+                 if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+                    fenetre = new Edt(controleurRecherchePromo,false);
+                 else //admin
+                    fenetre = new Edt(controleurRecherchePromo,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Promotion introuvable");
@@ -245,7 +265,11 @@ public class RechercheEdt extends JFrame{
             {
                 System.out.println("Recherche"+salle.getID());
                 Controleur controleurRechercheSalle = new ControleurSalle(salle.getID());
-                Edt fenetre = new Edt(controleurRechercheSalle,true);
+                Edt fenetre;
+                if(this.controleur.getUtilisateur().getDROIT()==2)//ref
+                    fenetre = new Edt(controleurRechercheSalle,false);
+                else //admin
+                    fenetre = new Edt(controleurRechercheSalle,true);
             }
             else
                  JOptionPane.showMessageDialog(null, "Salle introuvable");
